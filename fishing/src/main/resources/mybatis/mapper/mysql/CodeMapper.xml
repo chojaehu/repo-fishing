@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.stayc.infra.code.CodeDao">
+
+	<resultMap id="resultMapObj" type="com.stayc.infra.code.CodeDto"></resultMap>
+	
+	<sql id="selectCommon">
+  		  FROM codegroup a
+       		   LEFT JOIN code b
+              		  ON b.cdgSeq = a.cdgSeq 
+         WHERE 1 = 1          
+		   AND (@rownum:=0) = 0         
+         <if test="shDelNy != null and !shDelNy.equals('')">AND IFNULL(b.cdcDelNy, 0) = #{shDelNy}</if>
+         
+         <choose>
+         	<when test="shOptionDate == 1">AND b.cdcRegDt BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+         	<when test="shOptionDate == 2">AND b.cdcUdtDt BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+         </choose>
+         
+         <choose>
+         	<when test="shOption == 1">AND a.cdgName LIKE CONCAT('%', #{shValue}, '%')</when>
+         	<when test="shOption == 2">AND a.cdgSeq = #{shValue}</when>
+         	<when test="shOption == 3">AND b.cdcName LIKE CONCAT('%', #{shValue}, '%')</when>
+         	<when test="shOption == 4">AND b.cdcSeq = #{shValue}</when>
+         </choose>         
+         
+         <if test="shOptionGroup != null and !shOptionGroup.equals('')">AND a.cdgSeq = #{shOptionGroup}</if> 	
+	</sql>
+	
+	<select id="selectList" resultMap="resultMapObj">
+		SELECT aa.*
+		  FROM (
+		        SELECT @rownum:=@rownum+1 xrowSeq
+		             , a.cdgSeq
+		     		 , a.cdgName
+		     		 , b.cdcDelNy
+		     		 , b.cdcSeq
+		     		 , b.cdcName
+		     		 , b.cdcRegDt
+		     		 , b.cdcUdtDt
+		     		 , (SELECT count(*) 
+		     		      FROM product aa
+		     		     WHERE aa.pdtTypeCd      = ifnull(b.cdcSeq,'x')
+		     		        OR aa.pdtBrandCd     = ifnull(b.cdcSeq,'x')
+		     		        OR aa.pdtAccidentCd  = ifnull(b.cdcSeq,'x')
+		     		        OR aa.pdtColorCd     = ifnull(b.cdcSeq,'x') 
+		     		        OR aa.pdtRecommendCd = ifnull(b.cdcSeq,'x')               
+		     		   ) +
+		     		   (SELECT count(*) 
+		     		      FROM memberpayment bb
+		     		     WHERE bb.payTypeCd             = ifnull(b.cdcSeq,'x')
+		     		        OR ifnull(bb.payCardCd,'o') = ifnull(b.cdcSeq,'x')
+		     		   ) +
+		     		   (SELECT count(*) 
+		     		      FROM members cc
+		     		     WHERE cc.mbrType = ifnull(b.cdcSeq,'x')
+		     		        OR cc.mbrSex  = ifnull(b.cdcSeq,'x')
+		     		   ) xcodeCount
+			  <include refid="selectCommon"/>			 
+		         ORDER BY a.cdgSeq, b.cdcSeq         
+				 LIMIT 99999999999
+               ) aa
+         ORDER BY xrowSeq DESC
+    	 LIMIT #{pgRowCount}
+    	OFFSET #{pgOffset}  		 
+	</select>
+	
+    <!-- 카운팅 -->
+    <select id="getCount">
+        SELECT COUNT(*)
+      <include refid="selectCommon"/>
+    </select>
+    	
+	<select id="selectOne" resultMap="resultMapObj">
+        SELECT a.cdgSeq
+     		 , a.cdgName
+     		 , b.cdcDelNy
+     		 , b.cdcSeq
+     		 , b.cdcName
+     		 , b.cdcRegDt
+     		 , b.cdcUdtDt
+     		 , (SELECT count(*) 
+     		      FROM product aa
+     		     WHERE aa.pdtTypeCd      = ifnull(b.cdcSeq,'x')
+     		        OR aa.pdtBrandCd     = ifnull(b.cdcSeq,'x')
+     		        OR aa.pdtAccidentCd  = ifnull(b.cdcSeq,'x')
+     		        OR aa.pdtColorCd     = ifnull(b.cdcSeq,'x') 
+     		        OR aa.pdtRecommendCd = ifnull(b.cdcSeq,'x')               
+     		   ) +
+     		   (SELECT count(*) 
+     		      FROM memberpayment bb
+     		     WHERE bb.payTypeCd             = ifnull(b.cdcSeq,'x')
+     		        OR ifnull(bb.payCardCd,'o') = ifnull(b.cdcSeq,'x')
+     		   ) +
+     		   (SELECT count(*) 
+     		      FROM members cc
+     		     WHERE cc.mbrType = ifnull(b.cdcSeq,'x')
+     		        OR cc.mbrSex  = ifnull(b.cdcSeq,'x')
+     		   ) xcodeCount
+  		  FROM codegroup a
+       		   LEFT JOIN code b
+              		  ON b.cdgSeq = a.cdgSeq              		          
+         WHERE 1 = 1
+           AND a.cdgSeq = #{cdgSeq}
+           <if test="cdcSeq != null and !cdcSeq.equals('')">AND b.cdcseq = #{cdcSeq}</if>           
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO code
+			( 
+			  cdcName
+			, cdcRegDt
+			, cdcUdtDt
+			, cdcDelNy
+			, cdgSeq
+			)
+		VALUES
+			(
+			  #{cdcName}
+			, now()
+			, now()
+			, 0
+			, #{cdgSeq}
+			)
+	</insert>
+	
+	<update id="update">
+		UPDATE code
+		   SET cdcName  = #{cdcName}
+		     , cdcUdtDt = now()
+         WHERE 1 = 1		
+           AND cdcSeq = #{cdcSeq}	
+	</update>
+	
+	<update id="updateDelNy">
+		UPDATE code
+		   SET cdcUdtDt = now()
+		   
+		   <choose>
+		   		<when test="cdcDelNy == 0">, cdcDelNy = 1</when>
+		   		<when test="cdcDelNy == 1">, cdcDelNy = 0</when>
+		   </choose>
+         WHERE 1 = 1		
+           AND cdcSeq = #{cdcSeq}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM code
+        WHERE 1 = 1		
+          AND cdcSeq = #{cdcSeq}
+    </delete>
+    
+	<select id="selectListCachedCodeArrayList" resultMap="resultMapObj">
+		SELECT cdcSeq
+			 , cdcName
+			 , cdgSeq
+		  FROM code
+		 WHERE 1=1
+		   AND cdcDelNy = 0
+		 ORDER BY cdgSeq, cdcSeq
+   </select> 
+    
+    <!-- 다중선택자료 삭제 -->
+    <delete id="deleteList">
+    	DELETE
+    	  FROM code
+    	 WHERE 1 = 1
+    	   AND CONCAT(cdgSeq, cdcSeq) IN 
+    	       <foreach collection="shCheckedArray" item="list" open="(" close=")" separator=",">
+    	         #{list}
+    	       </foreach>
+    </delete> 
+
+</mapper>
