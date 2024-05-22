@@ -3,7 +3,7 @@ package com.stayc.common.constants;
 public class Constants {
 	public static final String PATH_CODE 		= "infra/v1/code/";
 	public static final String PATH_CODE_GROUP 	= "infra/v1/codegroup/";
-	public static final String PATH_HOME 		= "infra/v1/home/";
+	public static final String PATH_HOME 		= "infra/v1/index/";
 	public static final String PATH_LOGIN 		= "infra/v1/login/";
 	public static final String PATH_MEMBER 		= "infra/v1/member/";
 	public static final String PATH_PRODUCT 	= "infra/v1/product/";
