@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .seat-map {
+            width: 200px; /* 맵의 너비 */
+            height: 400px; /* 맵의 높이 */
+            position: relative;
+        }
+
+        .seat {
+            position: absolute;
+            width: 40px; /* 좌석의 너비 */
+            height: 40px; /* 좌석의 높이 */
+            background-color: #ccc;
+            border-radius: 20px; /* 타원형 모양 */
+            text-align: center;
+            line-height: 40px;
+            cursor: pointer; /* 마우스 커서를 포인터로 변경하여 클릭 가능한 것을 나타냄 */
+        }
+    </style>
+</head>
+<body>
+    <div class="seat-map" id="seatMap"></div>
+
+    <script>
+        const seatMapElement = document.getElementById('seatMap');
+        const numberOfSeats = 16;
+        const centerX = seatMapElement.offsetWidth / 2;
+        const centerY = seatMapElement.offsetHeight / 2;
+        const semiMajorAxis = 200; // 타원의 장축 반지름
+        const semiMinorAxis = 100; // 타원의 단축 반지름
+        const angleIncrement = (Math.PI * 2) / numberOfSeats; // 좌석 간의 각도 간격
+
+        for (let i = 0; i < numberOfSeats; i++) {
+            const angle = i * angleIncrement; // 현재 좌석의 각도 계산
+            const x = centerX + Math.cos(angle) * semiMinorAxis; // x 좌표 계산
+            const y = centerY + Math.sin(angle) * semiMajorAxis; // y 좌표 계산
+
+            const seatElement = document.createElement('div');
+            seatElement.classList.add('seat');
+            seatElement.textContent = i + 1;
+            seatElement.style.left = x + 'px';
+            seatElement.style.top = y + 'px';
+            
+            seatElement.addEventListener('click', function() {
+                alert('선택한 좌석: ' + seatElement.textContent);
+            });
+
+            seatMapElement.appendChild(seatElement);
+        }
+    </script>
+</body>
+</html>

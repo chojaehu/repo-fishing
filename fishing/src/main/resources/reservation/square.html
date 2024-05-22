@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .seat-map {
+            width: 400px; /* 맵의 너비 */
+            height: 300px; /* 맵의 높이 */
+            position: relative;
+        }
+
+        .seat {
+            position: absolute;
+            width: 40px; /* 좌석의 너비 */
+            height: 40px; /* 좌석의 높이 */
+            background-color: #ccc;
+            text-align: center;
+            line-height: 40px;
+            cursor: pointer; /* 마우스 커서를 포인터로 변경하여 클릭 가능한 것을 나타냄 */
+            border: 2px solid transparent; /* 좌석 테두리를 설정 */
+        }
+
+        .seat.selected {
+            border-color: red; /* 선택된 좌석의 테두리 색상을 빨간색으로 변경 */
+        }
+    </style>
+</head>
+<body>
+    <div class="seat-map" id="seatMap"></div>
+
+    <script>
+        const seatMapElement = document.getElementById('seatMap');
+        const numberOfRows = 5;
+        const seatsPerRow = 5;
+        const seatWidth = 40;
+        const seatHeight = 40;
+        const gap = 10; // 좌석 사이 간격
+        let number = numberOfRows;
+        let seata = seatsPerRow;
+
+        let seatNumber = 1; // 좌석 번호 초기화
+        let i = 1;
+        let j = 1;
+        for (let row = 0; row < numberOfRows; row++) {
+            j=1;
+            for (let seat = 0; seat < seatsPerRow; seat++) {
+                //가운데 위치는 건너뜁니다.
+                if (row === Math.floor(numberOfRows / 2) && seat === Math.floor(seatsPerRow / 2)) {
+                    continue;
+                }
+                if (row === Math.floor(numberOfRows / 5) && seat === Math.floor(seatsPerRow / 2)) {
+                    continue;
+                }
+                if (row === Math.floor(numberOfRows / 2) && seat === Math.floor(seatsPerRow / 5)) {
+                    continue;
+                }
+                if (row === Math.floor(numberOfRows / 5) && seat === Math.floor(seatsPerRow / 5)) {
+                    continue;
+                }
+                if (row === Math.floor(numberOfRows -2) && seat === Math.floor(seatsPerRow / 5)) {
+                    continue;
+                }
+                if (row === Math.floor(numberOfRows -2) && seat === Math.floor(seatsPerRow / 2)) {
+                    continue;
+                }
+                if (row === Math.floor(numberOfRows -2) && seat === Math.floor(seatsPerRow -2)) {
+                    continue;
+                }
+                if (row === Math.floor(numberOfRows -3) && seat === Math.floor(seatsPerRow -2)) {
+                    continue;
+                }
+                if (row === Math.floor(numberOfRows -4) && seat === Math.floor(seatsPerRow -2)) {
+                    continue;
+                }
+
+
+
+                // //  모서리 제거
+                if (row === Math.floor(numberOfRows - number) && seat === Math.floor(seatsPerRow - seata)) {
+                    continue;
+                }
+                if (row === Math.floor(numberOfRows -1) && seat === Math.floor(seatsPerRow -1)) {
+                    continue;
+                }
+                if (row === Math.floor(numberOfRows /number -1) && seat === Math.floor(seatsPerRow -1)) {
+                    continue;
+                }
+                if (row === Math.floor(numberOfRows -1) && seat === Math.floor(seatsPerRow /seata -1)) {
+                    continue;
+                }
+
+                // if (row === i && seat ===j) {
+                //     j++
+                //     continue;
+                // }
+                
+
+
+                
+
+
+                const x = seat * (seatWidth + gap);
+                const y = row * (seatHeight + gap);
+
+                const seatElement = document.createElement('div');
+                seatElement.classList.add('seat');
+                seatElement.textContent = seatNumber; // 좌석 번호를 할당합니다.
+                seatElement.style.left = x + 'px';
+                seatElement.style.top = y + 'px';
+
+                seatElement.addEventListener('click', function() {
+                    seatElement.classList.toggle('selected'); // 좌석을 클릭할 때마다 선택된 상태를 토글합니다.
+                    if (seatElement.classList.contains('selected')) {
+                        alert('선택한 좌석: ' + seatElement.textContent);
+                    }
+                });
+
+                seatMapElement.appendChild(seatElement);
+
+                seatNumber++; // 다음 좌석 번호로 이동합니다.
+            }
+        }
+    </script>
+</body>
+</html>
