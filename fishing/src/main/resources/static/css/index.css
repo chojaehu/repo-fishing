@@ -1,0 +1,49 @@
+/* CSS 스타일 추가 */
+.month-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.date-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.date-item {
+    margin: 3px;
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 4px;
+}
+.btn-arrow {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    margin: 0 10px;
+}
+.red {
+    color: red !important;
+}
+.month-year {
+    margin-right: 10px;
+}
+.clicked {
+    background-color: gray !important; /* 클릭된 버튼의 배경색을 변경 */
+    color: black !important; /* 클릭된 버튼의 글자색을 변경 */
+}
+.btn2{
+    transition: all 0.3s;
+    text-transform: uppercase;
+    padding: 1.2rem 1.8rem;
+    border-radius: 0;
+    font-size: 1.4rem;
+    font-weight: 700;
+    font-family: Poppins, sans-serif;
+    line-height: 1.429;
+}
+.btn2:focus {
+    box-shadow: none;
+}  
