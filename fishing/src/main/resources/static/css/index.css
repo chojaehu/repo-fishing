@@ -1,15 +1,16 @@
-/* CSS 스타일 추가 */
 .month-container {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 20px;
-}
+}        
+
 .date-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
+
 .date-item {
     margin: 3px;
     background-color: white;
@@ -18,32 +19,66 @@
     padding: 10px;
     border-radius: 4px;
 }
+
 .btn-arrow {
     background-color: white;
     color: black;
-    border: 1px solid black;
+    border: 2px solid black;
     margin: 0 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px; /* 너비 설정 */
+    height: 40px; /* 높이 설정 */
+    font-size: 1.5rem; /* 아이콘 크기 */
+    transition: all 0.3s;
+    cursor: pointer;
+    border-radius: 50%; /* 동그란 모양 */
+    outline: none; /* 포커스 시 외곽선 제거 */
 }
+
+.btn-arrow:hover {
+    background-color: #007bff; /* 호버 시 배경색 */
+    color: white; /* 호버 시 아이콘 색상 */
+    border-color: #007bff; /* 호버 시 테두리 색상 */
+}      
+
 .red {
     color: red !important;
 }
+
 .month-year {
     margin-right: 10px;
 }
+
 .clicked {
     background-color: gray !important; /* 클릭된 버튼의 배경색을 변경 */
     color: black !important; /* 클릭된 버튼의 글자색을 변경 */
 }
-.btn2{
+
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px; /* 원하는 너비로 설정 */
+    height: 40px; /* 원하는 높이로 설정 */
     transition: all 0.3s;
     text-transform: uppercase;
     padding: 1.2rem 1.8rem;
-    border-radius: 0;
+    border-radius: 20%;
     font-size: 1.4rem;
     font-weight: 700;
     font-family: Poppins, sans-serif;
     line-height: 1.429;
 }
-.btn2:focus {
+
+.btn:focus {
     box-shadow: none;
-}  
+}
+
+#month {
+    margin: 0 20px;
+    font-size: 2.7rem;
+    display: flex;
+    align-items: center; /* 텍스트 중앙 정렬 */
+}        
