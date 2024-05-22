@@ -1,13 +1,12 @@
 package com.stayc.common.constants;
 
 public class Constants {
-	public static final String PATH_CODE 		= "infra/v1/code/";
-	public static final String PATH_CODE_GROUP 	= "infra/v1/codegroup/";
-	public static final String PATH_HOME 		= "infra/v1/index/";
-	public static final String PATH_LOGIN 		= "infra/v1/login/";
-	public static final String PATH_MEMBER 		= "infra/v1/member/";
-	public static final String PATH_PRODUCT 	= "infra/v1/product/";
-	public static final String PATH_TEMP 		= "infra/v1/temp/";
+	public static final String PATH_CODE 		= "infra/code/";
+	public static final String PATH_CODE_GROUP 	= "infra/codegroup/";
+	public static final String PATH_HOME 		= "infra/index/";
+	public static final String PATH_LOGIN 		= "infra/login/";
+	public static final String PATH_RESERVE 	= "infra/reserve/";
+	public static final String PATH_CHAT 		= "infra/chat/";
 	
 	public static final String DATETIME_FORMAT_BASIC = "yyyy-MM-dd HH:mm:ss";
 	
