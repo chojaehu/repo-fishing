@@ -19,10 +19,21 @@
                         </a>
                         <!--메인메뉴-->
                         <div th:replace="~{infra/include/body :: menu}"></div>
+                        
+						<div class="align-items-center ml-5">
+							<nav aria-label="breadcrumb" class="breadcrumb-nav">
+								<div class="container">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item" style="color: blue;"><a href="/index"><b>Home</b></a></li>
+										<li class="breadcrumb-item active" aria-current="page">Login</li>
+									</ol>
+								</div>
+							</nav>
+						</div>
                     </div>
+                    
 					<!--우측메뉴-->
                     <div th:replace="~{infra/include/body :: menuRight}"></div>
-                    <br>
                 </div>
             </div>
         </header><!-- End .header -->
@@ -35,87 +46,96 @@
 							<ol class="breadcrumb">
 								<li class="breadcrumb-item"><a href="/index">Home</a></li>
 								<li class="breadcrumb-item active" aria-current="page">
-									My Account
+									Login
 								</li>
 							</ol>
 						</div>
 					</nav>
 
-					<h1>My Account</h1>
+					<h1>Login</h1>
 				</div>
 			</div>
 
 			<div class="container login-container">
 				<div class="row">
-					<div class="col-lg-10 mx-auto">
+					<div class="col-lg-5 mx-auto">
 						<div class="row">
-							<div class="col-md-6">
+							<div class="col">
 								<div class="heading mb-1">
 									<h2 class="title">Login</h2>
 								</div>
 
 								<form id="form-login" name="form-login">
-									<div>
-										<label for="login-email">
-											Username or email address
+									<div class="mb-3">
+										<label for="mbrEmail">
+											email address
 											<span class="required">*</span>
 										</label>
-										<input type="email" class="form-input form-wide" id="login-email" name="login-email" />
-										<span id="login-email-valid" style="visibility: hidden;"></span>
+										<input type="email" class="form-input form-wide" id="mbrEmail" name="mbrEmail" />
+										<span id="mbrEmailValid" name="mbrEmailValid" style="visibility: hidden;"></span>
 									</div>
 									
-									<div>
-										<label for="login-password">
+									<div class="mb-3">
+										<label for="mbrPw">
 											Password
 											<span class="required">*</span>
 										</label>
-										<input type="password" class="form-input form-wide" id="login-password" name="login-password" />
-										<span id="login-password-valid" style="visibility: hidden;"></span>
+										<input type="password" class="form-input form-wide" id="mbrPw" name="mbrPw" />
+										<span id="mbrPwValid" name="mbrPwValid" style="visibility: hidden;"></span>
 									</div>
 									
-									<div class="form-footer mb-2">
-										<button type="button" class="btn btn-dark btn-md w-100" onclick="fnControllerLogin();">
+									<div class="form-footer">
+										<button type="button" class="btn btn-dark btn-md w-100 mr-0" onclick="fnControllerLogin();">
 											LOGIN
 										</button>
 									</div>
 								</form>
 							</div>
-							<div class="col-md-6">
+							
+							<!--<div class="col-md-6">
 								<div class="heading mb-1">
 									<h2 class="title">Register</h2>
 								</div>
 
 								<form id="form-register" name="form-register">
-									<label for="register-email">
-										Email address
-										<span class="required">*</span>
-									</label>
-									<input type="email" class="form-input form-wide" id="register-email" required />
-
-									<label for="register-password">
-										Password
-										<span class="required">*</span>
-									</label>
-									<input type="password" class="form-input form-wide" id="register-password"
-										required />
-
-									<div class="form-footer mb-2">
+									<div class="mb-3">
+										<label for="registerEmail">
+											Email address
+											<span class="required">*</span>
+										</label>
+										<input type="email" class="form-input form-wide" id="registerEmail" name="registerEmail" />
+										<span id="registerEmailValid" name="registerEmailValid" style="visibility: hidden;"></span>
+									</div>
+									
+									<div class="mb-3">
+										<label for="register-password">
+											Password
+											<span class="required">*</span>
+										</label>
+										<input type="password" class="form-input form-wide" id="registerPassword" name="registerPassword"/>
+										<span id="registerPasswordValid" name="registerPasswordValid" style="visibility: hidden;"></span>
+									</div>
+									
+									<div class="form-footer">
 										<button type="button" class="btn btn-dark btn-md w-100 mr-0" onclick="fnControllerRegister();">
 											Register
 										</button>
 									</div>
 								</form>
-							</div>
+							</div>-->
 						</div>
 					</div>
 				</div>
 			</div>
 		</main><!-- End .main -->
-
+	
 		<footer th:replace="~{infra/include/body :: footer}"></footer>
 	</div><!-- End .page-wrapper -->
 
 	<a id="scroll-top" href="#top" title="Top" role="button"><i class="icon-angle-up"></i></a>
+	
+	<!--모달폼-->
+	<div th:replace="~{infra/include/modal :: modalConfirm('확인','')}"></div>
 
 	<!-- Plugins JS File -->
 	<script src="assets/js/jquery.min.js"></script>
@@ -126,35 +146,58 @@
 	<script src="assets/js/main.min.js"></script>
 	
 	<script>
+		// validType : 1(한글), 2(영문), 3(숫자:정수), 4(숫자:실수), 5(숫자콤마)
+		//             10(한글영문), 11(한글숫자), 12(영문숫자), 13(한글영문숫자)
+		//			   20(비밀번호), 21(날짜), 22(이메일)
+		//             30(특수문자), 31(공백체크)
+		// TYPE_KR   =  1, TYPE_EN   = 2,  TYPE_IT   = 3,  TYPE_FT     = 4;  TYPE_ICM = 5;
+		// TYPE_KREN = 10, TYPE_KRIT = 11, TYPE_ENIT = 12, TYPE_KRENIT = 13;
+		// TYPE_PW   = 20, TYPE_DT   = 21, TYPE_EM   = 22;
+		// TYPE_SP   = 30, TYPE_NULL = 31;
+		let dispText = "영문,숫자,특수문자(!@#$%^*+=-)조합";
+		let typeArr;
+		let nameArr;
+		let textArr;
+				
 		let formLogin    = document.querySelector("#form-login");
 		let formRegister = document.querySelector("#form-register");
 		
 		// 로그인
 		function fnControllerLogin() {
+			typeArr = [TYPE_EM, TYPE_PW];
+			nameArr = ["mbrEmail", "mbrPw"];
+			textArr = ["", dispText];
+					
+			if(!fnValidation()) {return false;}
+			
 			$.ajax({
 				async: true
 				, cache: false
 				, type: "post"
-				, data: {"mbrEmail":$("#login-email").val(), "mbrPassword":$("#login-password").val()}
+				, data: {"mbrEmail":$("#mbrEmail").val(), "mbrPw":$("#mbrPw").val()}
 				, url: "/loginConfirm"
 				, success: function(response) {
 					if(response.rt == "success") {
 						location.href = "/index";
 					} else if(response.rt == "id") {
-						//fnModalFormOneBtnShow("확인", "아이디가 일치하지 않습니다");
+						fnModalShow("확인", "아이디가 일치하지 않습니다");
 					} else if(response.rt == "password") {
-						//fnModalFormOneBtnShow("확인", "비밀번호가 일치하지 않습니다");
+						fnModalShow("확인", "비밀번호가 일치하지 않습니다");
 					}
 				}
 				, error : function(jqXHR, textStatus, errorThrown){
-					fnModalFormOneBtnShow("오류", "ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+					fnModalShow("오류", "ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
 				}
 			});
 		}
 		
 		// 회원등록
 		function fnControllerRegister() {
+			typeArr = [TYPE_EM, TYPE_PW];
+			nameArr = ["mbrEmail", "mbrPw"];
+			textArr = ["", dispText];
 			
+			if(!fnValidation()) {return false;}
 		}
 	</script>
 </body>

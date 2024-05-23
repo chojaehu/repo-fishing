@@ -37,6 +37,36 @@
 	
 	<!-- 달력 CSS File -->
     <link rel="stylesheet" type="text/css" href="css/index.css">
+    
+    <!-- 사용자 스크립트 -->
+    <script src="js/validation.js"></script>
+    <!--<script src="js/paging.js"></script>
+    <script src="js/common.js"></script>    
+    <script src="js/search.js"></script>-->    
+    <script src="js/modal.js"></script>     
+</div>
+
+<div th:fragment="date">
+    <section style="background-color: #f4f4f4;   display: grid; place-items: center;">
+	    <div style="margin: 30px;">
+	        <div class="month-container">
+	          <!-- 이전 월로 이동하는 버튼 -->
+	          <button type="button" id="prevMonth" class="btnDay btn btn-primary btn-arrow">
+				  <i class="fa fa-angle-left"></i>
+			  </button>
+	          <!-- 현재 월과 년도를 표시하는 부분 -->
+	          <h2 id="month"></h2>
+	          <!-- 다음 월로 이동하는 버튼 -->
+	          <button type="button" id="nextMonth" class="btnDay btn btn-primary btn-arrow">
+				  <i class="fa fa-angle-right"></i>
+			  </button>
+	        </div>
+	        <!-- 날짜를 표시하는 컨테이너 -->
+	        <div class="date-container" id="dateContainer">
+	          <!-- 날짜 버튼들은 JavaScript를 통해 동적으로 추가됩니다. -->
+	        </div>
+	    </div>
+	</section>
 </div>
 
 </html>

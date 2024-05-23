@@ -5,9 +5,9 @@
     <nav class="main-nav">
         <ul class="menu">
             <li class="active"><a href="/index">Home</a></li>
-            <li><a href="demo34-shop.html">예약하기</a></li>
-            <li><a href="demo34-product.html">뽐내기</a></li>
-            <li><a href="demo34-product.html">대화나누기</a></li>            
+            <li><a href="javascript:void(0)">예약하기</a></li>
+            <li><a href="javascript:void(0)">뽐내기</a></li>
+            <li><a href="javascript:void(0)">열린대화방</a></li>            
         </ul>
     </nav>
 </div>
@@ -31,6 +31,27 @@
     <a href="/login" class="header-icon">
         <i class="icon-user-2"></i>
     </a>
+</div>
+
+<div th:fragment="mobileMenu">
+	<div class="mobile-menu-overlay"></div><!-- End .mobil-menu-overlay -->
+    <div class="mobile-menu-container">
+        <div class="mobile-menu-wrapper">
+            <span class="mobile-menu-close"><i class="fa fa-times"></i></span>
+            <nav class="mobile-nav">
+                <ul class="mobile-menu">
+                    <li><a href="/index">Home</a></li>
+		            <li><a href="javascript:void(0)">예약하기</a></li>
+		            <li><a href="javascript:void(0)">뽐내기</a></li>
+		            <li><a href="javascript:void(0)">열린대화방</a></li>                     
+                </ul>
+
+                <ul class="mobile-menu">
+                    <li><a href="/login">Log In</a></li>
+                </ul>
+            </nav><!-- End .mobile-nav -->
+        </div><!-- End .mobile-menu-wrapper -->
+    </div><!-- End .mobile-menu-container -->
 </div>
 
 <footer th:fragment="footer" class="footer bg-dark">
