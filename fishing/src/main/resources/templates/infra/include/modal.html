@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+	<body>
+		<!-- Button trigger modal -->
+		<div th:fragment="modalDelete">
+			<!-- Modal -->
+			<div class="modal fade" id="modalFormDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h1 class="modal-title fs-5" id="modalFormDeleteTitle" name="modalFormDeleteTitle">삭제</h1>
+			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			      </div>
+			      <div class="modal-body" id="modalFormDeleteContent" name="modalFormDeleteContent">삭제를 진행 하시겠습니까?</div>
+			      <div class="modal-footer">
+			        <button id="btnExit" naem="btnExit" type="button" class="btn btn-primary" style="width: 100px;" data-bs-dismiss="modal">취소</button>
+					&ensp;
+			        <button id="btnOk" naem="btnOk" type="button" class="btn btn-primary" data-bs-dismiss="modal" style="width: 100px;" onclick="fnDataDelete();">삭제</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		</div>
+				
+		<!-- Button trigger modal -->
+		<div th:fragment="modalConfirm(title, content)">
+			<!-- Modal -->
+			<div class="modal fade" id="modalFormOneBtn" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h1 class="modal-title fs-5" id="title" name="title" th:text="${title}"></h1>
+			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			      </div>
+			      <div class="modal-body" id="modalFormOneBtnContent" name="modalFormOneBtnContent" th:text="${content}"></div>
+			      <div class="modal-footer">
+			        <button id="btnExit" naem="btnExit" type="button" class="btn btn-primary" style="width: 100px;" data-bs-dismiss="modal" th:text="${btnName1}">확인</button> <!-- 취소, 확인 -->
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		</div>
+		
+	</body>
+</html>    

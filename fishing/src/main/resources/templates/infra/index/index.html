@@ -2,7 +2,6 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<div th:replace="~{infra/include/head :: head}"></div>
-	<link rel="stylesheet" type="text/css" href="css/index.css">
 </head>
 
 <body>
@@ -22,6 +21,7 @@
                     </div>
 					<!--우측메뉴-->
                     <div th:replace="~{infra/include/body :: menuRight}"></div>
+                    <br>
                 </div>
             </div>
         </header><!-- End .header -->
@@ -1566,6 +1566,8 @@
             </nav><!-- End .mobile-nav -->
         </div><!-- End .mobile-menu-wrapper -->
     </div><!-- End .mobile-menu-container -->
+    
+    <footer th:replace="~{infra/include/body :: footer}"></footer>
 
     <a id="scroll-top" href="#top" title="Top" role="button"><i class="icon-angle-up"></i></a>
 
