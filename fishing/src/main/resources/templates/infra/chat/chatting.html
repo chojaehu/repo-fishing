@@ -12,8 +12,8 @@
         }
 
         .chat-messages {
-            min-height: calc(85vh - 10px); /* 상단바 높이를 뺀 값 */
-            max-height: calc(85vh - 56px); /* 상단바 높이를 뺀 값 */
+            min-height: calc(85vh - 10px);
+            max-height: calc(85vh - 56px);
             overflow-y: auto;
         }
 
@@ -23,28 +23,24 @@
             white-space: pre-wrap;
         }
 
-        .sidebar-left, .sidebar-right {
+        .sidebar-left {
             background-color: #f8f9fa;
             padding: 20px;
-            position: -webkit-sticky;
-            position: sticky;
-            top: 56px; /* 상단바 높이 */
-            height: calc(100vh - 56px); /* 상단바 높이를 뺀 값 */
-            z-index: 1;
-        }
-
-        .sidebar-left {
-            left: 0;
+            position: fixed;
+            top: 56px;
+            height: calc(100vh - 56px);
+            z-index: 1000;
             width: 250px;
             border-right: 1px solid #dee2e6;
-            float: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s ease-in-out;
+            transform: translateX(-100%);
         }
 
-        .sidebar-right {
-            right: 0;
-            width: 250px;
-            border-left: 1px solid #dee2e6;
-            float: right;
+        .sidebar-section {
+            margin-bottom: 20px;
         }
 
         .sidebar-link {
@@ -61,7 +57,8 @@
 
         .chat-box {
             padding: 20px;
-            margin-top: 56px; /* 상단바 높이만큼 아래로 */
+            margin-top: 56px;
+            transition: margin-left 0.3s ease-in-out;
         }
 
         .card-footer {
@@ -74,42 +71,44 @@
 
         @media (min-width: 992px) {
             .chat-box {
-                margin-left: 270px; /* 사이드바 너비 + 여백 */
-                margin-right: 270px; /* 사이드바 너비 + 여백 */
+                margin-left: 270px;
+            }
+
+            .sidebar-left {
+                transform: translateX(0);
             }
         }
 
         @media (max-width: 992px) {
-            .sidebar-left, .sidebar-right {
-                width: 250px;
+            .sidebar-left {
+                transform: translateX(-100%);
             }
 
             .chat-box {
-                margin-left: 270px; /* 사이드바 너비 + 여백 */
-                margin-right: 270px; /* 사이드바 너비 + 여백 */
-            }
-        }
-
-        @media (max-width: 768px) {
-            .sidebar-left, .sidebar-right {
-                width: 200px;
-            }
-
-            .chat-box {
-                margin-left: 220px; /* 사이드바 너비 + 여백 */
-                margin-right: 220px; /* 사이드바 너비 + 여백 */
+                margin-left: 0;
             }
         }
 
         @media (max-width: 576px) {
-            .sidebar-left, .sidebar-right {
-                display: none;
+            .sidebar-left {
+                transform: translateX(-100%);
             }
 
             .chat-box {
-                margin-left: 0; /* 사이드바 없을 때 */
-                margin-right: 0; /* 사이드바 없을 때 */
+                margin-left: 0;
             }
+
+            .toggle-sidebar-btn {
+                display: block;
+                position: fixed;
+                top: 10px;
+                left: 10px;
+                z-index: 2;
+            }
+        }
+
+        .sidebar-left.visible {
+            transform: translateX(0);
         }
     </style>
 </head>
@@ -117,38 +116,32 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">로고</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler toggle-sidebar-btn d-lg-none" type="button" aria-label="Toggle sidebar" onclick="toggleSidebar()">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">링크1</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">링크2</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">링크3</a>
-                    </li>
-                </ul>
-            </div>
         </div>
     </nav>
 
-    <div class="sidebar-left d-none d-lg-block">
-        <h5>사이드바 1</h5>
-        <a href="#" class="sidebar-link">링크 1</a>
-        <a href="#" class="sidebar-link">링크 2</a>
-        <a href="#" class="sidebar-link">링크 3</a>
+    <div class="sidebar-left d-lg-flex">
+        <div>
+            <div class="sidebar-section">
+                <h5>사이드바 1 - 구역 1</h5>
+                <a href="#" class="sidebar-link">링크 1</a>
+                <a href="#" class="sidebar-link">링크 2</a>
+                <a href="#" class="sidebar-link">링크 3</a>
+            </div>
+        </div>
+        <div>
+            <div class="sidebar-section">
+                <h5>사이드바 1 - 구역 2</h5>
+                <a href="#" class="sidebar-link">링크 4</a>
+                <a href="#" class="sidebar-link">링크 5</a>
+                <a href="#" class="sidebar-link">링크 6</a>
+            </div>
+        </div>
     </div>
 
-    <div class="sidebar-right d-none d-lg-block">
-        <h5>사이드바 2</h5>
-        <a href="#" class="sidebar-link">링크 A</a>
-        <a href="#" class="sidebar-link">링크 B</a>
-        <a href="#" class="sidebar-link">링크 C</a>
-    </div>
+    <button class="btn btn-primary toggle-sidebar-btn d-lg-none" onclick="toggleSidebar()">사이드바 열기</button>
     
     <div class="chat-box">
         <div class="card-body chat-messages">
@@ -219,10 +212,18 @@
             }
         });
 
+        function toggleSidebar() {
+            var sidebar = document.querySelector('.sidebar-left');
+            sidebar.classList.toggle('visible');
+        }
+
         // Ensure the chat starts at the bottom on page load
         document.addEventListener('DOMContentLoaded', function() {
             scrollToBottom();
         });
     </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

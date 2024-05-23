@@ -1,6 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
+	<style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fafafa;
+        }
 
+        .container {
+            padding: 20px;
+            
+        }
+
+        .post-card {
+            background-color: #fff;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            padding: 20px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+        }
+
+        .profile img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .profile h6 {
+            margin-bottom: 0;
+        }
+
+        .post-img {
+            width: 100%;
+            border-radius: 10px;
+            
+            transition: transform 0.2s ease-in-out;
+            cursor: pointer;
+            aspect-ratio: 5/5; /* 이미지의 가로세로 비율을 16:9로 설정 */
+        }
+
+        .post-img:hover {
+            transform: scale(1.1);
+        }
+
+        .comments .comment {
+            margin-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        .comment strong {
+            font-weight: bold;
+        }
+
+        .comment p {
+            margin: 5px 0;
+        }
+
+        .comment-form .input-group {
+            width: 100%;
+        }
+
+        .small-img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 5px;
+            transition: transform 0.2s ease-in-out;
+            cursor: pointer;
+        }
+
+        .small-img:hover {
+            transform: scale(1.1);
+        }
+    </style>
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,16 +91,16 @@
 
 
 	<script>
-		WebFontConfig = {
-			google: { families: [ 'Open+Sans:300,400,600,700,800', 'Poppins:300,400,500,600,700', 'Shadows+Into+Light:400' ] }
-		};
-		( function ( d ) {
-			var wf = d.createElement( 'script' ), s = d.scripts[ 0 ];
-			wf.src = 'assets/js/webfont.js';
-			wf.async = true;
-			s.parentNode.insertBefore( wf, s );
-		} )( document );
-	</script>
+        WebFontConfig = {
+            google: { families: ['Playfair+Display:200,300,400,400italic,500,600,700,700italic,800,900italic', 'Poppins:200,300,400,500,600,700,800', 'Oswald:300,600,700'] }
+        };
+        (function (d) {
+            var wf = d.createElement('script'), s = d.scripts[0];
+            wf.src = 'assets/js/webfont.js';
+            wf.async = true;
+            s.parentNode.insertBefore(wf, s);
+        })(document);
+    </script>
 
 	<!-- Plugins CSS File -->
 	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -40,8 +114,9 @@
 <body>
 	<div class="page-wrapper">
 
+
 		<header class="header">
-            <div class="header-top">
+			<div class="header-top">
                 <div class="container-fluid">
                     <div class="header-left">
                         <p class="top-message font-italic ls-n-10">Get <b class="font-weight-extra-bold">10% OFF</b> at
@@ -377,186 +452,127 @@
                     </div>
                 </div>
             </div>
-        </header><!-- End .header -->
+		</header><!-- End .header -->
 
 		<main class="main">
-			<nav aria-label="breadcrumb" class="breadcrumb-nav">
+			<!-- <nav aria-label="breadcrumb" class="breadcrumb-nav">
 				<div class="container">
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="demo4.html"><i class="icon-home"></i></a></li>
-						<li class="breadcrumb-item active" aria-current="page">Blog</li>
+						<li class="breadcrumb-item active" aria-current="page">Blog Post</li>
 					</ol>
-				</div><!-- End .container -->
-			</nav>
+				</div>End .container 
+			</nav>-->
 
-			<div class="container">
+			<div class="">
 				<div class="row">
-					<div class="col-lg-9">
-						<div class="row" style="padding: 20px;">
-							<div class="col-md-6 col-lg-4">
-								<article class="post">
-									<div class="post-media">
-										<a href="chatting.html" target="_blank">
-											<img src="assets/images/blog/home/post-1.jpg" alt="Post" width="225"
-												height="280">
-										</a>
-									</div><!-- End .post-media -->
+					<div class="col-lg-12">
+						<article class="post single">
 
-									<div class="post-body">
-										<h2 class="post-title">
-											<a href="single.html">Top New Collection</a>
-										</h2>
-										<div class="post-content">
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non
-												placerat mi.
-												Etiam non tellus sem. Aenean...</p>
-										</div><!-- End .post-content -->
-										<a href="single.html" class="post-comment">0 Comments</a>
-									</div><!-- End .post-body -->
-								</article><!-- End .post -->
+							<div class="container">
+								<div class="row justify-content-md-center">
+									<div class="col-md-8">
+										<div class="card post-card">
+											<div class="card-body">
+												<div class="row align-items-center">
+                                                    <div class="col-12 mt-3">
+														<div class="comments mt-3">
+															<div class="comment">
+																<strong>방제목</strong>
+															</div>
+															<!-- More comments go here -->
+															<form class="comment-form mt-3">
+																<!-- 부트스트랩 5 폼 컨트롤 사용 -->
+																<div class="input-group">
+																	<input type="text" class="form-control" placeholder="Add a comment..." aria-label="Add a comment..." aria-describedby="button-addon2">
+																	<button class="btn btn-primary" type="button" id="button-addon2">Post</button>
+																</div>
+															</form>
+														</div>
+													</div>
+                                                    <div class="col-12 mt-3 comment">
+                                                        <strong>커버 선택</strong>
+                                                    </div>
+                                                    
+                                                    <div class="col-4 mt-3 ">
+                                                        <img src="https://via.placeholder.com/600x400" alt="Post Image" class="img-fluid post-img " id="mainImg">
+                                                    </div>
+													<div class="col-8 mt-3 align-center">
+														<!-- <img src="https://via.placeholder.com/600x400" alt="Post Image" class="img-fluid post-img" id="mainImg"> -->
+                                                        
+														<div class="row">
+															<div class="col-6 col-sm-4 col-md-3">
+																<img src="https://via.placeholder.com/150/FF5733/FFFFFF" alt="Small Image 1" class="small-img" onclick="changeMainImg('https://via.placeholder.com/600x400/FF5733/FFFFFF')">
+															</div>
+															<div class="col-6 col-sm-4 col-md-3">
+																<img src="https://via.placeholder.com/150/C70039/FFFFFF" alt="Small Image 2" class="small-img" onclick="changeMainImg('https://via.placeholder.com/600x400/C70039/FFFFFF')">
+															</div>
+															<div class="col-6 col-sm-4 col-md-3">
+																<img src="https://via.placeholder.com/150/900C3F/FFFFFF" alt="Small Image 3" class="small-img" onclick="changeMainImg('https://via.placeholder.com/600x400/900C3F/FFFFFF')">
+															</div>
+															<div class="col-6 col-sm-4 col-md-3">
+																<img src="https://via.placeholder.com/150/581845/FFFFFF" alt="Small Image 4" class="small-img" onclick="changeMainImg('https://via.placeholder.com/600x400/581845/FFFFFF')">
+															</div>
+                                                            <div class="col-6 col-sm-4 col-md-3">
+																<img src="https://via.placeholder.com/150/FF5733/FFFFFF" alt="Small Image 1" class="small-img" onclick="changeMainImg('https://via.placeholder.com/600x400/FF5733/FFFFFF')">
+															</div>
+															<div class="col-6 col-sm-4 col-md-3">
+																<img src="https://via.placeholder.com/150/C70039/FFFFFF" alt="Small Image 2" class="small-img" onclick="changeMainImg('https://via.placeholder.com/600x400/C70039/FFFFFF')">
+															</div>
+															<div class="col-6 col-sm-4 col-md-3">
+																<img src="https://via.placeholder.com/150/900C3F/FFFFFF" alt="Small Image 3" class="small-img" onclick="changeMainImg('https://via.placeholder.com/600x400/900C3F/FFFFFF')">
+															</div>
+															<div class="col-6 col-sm-4 col-md-3">
+																<img src="https://via.placeholder.com/150/581845/FFFFFF" alt="Small Image 4" class="small-img" onclick="changeMainImg('https://via.placeholder.com/600x400/581845/FFFFFF')">
+															</div>
+														</div>
+													</div>
+                                                    <div class="col-8 mt-3">
+                                                        <div class="comment">
+                                                            <strong>방설명</strong>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+													  <textarea class="form-control" id="exampleformcontroltextarea1" rows="3"></textarea>
+													</div>
+													<div class="col-12">
+													<button class="btn btn-dark btn-rounded btn-lg float-right" style="margin-top: 30px">방생성</button>
+													  <!-- <ul class="btn-list">
+															<li><button class="btn btn-default btn-rounded btn-md">default</button></li>
+															<li><button class="btn btn-success btn-rounded btn-md">success</button></li>
+															<li><button class="btn btn-info btn-rounded btn-md">info</button></li>
+															<li><button class="btn btn-warning btn-rounded btn-md">warning</button></li>
+															<li><button class="btn btn-danger btn-rounded btn-md">danger</button></li>
+															<li><button class="btn btn-primary btn-rounded btn-md">primary</button></li>
+															<li><button class="btn btn-secondary btn-rounded btn-md">secondary</button></li>
+															<li><button class="btn btn-dark btn-rounded btn-md">dark</button></li>
+														</ul> -->
+													</div>
+                                                </div>
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
-							<div class="col-md-6 col-lg-4">
-								<article class="post">
-									<div class="post-media">
-										<a href="single.html">
-											<img src="assets/images/blog/home/post-2.jpg" alt="Post" width="225"
-												height="280">
-										</a>
-									</div><!-- End .post-media -->
+							
+						</article><!-- End .post -->
 
-									<div class="post-body">
-										<h2 class="post-title">
-											<a href="single.html">Fashion Trends</a>
-										</h2>
-										<div class="post-content">
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non
-												placerat mi.
-												Etiam non tellus sem. Aenean...</p>
-										</div><!-- End .post-content -->
-										<a href="single.html" class="post-comment">0 Comments</a>
-									</div><!-- End .post-body -->
-								</article><!-- End .post -->
-							</div>
-							<div class="col-md-6 col-lg-4">
-								<article class="post">
-									<div class="post-media">
-										<a href="single.html">
-											<img src="assets/images/blog/home/post-3.jpg" alt="Post" width="225"
-												height="280">
-										</a>
-									</div><!-- End .post-media -->
+					<hr class="mt-2 mb-1">
 
-									<div class="post-body">
-										<h2 class="post-title">
-											<a href="single.html">Etiam laoreet sem</a>
-										</h2>
-										<div class="post-content">
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non
-												placerat mi.
-												Etiam non tellus sem. Aenean...</p>
-										</div><!-- End .post-content -->
-										<a href="single.html" class="post-comment">0 Comments</a>
-									</div><!-- End .post-body -->
-								</article><!-- End .post -->
-							</div>
-							<div class="col-md-6 col-lg-4">
-								<article class="post">
-									<div class="post-media">
-										<a href="single.html">
-											<img src="assets/images/blog/home/post-4.jpg" alt="Post" width="225"
-												height="280">
-										</a>
-									</div><!-- End .post-media -->
+						<div class="related-posts">
+							<h4>Related <strong>Posts</strong></h4>
 
-									<div class="post-body">
-										<h2 class="post-title">
-											<a href="single.html">Perfect Accessories</a>
-										</h2>
-										<div class="post-content">
-											<p>Leap into electronic typesetting, remaining essentially unchanged. It was
-												popularised in the 1960s with the release of Letraset sheets...
-											</p>
-										</div><!-- End .post-content -->
-										<a href="single.html" class="post-comment">0 Comments</a>
-									</div><!-- End .post-body -->
-								</article><!-- End .post -->
-							</div>
 						</div>
-					</div><!-- End .col-lg-9 -->
+					</div>
 
 					<div class="sidebar-toggle custom-sidebar-toggle">
 						<i class="fas fa-sliders-h"></i>
 					</div>
 					<div class="sidebar-overlay"></div>
-					<aside class="sidebar mobile-sidebar col-lg-3">
-						<div class="sidebar-wrapper" data-sticky-sidebar-options='{"offsetTop": 72}'>
-							<div class="widget widget-categories">
-								<br><br><br>
-
-								<!-- <article class="post">
-									<div class="post-media">
-										<a href="single.html">
-											<img src="assets/images/blog/home/post-3.jpg" alt="Post" width="225"
-												height="280">
-										</a>
-									</div>
-								</article> -->
-                                <div class="info-box info-box-icon-top">
-                                    
-                                    <div class="info-box-content">
-                                        <h4>방만들기</h4>
-                                        <br><i class="fas fa-plus-circle"></i>
-                                    </div>
-                                    
-                                </div>
-							</div><!-- End .widget -->
-
-							<div class="widget widget-post">
-								<h4 class="widget-title">내 채팅방</h4>
-
-								<ul class="simple-post-list">
-									<li>
-										<div class="post-media">
-											<a href="single.html">
-												<img src="assets/images/blog/widget/post-1.jpg" alt="Post">
-											</a>
-										</div><!-- End .post-media -->
-										<div class="post-info">
-											<a href="single.html">낚시 모임</a>
-											<div class="post-meta">February 26, 2018</div>
-											<!-- End .post-meta -->
-										</div><!-- End .post-info -->
-									</li>
-
-									<li>
-										<div class="post-media">
-											<a href="single.html">
-												<img src="assets/images/blog/widget/post-2.jpg" alt="Post">
-											</a>
-										</div><!-- End .post-media -->
-										<div class="post-info">
-											<a href="single.html">몰래 여행가기방</a>
-											<div class="post-meta">February 26, 2018</div><!-- End .post-meta -->
-										</div><!-- End .post-info -->
-									</li>
-                                    <li>
-										<div class="post-media">
-											<a href="single.html">
-												<img src="assets/images/blog/widget/post-2.jpg" alt="Post">
-											</a>
-										</div><!-- End .post-media -->
-										<div class="post-info">
-											<a href="single.html">노하우 공유방</a>
-											<div class="post-meta">February 26, 2018</div><!-- End .post-meta -->
-										</div><!-- End .post-info -->
-									</li>
-								</ul>
-							</div><!-- End .widget -->
-						</div><!-- End .sidebar-wrapper -->
-					</aside><!-- End .col-lg-3 -->
-				</div><!-- End .row -->
-			</div><!-- End .container -->
-		</main><!-- End .main -->
+				
+				</div>
+			</div>
+		</main>
 
 		<footer class="footer font2">
             <div class="footer-top">
@@ -655,7 +671,6 @@
                     </p>
                 </div><!-- End .footer-bottom -->
             </div><!-- End .container -->
-        </footer><!-- End .footer -->
 	</div><!-- End .page-wrapper -->
 
 	<div class="loading-overlay">
@@ -849,11 +864,20 @@
 
 	<!-- Plugins JS File -->
 	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/bootstrap.bundle.min.js"></script>
-	<script src="assets/js/plugins.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/plugins.min.js"></script>
+    <script src="assets/js/optional/isotope.pkgd.min.js"></script>
+    <script src="assets/js/jquery.appear.min.js"></script>
+    <script src="assets/js/jquery.plugin.min.js"></script>
+    <script src="assets/js/jquery.countdown.min.js"></script>
 
 	<!-- Main JS File -->
 	<script src="assets/js/main.min.js"></script>
+	<script>
+        function changeMainImg(imgSrc) {
+            document.getElementById("mainImg").src = imgSrc;
+        }
+    </script>
 </body>
 
 </html>
