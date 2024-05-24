@@ -3,8 +3,27 @@
 
 <head>
 	<div th:replace="~{infra/include/head :: head}"></div>
-</head>
+    <style>
+        .page-header {
+            margin: 0;
+            padding: 0;
+        }
 
+        .d-flex {
+            margin: 0;
+            padding: 0;
+        }
+
+        .full-width-image {
+            width: 100%;
+            height: 300px;
+            display: block;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+ß
 <body>
 	<div class="page-wrapper">
 		<header class="header">
@@ -39,22 +58,12 @@
         </header><!-- End .header -->
 
 		<main class="main">
-			<!--<div class="page-header">
-				<div class="container d-flex flex-column align-items-center">
-					<nav aria-label="breadcrumb" class="breadcrumb-nav">
-						<div class="container">
-							<ol class="breadcrumb">
-								<li class="breadcrumb-item"><a href="/index">Home</a></li>
-								<li class="breadcrumb-item active" aria-current="page">
-									Login
-								</li>
-							</ol>
-						</div>
-					</nav>
-
-					<h1>Login</h1>
+			<!---->
+			<div class="page-header">
+				<div class="d-flex flex-column">
+					<img src="img/loginimage.webp" alt="Full Width Image" class="full-width-image">
 				</div>
-			</div>-->
+			</div>	
 
 			<div class="container login-container">
 				<div class="row">
