@@ -175,8 +175,10 @@
 															<!-- More comments go here -->
 															<div class="comment-form mt-3">
 																<!-- 부트스트랩 5 폼 컨트롤 사용 -->
+																<input type="hidden" th:value="${item.romSeq}">
 																<div class="input-group">
-																	<input id="romTitle" name="romTitle" type="text" class="form-control" placeholder="Add a comment..." aria-label="Add a comment..." aria-describedby="button-addon2">
+																	<input id="romTitle" name="romTitle" type="text" th:value="${item.romTitle}"
+																	class="form-control" placeholder="Add a comment..." aria-label="Add a comment..." aria-describedby="button-addon2">
 																</div>
 															</div>
 														</div>
@@ -189,7 +191,7 @@
 															<!-- More comments go here -->
 															<div class="comment-form mt-3">
 																<div class="product-single-qty">
-								                                    <input id ="romPersonnel" name ="romPersonnel" class="horizontal-quantity form-control" type="text">
+								                                    <input th:value="${item.romPersonnel}" id ="romPersonnel" name ="romPersonnel" class="horizontal-quantity form-control" type="text">
 								                                </div>
 															</div>
 														</div>
@@ -238,10 +240,10 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
-													  <textarea id="romNote" name ="romNote" class="form-control"   rows="3"></textarea>
+													  <textarea th:text="${item.romNote}" id="romNote" name ="romNote" class="form-control"   rows="3"></textarea>
 													</div>
 													<div class="col-12">
-													<button id="btn" name="btn" class="btn btn-dark btn-rounded btn-lg float-right" style="margin-top: 30px">방생성</button>
+													<button id="btn" name="btn" class="btn btn-dark btn-rounded btn-lg float-right" style="margin-top: 30px">수정하기</button>
 													  <!-- <ul class="btn-list">
 															<li><button class="btn btn-default btn-rounded btn-md">default</button></li>
 															<li><button class="btn btn-success btn-rounded btn-md">success</button></li>

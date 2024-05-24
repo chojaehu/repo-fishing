@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.stayc.infra.chat.ChatDao">
+
+	<resultMap id="resultMapObj" type="com.stayc.infra.chat.ChatDto"></resultMap>
+	
+	
+	 <select id="roomList" resultMap="resultMapObj">
+		select 
+			romSeq, 
+		    romDate, 
+		    romTitle, 
+		    romPersonnel, 
+		    romNote, 
+		    mbrSeq
+		from 
+			room
+		where 1=1
+	 </select>
+	 
+	 <select id="roomOne" resultMap="resultMapObj">
+		select 
+			romSeq, 
+		    romDate, 
+		    romTitle, 
+		    romPersonnel, 
+		    romNote, 
+		    mbrSeq
+		from 
+			room
+		where 1=1 and romSeq = #{romSeq}
+	 </select>
+	
+	
+	<insert id="chatroominst">
+	insert into room
+	(
+		romDate,
+		romTitle,
+		romPersonnel,
+		romNote,  
+		mbrSeq
+	)
+	values
+	(
+		NOW()
+		,#{romTitle}
+		,#{romPersonnel}
+		,#{romNote}
+		,1
+	)
+	</insert>
+	
+	<update id = "chatupdates">
+	update room
+	(
+		romTitle,
+		romPersonnel,
+		romNote
+	) 
+	set
+	(
+		#{romTitle}
+		,#{romPersonnel}
+		,#{romNote}
+	)
+	</update>
+	
+</mapper>
