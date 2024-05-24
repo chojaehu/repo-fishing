@@ -23,7 +23,7 @@
         }
     </style>
 </head>
-ß
+
 <body>
 	<div class="page-wrapper">
 		<header class="header">
@@ -58,7 +58,6 @@
         </header><!-- End .header -->
 
 		<main class="main">
-			<!---->
 			<div class="page-header">
 				<div class="d-flex flex-column">
 					<img src="img/loginimage.webp" alt="Full Width Image" class="full-width-image">
@@ -178,7 +177,7 @@
 			textArr = ["", dispText];
 					
 			if(!fnValidation()) {return false;}
-			
+			fnModalShow("확인", "로그인");
 			$.ajax({
 				async: true
 				, cache: false

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.stayc.infra.member.MemberDao">
+
+	<resultMap id="resultMapObj" type="com.stayc.infra.member.MemberDto"></resultMap>
+	
+	<sql id="selectCommon">
+		  FROM members a
+		 WHERE 1 = 1
+		   AND (@rownum:=0) = 0
+		<choose>
+			<when test="shOptionDate == 1">AND a.mbrRegDt BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+			<when test="shOptionDate == 2">AND a.mbrUdtDt BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+		</choose>
+		
+		<choose>
+			<when test="shOption == 1">AND a.mbrName  LIKE CONCAT('%', #{shValue}, '%')</when>
+			<when test="shOption == 2">AND a.mbrEmail LIKE CONCAT('%', #{shValue}, '%')</when>
+		</choose>
+
+		<if test="shOptionType != null and !shOptionType.equals('')">AND a.mbrType = #{shOptionType}</if>
+				
+		<if test="shDelNy != null and !shDelNy.equals('')" >AND a.mbrDelNy = #{shDelNy}</if>
+		
+		<if test="shSex != null and !shSex.equals('')">AND a.mbrSex = #{shSex}</if>	
+	</sql>
+	
+	<select id="selectList" resultMap="resultMapObj">
+		SELECT aa.*
+		  FROM (
+				SELECT @rownum:=@rownum+1 xrowSeq
+				     , a.mbrSeq
+				     , a.mbrType
+				     , a.mbrName
+				     , a.mbrSex
+				     , a.mbrBirthday
+				     , a.mbrEmail
+				     , a.mbrPw
+				     , a.mbrRegDt
+				     , a.mbrUdtDt
+				     , a.mbrDelNy
+				     , (SELECT COUNT(*) FROM memberpayment aa WHERE aa.mbrSeq = a.mbrSeq) xmbrCount
+			  <include refid="selectCommon"/>			 
+		         ORDER BY a.mbrSeq 
+				 LIMIT 99999999999
+               ) aa
+         ORDER BY xrowSeq DESC
+    	 LIMIT #{pgRowCount}
+    	OFFSET #{pgOffset}          
+	</select>
+
+    <!-- 카운팅 -->
+    <select id="selectOneCount">
+        SELECT COUNT(*)
+      <include refid="selectCommon"/>
+    </select>
+    
+	<select id="selectOne" resultMap="resultMapObj">
+		SELECT a.mbrSeq
+		     , a.mbrType
+		     , a.mbrName
+		     , a.mbrSex
+		     , a.mbrBirthday
+		     , a.mbrEmail
+			 , a.mbrZipCode
+			 , a.mbrAddr
+			 , a.mbrAddrD
+			 , a.mbrAddrRemark
+			 , a.mbrPointLat
+			 , a.mbrPointLon
+		     , a.mbrRegDt
+		     , a.mbrUdtDt
+		     , a.mbrDelNy
+		     , (SELECT COUNT(*)
+		          FROM memberpayment aa
+		         WHERE aa.mbrSeq = a.mbrSeq
+		       ) xmbrCount
+		     , b.originalName xFileName
+		     , b.pathName xpathUpload
+		     , b.path xpathLoad
+		     , b.uuidName xuuidName
+		     , b.ext xExt
+		  FROM members a
+		       LEFT JOIN fileuploaded b
+		         ON b.pseq = a.mbrSeq
+		        AND b.category  = 0
+		        AND b.defaultNy = 0
+		 WHERE 1 = 1	
+           AND a.mbrSeq = #{mbrSeq}	
+	</select>
+	
+	<!-- 로그인 id 확인용 -->
+	<select id="selectOneLogin" resultMap="resultMapObj">
+		SELECT mbrSeq
+		     , mbrName
+		     , mbrEmail
+		     , mbrPw
+		  FROM members
+		 WHERE 1 = 1
+		   AND mbrEmail = #{mbrEmail}
+		   AND mbrDelNy = 0
+	</select>
+	
+	<select id="selectListCode" resultMap="resultMapObj">
+		SELECT a.cdcSeq
+		     , a.cdcName
+		  FROM code a
+		 WHERE 1 = 1		
+           AND a.cdgSeq = #{shCdgSeq}
+           AND a.cdcDelNy = 0
+         ORDER BY a.cdcSeq
+	</select>	
+	
+	<insert id="insert">
+		INSERT INTO members
+			( 
+			  mbrType
+			, mbrName
+			, mbrSex
+			<if test="mbrBirthday != null and !mbrBirthday.equals('')">, mbrBirthday</if>
+			, mbrEmail
+			, mbrPw
+			, mbrZipCode
+			, mbrAddr
+			, mbrAddrD
+			, mbrAddrRemark
+			, mbrPointLat
+			, mbrPointLon
+			, mbrRegDt
+			, mbrUdtDt
+			, mbrDelNy
+			)
+		VALUES
+			(
+			  #{mbrType}
+			, #{mbrName}
+			, #{mbrSex}
+			<if test="mbrBirthday != null and !mbrBirthday.equals('')">, STR_TO_DATE(#{mbrBirthday},'%Y-%m-%d %H%i%s')</if>
+			, #{mbrEmail}
+			, #{mbrPw}
+			, #{mbrZipCode}
+			, #{mbrAddr}
+			, #{mbrAddrD}
+			, #{mbrAddrRemark}
+			, #{mbrPointLat}
+			, #{mbrPointLon}
+			, now()
+			, now()
+			, 0
+			)
+		<selectKey keyProperty="mbrSeq" resultType="String" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<update id="update">
+		UPDATE members
+		   SET mbrName       = #{mbrName}
+			 , mbrSex        = #{mbrSex}
+			 , mbrZipCode    = #{mbrZipCode}
+			 , mbrAddr       = #{mbrAddr}
+			 , mbrAddrD      = #{mbrAddrD}
+			 , mbrAddrRemark = #{mbrAddrRemark}
+			 , mbrPointLat   = #{mbrPointLat}
+			 , mbrPointLon   = #{mbrPointLon}
+			 <if test="mbrBirthday != null and !mbrBirthday.equals('')">, mbrBirthday = STR_TO_DATE(#{mbrBirthday},'%Y-%m-%d %H%i%s')</if>
+			 , mbrUdtDt = now()
+         WHERE 1 = 1		
+           AND mbrSeq = #{mbrSeq}	
+	</update>
+	
+	<update id="updatePassword">
+		UPDATE members
+		   SET mbrPw = #{mbrPw}
+		     , mbrUdtDt = now()
+         WHERE 1 = 1		
+           AND mbrSeq = #{mbrSeq}	
+	</update>
+	
+	<update id="updateDelNy">
+		UPDATE members
+		   SET mbrUdtDt = now()
+		   
+		   <choose>
+		   		<when test="mbrDelNy == 0">, mbrDelNy = 1</when>
+		   		<when test="mbrDelNy == 1">, mbrDelNy = 0</when>
+		   </choose>
+         WHERE 1 = 1		
+           AND mbrSeq = #{mbrSeq}
+	</update>	
+	
+	<delete id="delete">
+		DELETE FROM members
+         WHERE 1 = 1		
+           AND mbrSeq = #{mbrSeq}
+	</delete>
+	
+    <!-- 다중선택자료 삭제 -->
+    <delete id="deleteList">
+    	DELETE
+    	  FROM members
+    	 WHERE 1 = 1
+    	   AND mbrSeq IN 
+    	       <foreach collection="shCheckedArray" item="list" open="(" close=")" separator=",">
+    	         #{list}
+    	       </foreach>
+    </delete> 	
+
+</mapper>

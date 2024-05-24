@@ -21,25 +21,23 @@ fnValidation = function() {
 		for(let i = 0; i < nameArr.length; i++) {
 			validName = nameArr[i];
 			obj = document.querySelector("input[name="+validName+"]");
-			
+
 			try {
-				if((obj.getAttribute("style") == null) || (obj.getAttribute("style") == "")) {
-					validType = typeArr[i];
-					validText = textArr[i];
-					validName = nameArr[i]+"Valid";
-					objValid = document.querySelector("span[name="+validName+"]");
-					
-					if(!fnNullToEmpty(obj, objValid, validText)) {
-				    	validChk = false;
-				    } else {
-						// 정규식 확인
-						validChk = fnValidType(obj, objValid, validText, validType);
-				    };	
-			    			
-					if(!validChk) {
-						obj.focus();
-						break;
-					};				
+				validType = typeArr[i];
+				validText = textArr[i];
+				validName = nameArr[i]+"Valid";
+				objValid = document.querySelector("span[name="+validName+"]");
+				
+				if(!fnNullToEmpty(obj, objValid, validText)) {
+			    	validChk = false;
+			    } else {
+					// 정규식 확인
+					validChk = fnValidType(obj, objValid, validText, validType);
+			    };	
+		    			
+				if(!validChk) {
+					obj.focus();
+					break;
 				};				
 			}
 			catch(e) {
@@ -226,14 +224,14 @@ fnSpecialChar = function(obj, objValid, validText) {
 fnValidationCheck = function(obj, objValid, validText, regExp) {	
 	let objValue = obj.value.trim();
     let dispText = "입력 형식 불일치";
-    
+
     if(objValue == "") {
 		obj.setAttribute("style","border:1px solid red;");
 		objValid.setAttribute("style", "float: left; color: red;");
 		return true;		
 	} else {
 	    if(validText != "") {dispText = validText;};
-	    
+
 		if(!regExp.test(objValue)) {
 			obj.setAttribute("style","border:1px solid red;");
 			objValid.innerHTML = dispText;
@@ -247,25 +245,3 @@ fnValidationCheck = function(obj, objValid, validText, regExp) {
 	};
 
 };
-
-/*// 날짜항목에 대한 특수문자처리
-fnSpecialDate = function(obj, objValid, validText) {
-	let regExp = /^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/;
-	fnValidationCheck(obj, validText, regExp);
-	return false;
-};
-
-// 특수문자확인
-fnSpecialCharCheck = function(obj, text, regExp) {
-	let validName = obj.name+"Valid";
-	let objValid = document.querySelector("span[name="+validName+"]");
-
-	if (regExp.test(obj.value.trim()) == true) {
-		obj.setAttribute("class","block w-full mt-1 text-sm border-red-600 dark:text-gray-300 dark:bg-gray-700 focus:border-red-400 focus:outline-none focus:shadow-outline-red form-input");
-		objValid.innerHTML = text;
-		objValid.setAttribute("style", "");
-	} else {
-		obj.setAttribute("class","block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input");
-		objValid.setAttribute("style", "visibility:hidden;");
-	};
-};*/

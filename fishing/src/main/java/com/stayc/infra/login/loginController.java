@@ -28,13 +28,11 @@ public class loginController extends BaseController {
 	// 로그인 아이디, 비밀번호 확인용
 	@ResponseBody
 	@RequestMapping(value = "/loginConfirm")
-	public Map<String, Object> memberSdmLoginConfirm(MemberDto dto, HttpSession httpSession) throws Exception {
+	public Map<String, Object> memberSdmLoginConfirm(MemberDto dto, MemberDto rtDto, HttpSession httpSession) throws Exception {
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 		
 		String loginPassword = dto.getMbrPw();
-		
-		MemberDto rtDto = memberService.selectOneLogin(dto);
-		
+		rtDto = memberService.selectOneLogin(dto);
 		if(rtDto != null) {
 			// 비밀번호 비교
 			if(matchesBcrypt(loginPassword, rtDto.getMbrPw(), 10)) {

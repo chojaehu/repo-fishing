@@ -28,9 +28,51 @@
     </div><!-- End .header-search -->
 
 	<!--로그인-->
-    <a href="/login" class="header-icon">
+    <!--<a href="/login" class="header-icon">
         <i class="icon-user-2"></i>
-    </a>
+    </a>-->
+    
+    <div class="dropdown cart-dropdown">
+        <a href="#" title="Cart" class="dropdown-toggle cart-toggle header-icon" role="button"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
+            <i class="icon-user-2"></i>
+        </a>
+
+        <div class="cart-overlay"></div>
+
+        <div class="dropdown-menu mobile-cart">
+            <!--<a href="#" title="Close (Esc)" class="btn-close">×</a>-->
+
+            <div class="dropdownmenu-wrapper custom-scrollbar">
+                <div class="dropdown-cart-header">My Account</div>
+                <!-- End .dropdown-cart-header -->
+
+                <div class="dropdown-cart-products">
+                    <div class="product">
+                        <div class="product-details">
+                            <h4 class="product-title"><a href="/login">로그인</a></h4>
+                        </div><!-- End .product-details -->
+                        <figure class="product-image-container">
+                            <a href="/login" class="product-image">
+                                <img src="img/menulogin.webp" alt="login" width="80" height="80">
+                            </a>
+                        </figure>
+                    </div><!-- End .product -->
+
+                    <div class="product">
+                        <div class="product-details">
+                            <h4 class="product-title"><a href="#">회원가입</a></h4>
+                        </div><!-- End .product-details -->
+                        <figure class="product-image-container">
+                            <a href="#" class="product-image">
+                                <img src="img/menulogin.webp" alt="login" width="80" height="80">
+                            </a>
+                        </figure>
+                    </div><!-- End .product -->
+                </div><!-- End .cart-product -->
+            </div><!-- End .dropdownmenu-wrapper -->
+        </div><!-- End .dropdown-menu -->
+    </div><!-- End .dropdown -->
 </div>
 
 <div th:fragment="mobileMenu">

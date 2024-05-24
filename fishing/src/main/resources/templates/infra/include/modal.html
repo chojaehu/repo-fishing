@@ -9,7 +9,7 @@
 			  <div class="modal-dialog">
 			    <div class="modal-content">
 			      <div class="modal-header">
-			        <h1 class="modal-title fs-5" id="modalFormDeleteTitle" name="modalDeleteTitle">삭제</h1>
+			        <h1 class="modal-title fs-2" id="modalFormDeleteTitle" name="modalDeleteTitle">삭제</h1>
 			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			      </div>
 			      <div class="modal-body" id="modalFormDeleteContent" name="modalDeleteContent">삭제를 진행 하시겠습니까?</div>
@@ -30,12 +30,12 @@
 			  <div class="modal-dialog">
 			    <div class="modal-content">
 			      <div class="modal-header">
-			        <h1 class="modal-title fs-5" id="title" name="title" th:text="${title}"></h1>
+			        <h1 class="modal-title fs-2" id="title" name="title" th:text="${title}"></h1>
 			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			      </div>
-			      <div class="modal-body" id="modalConfirmContent" name="modalConfirmContent" th:text="${content}"></div>
+			      <div class="modal-body fs-4" id="modalConfirmContent" name="modalConfirmContent" th:text="${content}"></div>
 			      <div class="modal-footer">
-			        <button id="btnExit" naem="btnExit" type="button" class="btn btn-primary" style="width: 100px;" data-bs-dismiss="modal" th:text="${btnName1}">확인</button> <!-- 취소, 확인 -->
+			        <button id="btnExit" naem="btnExit" type="button" class="btn btn-primary" style="width: 100px;" data-bs-dismiss="modal">확인</button> <!-- 취소, 확인 -->
 			      </div>
 			    </div>
 			  </div>
