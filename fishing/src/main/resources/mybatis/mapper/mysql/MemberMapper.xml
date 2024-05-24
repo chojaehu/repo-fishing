@@ -11,7 +11,7 @@
 		   AND (@rownum:=0) = 0
 		<choose>
 			<when test="shOptionDate == 1">AND a.mbrRegDt BETWEEN #{shDateStart} AND #{shDateEnd}</when>
-			<when test="shOptionDate == 2">AND a.mbrUdtDt BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+			<when test="shOptionDate == 2">AND a.mbrModDt BETWEEN #{shDateStart} AND #{shDateEnd}</when>
 		</choose>
 		
 		<choose>
@@ -23,7 +23,7 @@
 				
 		<if test="shDelNy != null and !shDelNy.equals('')" >AND a.mbrDelNy = #{shDelNy}</if>
 		
-		<if test="shSex != null and !shSex.equals('')">AND a.mbrSex = #{shSex}</if>	
+		<if test="shSex != null and !shSex.equals('')">AND a.mbrGenderCd = #{shSex}</if>	
 	</sql>
 	
 	<select id="selectList" resultMap="resultMapObj">
@@ -31,14 +31,13 @@
 		  FROM (
 				SELECT @rownum:=@rownum+1 xrowSeq
 				     , a.mbrSeq
-				     , a.mbrType
 				     , a.mbrName
-				     , a.mbrSex
+				     , a.mbrGenderCd
 				     , a.mbrBirthday
 				     , a.mbrEmail
 				     , a.mbrPw
 				     , a.mbrRegDt
-				     , a.mbrUdtDt
+				     , a.mbrModDt
 				     , a.mbrDelNy
 				     , (SELECT COUNT(*) FROM memberpayment aa WHERE aa.mbrSeq = a.mbrSeq) xmbrCount
 			  <include refid="selectCommon"/>			 
@@ -58,19 +57,17 @@
     
 	<select id="selectOne" resultMap="resultMapObj">
 		SELECT a.mbrSeq
-		     , a.mbrType
 		     , a.mbrName
-		     , a.mbrSex
-		     , a.mbrBirthday
+		     , a.mbrGenderCd
 		     , a.mbrEmail
-			 , a.mbrZipCode
+			 , a.mbrZip
 			 , a.mbrAddr
 			 , a.mbrAddrD
 			 , a.mbrAddrRemark
 			 , a.mbrPointLat
 			 , a.mbrPointLon
 		     , a.mbrRegDt
-		     , a.mbrUdtDt
+		     , a.mbrModDt
 		     , a.mbrDelNy
 		     , (SELECT COUNT(*)
 		          FROM memberpayment aa
@@ -115,31 +112,27 @@
 	<insert id="insert">
 		INSERT INTO members
 			( 
-			  mbrType
-			, mbrName
-			, mbrSex
-			<if test="mbrBirthday != null and !mbrBirthday.equals('')">, mbrBirthday</if>
+			  mbrName
+			, mbrGenderCd
 			, mbrEmail
 			, mbrPw
-			, mbrZipCode
+			, mbrZip
 			, mbrAddr
 			, mbrAddrD
 			, mbrAddrRemark
 			, mbrPointLat
 			, mbrPointLon
 			, mbrRegDt
-			, mbrUdtDt
+			, mbrModDt
 			, mbrDelNy
 			)
 		VALUES
 			(
-			  #{mbrType}
-			, #{mbrName}
-			, #{mbrSex}
-			<if test="mbrBirthday != null and !mbrBirthday.equals('')">, STR_TO_DATE(#{mbrBirthday},'%Y-%m-%d %H%i%s')</if>
+			  #{mbrName}
+			, #{mbrGenderCd}
 			, #{mbrEmail}
 			, #{mbrPw}
-			, #{mbrZipCode}
+			, #{mbrZip}
 			, #{mbrAddr}
 			, #{mbrAddrD}
 			, #{mbrAddrRemark}
@@ -157,30 +150,29 @@
 	<update id="update">
 		UPDATE members
 		   SET mbrName       = #{mbrName}
-			 , mbrSex        = #{mbrSex}
-			 , mbrZipCode    = #{mbrZipCode}
+			 , mbrGenderCd   = #{mbrGenderCd}
+			 , mbrZip        = #{mbrZip}
 			 , mbrAddr       = #{mbrAddr}
 			 , mbrAddrD      = #{mbrAddrD}
 			 , mbrAddrRemark = #{mbrAddrRemark}
 			 , mbrPointLat   = #{mbrPointLat}
 			 , mbrPointLon   = #{mbrPointLon}
-			 <if test="mbrBirthday != null and !mbrBirthday.equals('')">, mbrBirthday = STR_TO_DATE(#{mbrBirthday},'%Y-%m-%d %H%i%s')</if>
-			 , mbrUdtDt = now()
+			 , mbrModDt      = now()
          WHERE 1 = 1		
            AND mbrSeq = #{mbrSeq}	
 	</update>
 	
 	<update id="updatePassword">
 		UPDATE members
-		   SET mbrPw = #{mbrPw}
-		     , mbrUdtDt = now()
+		   SET mbrPw    = #{mbrPw}
+		     , mbrModDt = now()
          WHERE 1 = 1		
            AND mbrSeq = #{mbrSeq}	
 	</update>
 	
 	<update id="updateDelNy">
 		UPDATE members
-		   SET mbrUdtDt = now()
+		   SET mbrModDt = now()
 		   
 		   <choose>
 		   		<when test="mbrDelNy == 0">, mbrDelNy = 1</when>

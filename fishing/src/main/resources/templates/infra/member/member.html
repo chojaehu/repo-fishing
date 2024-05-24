@@ -70,10 +70,19 @@
 						<div class="row">
 							<div class="col">
 								<div class="heading mb-1">
-									<h2 class="title">Login</h2>
+									<h2 class="title">Register</h2>
 								</div>
 
 								<form id="form" name="form">
+									<div class="mb-3">
+										<label for="mbrName">
+											your name
+											<span class="required">*</span>
+										</label>
+										<input type="text" class="form-input form-wide" id="mbrName" name="mbrName" />
+										<span id="mbrNameValid" name="mbrNameValid" style="visibility: hidden;"></span>
+									</div>
+									
 									<div class="mb-3">
 										<label for="mbrEmail">
 											email address
@@ -93,44 +102,12 @@
 									</div>
 									
 									<div class="form-footer">
-										<button type="button" class="btn btn-dark btn-md w-100 mr-0" onclick="fnControllerLogin();">
-											LOGIN
-										</button>
-									</div>
-								</form>
-							</div>
-							
-							<!--<div class="col-md-6">
-								<div class="heading mb-1">
-									<h2 class="title">Register</h2>
-								</div>
-
-								<form id="form-register" name="form-register">
-									<div class="mb-3">
-										<label for="registerEmail">
-											Email address
-											<span class="required">*</span>
-										</label>
-										<input type="email" class="form-input form-wide" id="registerEmail" name="registerEmail" />
-										<span id="registerEmailValid" name="registerEmailValid" style="visibility: hidden;"></span>
-									</div>
-									
-									<div class="mb-3">
-										<label for="register-password">
-											Password
-											<span class="required">*</span>
-										</label>
-										<input type="password" class="form-input form-wide" id="registerPassword" name="registerPassword"/>
-										<span id="registerPasswordValid" name="registerPasswordValid" style="visibility: hidden;"></span>
-									</div>
-									
-									<div class="form-footer">
 										<button type="button" class="btn btn-dark btn-md w-100 mr-0" onclick="fnControllerRegister();">
 											Register
 										</button>
 									</div>
 								</form>
-							</div>-->
+							</div>
 						</div>
 					</div>
 				</div>
@@ -163,29 +140,27 @@
 		// TYPE_PW   = 20, TYPE_DT   = 21, TYPE_EM   = 22;
 		// TYPE_SP   = 30, TYPE_NULL = 31;
 		let dispText = "영문,숫자,특수문자(!@#$%^*+=-)조합";
-		let typeArr = [TYPE_EM, TYPE_PW];
-		let nameArr = ["mbrEmail", "mbrPw"];
-		let textArr = ["", dispText];
+		let typeArr = [TYPE_KREN, TYPE_EM, TYPE_PW];
+		let nameArr = ["mbrName", "mbrEmail", "mbrPw"];
+		let textArr = ["", "", dispText];
 				
 		let form = document.querySelector("#form");
 		
-		// 로그인
-		function fnControllerLogin() {
+		// 회원등록
+		function fnControllerRegister() {
 			if(!fnValidation()) {return false;}
-
+			
 			$.ajax({
 				async: true
 				, cache: false
 				, type: "post"
-				, data: {"mbrEmail":$("#mbrEmail").val(), "mbrPw":$("#mbrPw").val()}
-				, url: "/loginConfirm"
+				, data: {"mbrName":$("#mbrName").val(), "mbrEmail":$("#mbrEmail").val(), "mbrPw":$("#mbrPw").val()}
+				, url: "/memberInsert"
 				, success: function(response) {
 					if(response.rt == "success") {
-						location.href = "/index";
-					} else if(response.rt == "id") {
-						fnModalShow("확인", "아이디가 일치하지 않습니다");
-					} else if(response.rt == "password") {
-						fnModalShow("확인", "비밀번호가 일치하지 않습니다");
+						location.href = "/login";
+					} else if(response.rt == "email") {
+						fnModalShow("확인", "이메일이 존재합니다");
 					}
 				}
 				, error : function(jqXHR, textStatus, errorThrown){
@@ -193,6 +168,7 @@
 				}
 			});
 		}
+		
 	</script>
 </body>
 

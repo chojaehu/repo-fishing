@@ -5,6 +5,7 @@ public class Constants {
 	public static final String PATH_CODE_GROUP 	= "infra/codegroup/";
 	public static final String PATH_HOME 		= "infra/index/";
 	public static final String PATH_LOGIN 		= "infra/login/";
+	public static final String PATH_MEMBER 		= "infra/member/";
 	public static final String PATH_RESERVE 	= "infra/reserve/";
 	public static final String PATH_CHAT 		= "infra/chat/";
 	

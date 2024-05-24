@@ -29,18 +29,7 @@ public class MemberService {
 	
 	public int selectOneCount(MemberVo vo) {
 		return dao.selectOneCount(vo);
-	}	
-	
-	// 저장
-	public int restInsert(MemberDto dto) throws Exception {
-		return dao.insert(dto);
-	}
-	
-	// 수정
-	public int restUpdate(MemberDto dto) throws Exception {
-		return dao.update(dto);
-	}
-		
+	}			
 	// 저장
 	public int insert(MemberDto dto) throws Exception {
 		return dao.insert(dto);
@@ -53,14 +42,6 @@ public class MemberService {
 	
 	public int delete(MemberDto dto) {
 		return dao.delete(dto);
-	}
-	
-	public int updatePassword(MemberDto dto) {
-		return dao.updatePassword(dto);
-	}
-	
-	public int updateDelNy(MemberDto dto) {
-		return dao.updateDelNy(dto);
 	}
 		
 	// 다중선택자료 삭제
