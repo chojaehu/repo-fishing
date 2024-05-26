@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.stayc.infra.board.BoardDao">
+
+	<resultMap id="resultMapObj" type="com.stayc.infra.board.BoardDto"></resultMap>
+	
+	
+	 <select id="selectList" resultMap="resultMapObj">
+	 	SELECT a.*
+	 	  FROM (SELECT 99999999999 xrowNum
+				     , a.brdSeq
+			         , a.brdDefaultNy
+			         , a.brdDate
+			         , a.mbrSeq
+			         , "" xmbrName
+		         	 , a.brdTitle
+		         	 , a.brdNote
+		         	 , a.brdDelNy
+		         	 , a.brdOpen
+		         	 , a.brdRegDt
+		         	 , a.brdModDt
+		          FROM board a
+		        WHERE 1 = 1
+		          AND a.brdDefaultNy = 0
+				UNION	 
+				SELECT a.*
+				  FROM (SELECT @rownum := @rownum + 1 xrowNum
+				  			 , a.brdSeq
+					 		 , a.brdDefaultNy
+					 		 , a.brdDate
+					 		 , a.mbrSeq
+					 		 , b.mbrName xmbrName
+					 		 , a.brdTitle
+					 		 , a.brdNote
+					 		 , a.brdDelNy
+					 		 , a.brdOpen
+					 		 , a.brdRegDt
+					 		 , a.brdModDt
+				  		  FROM board a
+				       		   LEFT JOIN members b
+				         		 ON b.mbrSeq = a.mbrSeq
+						 WHERE 1 = 1
+				   		   AND a.brdDefaultNy = 1
+				   		   AND (@rownum := 0) = 0
+				 		 LIMIT 99999999999
+				 	   ) a
+		 	   ) a
+		 ORDER BY xrowNum DESC, a.brdSeq DESC
+	 </select>
+	 
+	 <select id="selectOne" resultMap="resultMapObj">
+		SELECT a.brdSeq
+			 , a.brdDefaultNy
+			 , a.brdDate
+			 , a.mbrSeq
+			 , b.mbrName xmbrName
+			 , a.brdTitle
+			 , a.brdNote
+			 , a.brdDelNy
+			 , a.brdOpen
+			 , a.brdRegDt
+			 , a.brdModDt
+		  FROM board a
+		       LEFT JOIN members b
+		         ON b.mbrSeq = a.mbrSeq
+		 WHERE 1 = 1
+		   AND a.brdSeq = #{brdSeq}
+	 </select>
+	
+	
+	<insert id="insert">
+		INSERT INTO board
+			 ( brdDefaultNy
+			 , brdDate
+			 , mbrSeq
+			 , brdTitle
+			 , brdNote
+			 , brdDelNy
+			 , brdOpen
+			 , brdRegDt
+			 , brdModDt
+			 )
+		VALUES
+			 ( #{brdDefaultNy}
+			 , now()
+			 , #{mbrSeq}
+			 , #{brdTitle}
+			 , #{brdNote}
+			 , 0
+			 , 0
+			 , now()
+			 , now()
+			 )
+	</insert>
+	
+	<update id = "update">
+		UPDATE board
+		   SET brdTitle = #{brdTitle}
+		     , brdNote  = #{brdNote}
+			 , brdModDt = now()
+		 WHERE 1 = 1
+		   AND brdSeq = #{brdSeq}
+	</update>
+	
+	<update id = "updateOpen">
+		UPDATE board
+		   SET brdOpen  = brdOpen + 1
+			 , brdModDt = now()
+		 WHERE 1 = 1
+		   AND brdSeq = #{brdSeq}
+	</update>	
+	
+	<delete id = "delete">
+		DELETE FROM board
+		 WHERE 1 = 1
+		   AND brdSeq = #{brdSeq}
+	</delete>
+	
+	<!-- 댓글조회 -->
+	<select id = "selectListReview" resultMap="resultMapObj">
+		SELECT a.brvSeq
+			 , a.brvDate
+			 , a.brvNote
+			 , a.brvDelNy
+			 , a.brvRegDt
+			 , a.brvModDt
+			 , a.mbrSeq
+			 , b.mbrName xmbrName
+			 , a.brdSeq
+		  FROM boardreview a
+		       LEFT JOIN members b
+		         ON b.mbrSeq = a.mbrSeq
+		 WHERE 1 = 1
+		   AND a.brdSeq = #{brdSeq}
+		 ORDER BY a.brvSeq DESC 
+	</select>
+	
+	<!-- 댓글등록 -->
+	<insert id = "insertReview">
+		INSERT INTO boardreview
+			 ( brvDate
+             , brvNote
+             , brvDelNy
+             , brvRegDt
+             , brvModDt
+             , mbrSeq
+             , brdSeq
+			 )
+		VALUES
+			 ( now()
+             , #{brvNote}
+             , 0
+             , now()
+             , now()
+             , #{mbrSeq}
+             , #{brdSeq}
+			 )
+	</insert>
+</mapper>

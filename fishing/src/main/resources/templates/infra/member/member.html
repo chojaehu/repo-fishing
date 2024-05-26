@@ -33,18 +33,21 @@
                         <button class="mobile-menu-toggler pl-0" type="button">
                             <i class="fas fa-bars"></i>
                         </button>
-                        <a href="/index" class="logo">
+                        <a href="/index" class="logo mr-5">
                             <img src="img/logo.png" alt="Logo" width="111" height="44">
                         </a>
                         <!--메인메뉴-->
-                        <div th:replace="~{infra/include/body :: menu}"></div>
+                        <div th:replace="~{infra/include/body :: menu(0)}"></div>
                         
 						<div class="align-items-center ml-5">
 							<nav aria-label="breadcrumb" class="breadcrumb-nav">
 								<div class="container">
 									<ol class="breadcrumb">
-										<li class="breadcrumb-item" style="color: blue;"><a href="/index"><b>Home</b></a></li>
-										<li class="breadcrumb-item active" aria-current="page">Login</li>
+										<li class="breadcrumb-item" style="color: blue;">
+											<a href="/index"><i class="fas fa-fish">&nbsp;</i><b>Home</b></a>
+										</li>
+										<li class="breadcrumb-item active" aria-current="page">My Account</li>
+										<li class="breadcrumb-item active" aria-current="page">Register</li>
 									</ol>
 								</div>
 							</nav>
@@ -60,7 +63,7 @@
 		<main class="main">
 			<div class="page-header">
 				<div class="d-flex flex-column">
-					<img src="img/loginimage.webp" alt="Full Width Image" class="full-width-image">
+					<img src="img/registerimage.jpg" alt="Full Width Image" class="full-width-image">
 				</div>
 			</div>	
 

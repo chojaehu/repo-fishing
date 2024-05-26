@@ -22,8 +22,15 @@ public class loginController extends BaseController {
 	
 	@RequestMapping(value = "/login")
 	public String login() {
-		return Constants.PATH_LOGIN+"login";
+		return Constants.PATH_LOGIN + "login";
 	}
+	
+	@RequestMapping(value = "/logout")
+	public String logout(HttpSession httpSession) {
+		// 세션종료
+		httpSession.invalidate(); 
+		return Constants.PATH_HOME + "index";
+	}	
 	
 	// 로그인 아이디, 비밀번호 확인용
 	@ResponseBody
@@ -49,6 +56,23 @@ public class loginController extends BaseController {
 			returnMap.put("rt", "id");
 		}
 
+		return returnMap;
+	}
+	
+	// 로그인 확인
+	@ResponseBody
+	@RequestMapping(value = "/loginCheck")
+	public Map<String, Object> loginCheck(HttpSession httpSession) throws Exception {
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		String check = (String) httpSession.getAttribute("sessMbrSeq");
+		
+		System.out.println("======================================================check: "+check);
+		if(check == null || check == "") {
+			returnMap.put("rt", "login");
+		} else {
+			returnMap.put("rt", "success");			
+		}
+		
 		return returnMap;
 	}
 }

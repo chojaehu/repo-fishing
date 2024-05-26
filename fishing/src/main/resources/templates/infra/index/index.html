@@ -26,106 +26,84 @@
 <body>
     <div class="page-wrapper">
         <header class="header">
-            <div class="header-middle sticky-header font2">
-                <div class="container-fluid">
-                    <div class="header-left">
-                        <button class="mobile-menu-toggler pl-0" type="button">
-                            <i class="fas fa-bars"></i>
-                        </button>
-                        <a href="/index" class="logo">
-                            <img src="img/logo.png" alt="Logo" width="111" height="44">
-                        </a>
-                        <!--메인메뉴-->
-                        <div th:replace="~{infra/include/body :: menu}"></div>
-                    </div>
+			<div class="header-middle sticky-header font2">
+			    <div class="container-fluid">
+			        <div class="header-left">
+			            <button class="mobile-menu-toggler pl-0" type="button">
+			                <i class="fas fa-bars"></i>
+			            </button>
+			            <a href="/index" class="logo mr-5">
+			                <img src="img/logo.png" alt="Logo" width="111" height="44">
+			            </a>
+			            <!--메인메뉴-->
+			            <div th:replace="~{infra/include/body :: menu(0)}"></div>
+			        </div>
 					<!--우측메뉴-->
-                    <div th:replace="~{infra/include/body :: menuRight}"></div>
-                    <br>
-                </div>
-            </div>
-            
-            <!--예약일자-->
-            <div th:replace="~{infra/include/head :: date}"></div>
+			        <div th:replace="~{infra/include/body :: menuRight}"></div>
+			        <br>
+			    </div>
+			</div>
+			
+			<!--예약일자-->
+			<div th:replace="~{infra/include/head :: date}"></div>		
         </header><!-- End .header -->
 
         <main class="main">
-            <section class="category-section">
-                <div class="container mt-3">
-                    <h2 class="section-title m-b-2 appear-animate" data-animation-name="fadeInUpShorter">최근 등록 게시물</h2>
+            <section class="recommended-section mt-3">
+                <div class="container">
+                    <h2 class="section-title m-b-2 appear-animate" data-animation-name="fadeInUpShorter">최근 등록 겔러리</h2>
                     <h5 class="section-info p-b-4 mb-2 appear-animate" data-animation-name="fadeInUpShorter"
-                        data-animation-delay="200">~~뽐내보아요~~
-                    </h5>
-                    <div class="row grid appear-animate" data-animation-name="fadeInUpShorter"
-                        data-animation-delay="400">
-                        <div class="grid-item col-sm-6 col-md-3 height-3-5">
-                            <div class="product-category" style="background-color: #f4f4f2;">
-                                <a href="javascript:void(0)">
-                                    <figure>
-                                        <img src="img/img1.jpg" alt="src" width="264" height="345">
-                                    </figure>
-                                </a>
-                                <div class="category-content">
-									<h3 style="color: white;">낚시터명</h3>
+                        data-animation-delay="200">~~뽐내기~~</h5>
+                                    
+                    <div class="product-slider-tab">
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active">
+                                <div class="products-slider owl-carousel owl-theme show-nav-hover nav-outer nav-image-center"
+                                    data-owl-options="{'dots': false, 'nav': true, 'responsive': {'576': {'items': 2},'992': {'items': 3}}}">
+                                    <div class="product-default">
+                                        <figure>
+                                            <a href="javascript:void(0)">
+                                                <img src="img/img1.jpg" width="217" height="217" alt="gallay" style="height: 250px;">
+                                            </a>
+                                        </figure>
+                                    </div>
+                                    <div class="product-default">
+                                        <figure>
+                                            <a href="javascript:void(0)">
+                                                <img src="img/img2.jpg" width="217" height="217" alt="gallay" style="height: 250px;">
+                                            </a>
+                                        </figure>
+                                    </div>
+                                    <div class="product-default">
+                                        <figure>
+                                            <a href="javascript:void(0)">
+                                                <img src="img/img3.jpg" width="217" height="217" alt="gallay" style="height: 250px;">
+                                            </a>
+                                        </figure>
+                                    </div>
+                                    <div class="product-default inner-quickview inner-icon">
+                                        <figure>
+                                            <a href="javascript:void(0)">
+                                                <img src="img/img4.jpg" width="217" height="217" alt="gallay" style="height: 250px;">
+                                            </a>
+                                        </figure>
+                                    </div>
+                                    <div class="product-default inner-quickview inner-icon">
+                                        <figure>
+                                            <a href="javascript:void(0)">
+                                                <img src="img/img5.jpg" width="217" height="217" alt="gallay" style="height: 250px;">
+                                            </a>
+                                        </figure>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="grid-item col-sm-6 height-5-5">
-                            <div class="product-category" style="background-color: #f4f4f2;">
-                                <a href="javascript:void(0)">
-                                    <figure>
-                                        <img src="img/img2.jpg" alt="src" width="550" height="564">
-                                    </figure>
-                                </a>
-                                <div class="category-content">
-                                    <h3 style="color: white;">낚시터명</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="grid-item col-sm-6 col-md-3 height-2-5">
-                            <div class="product-category" style="background-color: #f4f4f4;">
-                                <a href="javascript:void(0)">
-                                    <figure>
-                                        <img src="img/img1.jpg" alt="src" width="264" height="199">
-                                    </figure>
-                                </a>
-                                <div class="category-content">
-                                    <h3 style="color: white;">낚시터명</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="grid-item col-sm-6 col-md-3 height-3-5">
-                            <div class="product-category" style="background-color: #f4f4f2;">
-                                <a href="javascript:void(0)">
-                                    <figure>
-                                        <img src="img/img2.jpg" alt="src"
-                                            width="264" height="345">
-                                    </figure>
-                                </a>
-                                <div class="category-content">
-                                    <h3 style="color: white;">낚시터명</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="grid-item col-sm-6 col-md-3 height-2-5">
-                            <div class="product-category" style="background-color: #f4f4f4">
-                                <a href="javascript:void(0)">
-                                    <figure>
-                                        <img src="img/img2.jpg" alt="src"
-                                            width="264" height="199">
-                                    </figure>
-                                </a>
-                                <div class="category-content">
-                                    <h3 style="color: white;">낚시터명</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="grid-col-sizer col-1"></div>
                     </div>
-                </divclass="container-fluid">
+                </div>
             </section>
 
-			<!--추천 낚시터-->
-            <section class="recommended-section">
+			<!--추천 낚시터-->            			
+            <section class="recommended-section mt-3">
                 <div class="container">
                     <h2 class="section-title m-b-2 appear-animate" data-animation-name="fadeInUpShorter">추천 낚시터</h2>
                     <h5 class="section-info p-b-4 mb-2 appear-animate" data-animation-name="fadeInUpShorter"
@@ -139,7 +117,7 @@
                             <a class="nav-link" data-toggle="tab" href="#what-new">인천</a>
                         </li>
                     </ul>
-
+            
                     <div class="product-slider-tab">
                         <div class="tab-content">
                             <div class="tab-pane fade show active" id="best-seller">
@@ -148,28 +126,28 @@
                                     <div class="product-default">
                                         <figure>
                                             <a href="javascript:void(0)">
-                                                <img src="img/img1.jpg" width="217" height="217" alt="product" style="height: 250px;">
+                                                <img src="img/fishingHole1.jpg" width="217" height="217" alt="product" style="height: 250px;">
                                             </a>
                                         </figure>
                                     </div>
                                     <div class="product-default">
                                         <figure>
                                             <a href="javascript:void(0)">
-                                                <img src="img/img2.jpg" width="217" height="217" alt="product" style="height: 250px;">
+                                                <img src="img/fishingHole2.jpg" width="217" height="217" alt="product" style="height: 250px;">
                                             </a>
                                         </figure>
                                     </div>
                                     <div class="product-default">
                                         <figure>
                                             <a href="javascript:void(0)">
-                                                <img src="img/img1.jpg" width="217" height="217" alt="product" style="height: 250px;">
+                                                <img src="img/fishingHole3.jpg" width="217" height="217" alt="product" style="height: 250px;">
                                             </a>
                                         </figure>
                                     </div>
                                     <div class="product-default inner-quickview inner-icon">
                                         <figure>
                                             <a href="javascript:void(0)">
-                                                <img src="img/img2.jpg" width="217" height="217" alt="product" style="height: 250px;">
+                                                <img src="img/fishingHole4.jpg" width="217" height="217" alt="product" style="height: 250px;">
                                             </a>
                                         </figure>
                                     </div>
@@ -181,28 +159,28 @@
                                     <div class="product-default">
                                         <figure>
                                             <a href="javascript:void(0)">
-                                                <img src="img/img1.jpg" width="217" height="217" alt="product" style="height: 250px;">
+                                                <img src="img/fishingHole4.jpg" width="217" height="217" alt="product" style="height: 250px;">
                                             </a>
                                         </figure>
                                     </div>
                                     <div class="product-default inner-quickview inner-icon">
                                         <figure>
                                             <a href="javascript:void(0)">
-                                                <img src="img/img2.jpg" width="217" height="217" alt="product" style="height: 250px;">
+                                                <img src="img/fishingHole3.jpg" width="217" height="217" alt="product" style="height: 250px;">
                                             </a>
                                         </figure>
                                     </div>
                                     <div class="product-default inner-quickview inner-icon">
                                         <figure>
                                             <a href="javascript:void(0)">
-                                                <img src="img/img1.jpg" width="217" height="217" alt="product" style="height: 250px;">
+                                                <img src="img/fishingHole2.jpg" width="217" height="217" alt="product" style="height: 250px;">
                                             </a>
                                         </figure>
                                     </div>
                                     <div class="product-default inner-quickview inner-icon">
                                         <figure>
                                             <a href="javascript:void(0)">
-                                                <img src="img/img2.jpg" width="217" height="217" alt="product" style="height: 250px;">
+                                                <img src="img/fishingHole1.jpg" width="217" height="217" alt="product" style="height: 250px;">
                                             </a>
                                         </figure>
                                     </div>
@@ -242,96 +220,7 @@
 
     <!-- Main JS File -->
     <script src="assets/js/main.min.js"></script>
-    <script>
-        // 대한민국의 공휴일 날짜 (간단히 예시로 몇 가지만 지정합니다)
-        const holidays = [
-		    { month: 1, day: 1 },
-		    { month: 3, day: 1 },
-		    { month: 5, day: 5 },
-		    { month: 6, day: 6 },
-		    { month: 8, day: 15 },
-		    { month: 10, day: 3 },
-		    { month: 10, day: 9 },
-		    { month: 12, day: 25 }];
 
-		// 특정 날짜가 공휴일인지 확인하는 함수
-		function isHoliday(day, month) {
-		    return holidays.some(holiday => holiday.month === month + 1 && holiday.day === day);
-		}
-		
-		// 특정 날짜가 주말인지 확인하는 함수
-		function isWeekend(day) {
-		    return day === 0 || day === 6;
-		}
-		
-		// 클릭된 버튼을 기억할 변수
-		let clickedButton = null;
-		
-		// 클릭 이벤트 핸들러
-		function onDateButtonClick(event) {
-		    // 이전에 클릭된 버튼이 있다면 스타일 초기화
-		    if (clickedButton) {
-		        clickedButton.classList.remove('clicked');
-		    }
-		    // 현재 클릭된 버튼 스타일 변경
-		    clickedButton = event.target;
-		    clickedButton.classList.add('clicked');
-		}
-
-		// 월 변경 및 날짜 갱신 함수
-		function updateMonth(year, month) {
-		    const dateContainer = document.getElementById("dateContainer");
-		    dateContainer.innerHTML = "";
-		
-		    const daysInMonth = new Date(year, month + 1, 0).getDate();
-		    const monthName = new Date(year, month).toLocaleString('default', { month: 'long' });
-		    const yearNumber = new Date(year, month).getFullYear();
-		
-		    document.getElementById("month").innerHTML = `<span class="month-year">${monthName}</span>${yearNumber}`;
-		
-		    for (let i = 1; i <= daysInMonth; i++) {
-		        const button = document.createElement("button");
-		        button.type = "button";
-		        button.classList.add("btnDay", "date-item");
-		        button.textContent = i;
-		
-		        if (isHoliday(i, month) || isWeekend(new Date(year, month, i).getDay())) {
-		            button.classList.add("red");
-		        }
-		
-		        // 버튼에 클릭 이벤트 추가
-		        button.addEventListener('click', onDateButtonClick);
-		
-		        dateContainer.appendChild(button);
-		    }
-		}
-
-		// 초기화
-		let currentYear = 2024;
-		let currentMonth = 4;
-		
-		updateMonth(currentYear, currentMonth);
-		
-		document.getElementById("prevMonth").addEventListener("click", () => {
-		    if (currentMonth === 0) {
-		        currentMonth = 11;
-		        currentYear -= 1;
-		    } else {
-		        currentMonth -= 1;
-		    }
-		    updateMonth(currentYear, currentMonth);
-		});
-		
-		document.getElementById("nextMonth").addEventListener("click", () => {
-		    if (currentMonth === 11) {
-		        currentMonth = 0;
-		        currentYear += 1;
-		    } else {
-		        currentMonth += 1;
-		    }
-		    updateMonth(currentYear, currentMonth);
-		});
-	</script>
 </body>
 
 </html>

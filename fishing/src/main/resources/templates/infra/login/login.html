@@ -33,17 +33,20 @@
                         <button class="mobile-menu-toggler pl-0" type="button">
                             <i class="fas fa-bars"></i>
                         </button>
-                        <a href="/index" class="logo">
+                        <a href="/index" class="logo mr-5">
                             <img src="img/logo.png" alt="Logo" width="111" height="44">
                         </a>
                         <!--메인메뉴-->
-                        <div th:replace="~{infra/include/body :: menu}"></div>
+                        <div th:replace="~{infra/include/body :: menu(0)}"></div>
                         
 						<div class="align-items-center ml-5">
 							<nav aria-label="breadcrumb" class="breadcrumb-nav">
 								<div class="container">
 									<ol class="breadcrumb">
-										<li class="breadcrumb-item" style="color: blue;"><a href="/index"><b>Home</b></a></li>
+										<li class="breadcrumb-item" style="color: blue;">
+											<a href="/index"><i class="fas fa-fish">&nbsp;</i><b>Home</b></a>
+										</li>
+										<li class="breadcrumb-item active" aria-current="page">My Account</li>
 										<li class="breadcrumb-item active" aria-current="page">Login</li>
 									</ol>
 								</div>
@@ -60,7 +63,7 @@
 		<main class="main">
 			<div class="page-header">
 				<div class="d-flex flex-column">
-					<img src="img/loginimage.webp" alt="Full Width Image" class="full-width-image">
+					<img src="img/loginimage.jpg" alt="Full Width Image" class="full-width-image">
 				</div>
 			</div>	
 
@@ -79,7 +82,7 @@
 											email address
 											<span class="required">*</span>
 										</label>
-										<input type="email" class="form-input form-wide" id="mbrEmail" name="mbrEmail" />
+										<input type="email" class="form-input form-wide" id="mbrEmail" name="mbrEmail" value="a@a.com" />
 										<span id="mbrEmailValid" name="mbrEmailValid" style="visibility: hidden;"></span>
 									</div>
 									
@@ -88,7 +91,7 @@
 											Password
 											<span class="required">*</span>
 										</label>
-										<input type="password" class="form-input form-wide" id="mbrPw" name="mbrPw" />
+										<input type="password" class="form-input form-wide" id="mbrPw" name="mbrPw" value="q!1" />
 										<span id="mbrPwValid" name="mbrPwValid" style="visibility: hidden;"></span>
 									</div>
 									
@@ -171,6 +174,7 @@
 		
 		// 로그인
 		function fnControllerLogin() {
+			// validation 체크
 			if(!fnValidation()) {return false;}
 
 			$.ajax({

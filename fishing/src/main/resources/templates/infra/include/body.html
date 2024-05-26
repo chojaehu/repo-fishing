@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <!--메인메뉴-->
-<div th:fragment="menu">
+<div th:fragment="menu(pageIndex)">
     <nav class="main-nav">
         <ul class="menu">
-            <li class="active"><a href="/index">Home</a></li>
-            <li><a href="javascript:void(0)">예약하기</a></li>
-            <li><a href="javascript:void(0)">뽐내기</a></li>
-            <li><a href="javascript:void(0)">열린대화방</a></li>            
+            <li th:if="${pageIndex} == 0" class="active"><a href="/index">Home</a></li>
+            <li th:unless="${pageIndex} == 0"><a href="/index">Home</a></li>
+            
+            <li th:if="${pageIndex} == 1" class="active" title="예약"><a href="javascript:void(0)">Reservation</a></li>
+            <li th:unless="${pageIndex} == 1" title="예약"><a href="javascript:void(0)">Reservation</a></li>
+            
+            <li th:if="${pageIndex} == 2" class="active" title="게시판"><a href="/boardList">Board</a></li>
+            <li th:unless="${pageIndex} == 2" title="게시판"><a href="/boardList">Board</a></li>
+            
+            <li th:if="${pageIndex} == 3" class="active" title="열린대화방"><a href="javascript:void(0)">chat room</a></li>            
+            <li th:unless="${pageIndex} == 3" title="열린대화방"><a href="javascript:void(0)">chat room</a></li>            
         </ul>
     </nav>
 </div>
@@ -17,7 +24,7 @@
 	<!--낚시터검색-->
     <div
         class="header-search header-search-popup header-search-category w-lg-max text-right d-none d-sm-block">
-        <a href="#" class="search-toggle" role="button"><i class="icon-magnifier"></i></a>
+        <a href="#" class="search-toggle header-icon" role="button"><i class="icon-magnifier"></i></a>
         <form action=" #" method="get">
             <div class="header-search-wrapper">
                 <input type="search" class="form-control" name="q" id="q" placeholder="낚시터 Search..."
@@ -33,10 +40,16 @@
 			<li>
 			    <div class="header-icon">
 			        <i class="icon-user-2"></i>&ensp;My Account
+			        <span style="color: blue;">[[${session.sessMbrName}]]</span>
 			    </div>				
 			    <ul>
-					<li><a href="/login" class="header-icon">로그인<span class="tip tip-new">자유를 찾아서~~</span></a></li>
-					<li><a href="/member" class="header-icon">회원가입<span class="tip tip-new">원한다면 GO~~</span></a></li>
+					<th:block th:if="${session.sessMbrName != null and session.sessMbrName != ''}">
+						<li><a href="/logout" class="header-icon">로그아웃<span class="tip tip-new">일상으로~~</span></a></li>
+					</th:block>
+					<th:block th:unless="${session.sessMbrName != null and session.sessMbrName != ''}">
+						<li><a href="/login" class="header-icon">로그인<span class="tip tip-new">자유를 찾아서~~</span></a></li>
+						<li><a href="/member" class="header-icon">회원가입<span class="tip tip-new">원한다면 GO~~</span></a></li>
+					</th:block>
 				</ul>				
 			</li>
 		</ul>
@@ -51,9 +64,9 @@
             <nav class="mobile-nav">
                 <ul class="mobile-menu">
                     <li><a href="/index">Home</a></li>
-		            <li><a href="javascript:void(0)">예약하기</a></li>
-		            <li><a href="javascript:void(0)">뽐내기</a></li>
-		            <li><a href="javascript:void(0)">열린대화방</a></li>                     
+		            <li><a href="javascript:void(0)">Reservation</a></li>
+		            <li><a href="/boardList">Board</a></li>
+		            <li><a href="javascript:void(0)">chat room</a></li>                  
                 </ul>
 
                 <ul class="mobile-menu">
@@ -74,6 +87,9 @@
 			</div>
 		</div><!-- End .footer-bottom -->
 	</div><!-- End .container-fluid -->
+	   
+	<!-- 달력생성 : 위치변경시 표시되지 않음-->
+	<script src="js/date.js"></script>
 </footer><!-- End .footer -->
 
 </html>
