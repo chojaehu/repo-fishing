@@ -119,14 +119,23 @@
 													</button>
 												</a>
 										    </div>
+										    
 										    <div class="col-10"></div>
-										    <div class="col-1" th:if="${session.sessMbrSeq} == ${item.mbrSeq} and ${session.sessMbrSeq} != null">
-										    	<button type="button" class="btn btn-primary" onclick="fnSave();" style="border-radius: 15%;">
-													저장
-												</button>
-										    </div>
-										    <div class="col-1" th:unless="${session.sessMbrSeq} == ${item.mbrSeq} and ${session.sessMbrSeq} != null">
-										    </div>
+										    
+										    <th:block th:if="${!#lists.isEmpty(item)}">
+											    <div class="col-1" th:if="${session.sessMbrSeq} == ${item.mbrSeq} and ${session.sessMbrSeq} != null">
+											    	<button type="button" class="btn btn-primary" onclick="fnSave();" style="border-radius: 15%;">
+														저장
+													</button>
+											    </div>
+											</th:block>
+											<th:block th:unless="${!#lists.isEmpty(item)}">
+											    <div class="col-1">
+											    	<button type="button" class="btn btn-primary" onclick="fnSave();" style="border-radius: 15%;">
+														저장
+													</button>
+											    </div>
+											</th:block>
 										</div>
 									</div>
 								</div>	
@@ -180,7 +189,7 @@
 											    <div class="col-11"></div>
 											    <div class="col-1">
 											    	<button type="button" class="btn btn-primary" onclick="fnSaveReview();" style="border-radius: 15%;">
-														저장
+														등록
 													</button>
 											    </div>
 											</div>
