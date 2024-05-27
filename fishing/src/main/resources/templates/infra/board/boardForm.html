@@ -73,7 +73,7 @@
 				
             <section class="category-section">
                 <div class="container mt-3">
-                    <h2 class="section-title m-b-2 appear-animate" data-animation-name="fadeInUpShorter"><i></i>게시판</h2>
+                    <h2 class="section-title m-b-2 appear-animate" data-animation-name="fadeInUpShorter">게시판</h2>
                     <h5 class="section-info p-b-4 mb-2 appear-animate" data-animation-name="fadeInUpShorter"
                         data-animation-delay="200">~~뽐내기~~후기~~글쓰기~~
                     </h5>
@@ -142,32 +142,34 @@
 							</form>
 							
 							<!--댓글작성-->
-							<form id="formReview" name="formReview" method="post" autocomplete="off">
-								<input th:if="${#lists.isEmpty(item)}" type="hidden" id="brdSeq" name="brdSeq" />
-								<input th:unless="${#lists.isEmpty(item)}" type="hidden" id="brdSeq" name="brdSeq" th:value="${item.brdSeq}" />
-								<h2 class="section-title m-b-2 appear-animate" data-animation-name="fadeInUpShorter"><i></i>댓글리스트</h2>
-								<div class="row">
-									<div class="col">
-										<div id="listData" class="order-table-container text-center">
-											<table class="table table-order text-left">
-												<thead>
-													<tr>
-														<th class="text-left" style="width: 10%;">글쓴이</th>
-														<th class="text-left" style="width: 10%;">작성일</th>
-														<th class="text-left" style="width: 80;">내용</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr th:if="${#lists.isEmpty(list)}">
-														<td class="text-center p-0" colspan="3">등록된 댓글이 없습니다</td>
-													</tr>
-													<tr th:unless="${#lists.isEmpty(list)}" th:each="list : ${list}">
-														<td class="text-left" style="width: 10%;" th:text="${list.xmbrName}"></td>
-														<td class="text-left" style="width: 10%;" th:text="${#dates.format(list.brvDate, 'yyyy-MM-dd')}"></td>
-														<td class="text-left" style="width: 80%;" th:text="${list.brvNote}"></td>
-													</tr>
-												</tbody>
-											</table>
+							<div class="account-content">
+								<form id="formReview" name="formReview" method="post" autocomplete="off">
+									<input th:if="${#lists.isEmpty(item)}" type="hidden" id="brdSeq" name="brdSeq" />
+									<input th:unless="${#lists.isEmpty(item)}" type="hidden" id="brdSeq" name="brdSeq" th:value="${item.brdSeq}" />
+									<h2 class="section-title m-b-2 appear-animate" data-animation-name="fadeInUpShorter">댓글리스트</h2>
+									<div class="row">
+										<div class="col">
+											<div id="listData" class="order-table-container text-center">
+												<table class="table table-order text-left">
+													<thead>
+														<tr>
+															<th class="text-left" style="width: 10%;">글쓴이</th>
+															<th class="text-left" style="width: 10%;">작성일</th>
+															<th class="text-left" style="width: 80;">내용</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr th:if="${#lists.isEmpty(list)}">
+															<td class="text-center p-0" colspan="3">등록된 댓글이 없습니다</td>
+														</tr>
+														<tr th:unless="${#lists.isEmpty(list)}" th:each="list : ${list}">
+															<td class="text-left" style="width: 10%;" th:text="${list.xmbrName}"></td>
+															<td class="text-left" style="width: 10%;" th:text="${#dates.format(list.brvDate, 'yyyy-MM-dd')}"></td>
+															<td class="text-left" style="width: 80%;" th:text="${list.brvNote}"></td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
 										</div>
 									</div>
 									
@@ -195,8 +197,8 @@
 											</div>
 										</div>
 									</div>									
-								</div>
-							</form>					
+								</form>					
+							</div>	
 						</div>
 					</div>
 				</div>
