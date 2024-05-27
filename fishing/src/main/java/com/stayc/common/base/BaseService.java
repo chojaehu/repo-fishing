@@ -160,10 +160,10 @@ public class BaseService {
 			
 			if(BaseService.getOs().equals("win")) {
 				pathUpload = Constants.UPLOADED_PATH_PREFIX_LOCAL;// + "/" + pathModule + "/" + type + "/" + pathDate + "/";
-				pathLoad   = Constants.UPLOADED_PATH_PREFIX_FOR_VIEW_LOCAL;// + "/" + pathModule + "/" + type + "/" + pathDate + "/";					
+				pathLoad   = Constants.UPLOADED_PATH_PREFIX_LOCAL;// + "/" + pathModule + "/" + type + "/" + pathDate + "/";					
 			} else {
 				pathUpload = Constants.UPLOADED_PATH_PREFIX_LOCAL_MAC;// + "/" + pathModule + "/" + type + "/" + pathDate + "/";
-				pathLoad   = Constants.UPLOADED_PATH_PREFIX_FOR_VIEW_LOCAL_MAC;// + "/" + pathModule + "/" + type + "/" + pathDate + "/";										
+				pathLoad   = Constants.UPLOADED_PATH_PREFIX_LOCAL_MAC;// + "/" + pathModule + "/" + type + "/" + pathDate + "/";										
 			}
 			
 			File uploadPath = new File(pathUpload);
@@ -257,10 +257,10 @@ public class BaseService {
 				
 				if(BaseService.getOs().equals("win")) {
 					writePath = Constants.UPLOADED_PATH_PREFIX_LOCAL;// + "/" + pathModule + "/" + type + "/" + pathDate + "/";
-					loadPath  = Constants.UPLOADED_PATH_PREFIX_FOR_VIEW_LOCAL;// + "/" + pathModule + "/" + type + "/" + pathDate + "/";					
+					loadPath  = Constants.UPLOADED_PATH_PREFIX_LOCAL;// + "/" + pathModule + "/" + type + "/" + pathDate + "/";					
 				} else {
 					writePath = Constants.UPLOADED_PATH_PREFIX_LOCAL_MAC;// + "/" + pathModule + "/" + type + "/" + pathDate + "/";
-					loadPath  = Constants.UPLOADED_PATH_PREFIX_FOR_VIEW_LOCAL_MAC;// + "/" + pathModule + "/" + type + "/" + pathDate + "/";										
+					loadPath  = Constants.UPLOADED_PATH_PREFIX_LOCAL_MAC;// + "/" + pathModule + "/" + type + "/" + pathDate + "/";										
 				}
 				
 				File uploadPath = new File(writePath);

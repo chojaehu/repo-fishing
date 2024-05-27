@@ -26,13 +26,18 @@ public class BoardDto extends BaseDto {
 	private Date   brvModDt; // 수정일시
 	
 	// 추가필드
+	private Integer xCount;
 	private String  xrowNum;      // 레코드순번
 	private String  xmbrName;     // 회원성명
 	
 	// 이미지필드
-	private String xpath;
-	private String xdefaultNy;
-	private String xoriginalName;
+	private Integer xrowSeq;
+	private String  xfileName;
+	private String  xpathUpload;
+	private String  xpathload;
+	private String  xuuidName;
+	private String  xext;
+	private String  xdefaultNy;
 	
 	public String getBrdSeq() {
 		return brdSeq;
@@ -142,11 +147,41 @@ public class BoardDto extends BaseDto {
 	public void setBrvModDt(Date brvModDt) {
 		this.brvModDt = brvModDt;
 	}
-	public String getXpath() {
-		return xpath;
+	public Integer getXrowSeq() {
+		return xrowSeq;
 	}
-	public void setXpath(String xpath) {
-		this.xpath = xpath;
+	public void setXrowSeq(Integer xrowSeq) {
+		this.xrowSeq = xrowSeq;
+	}
+	public String getXfileName() {
+		return xfileName;
+	}
+	public void setXfileName(String xfileName) {
+		this.xfileName = xfileName;
+	}
+	public String getXpathUpload() {
+		return xpathUpload;
+	}
+	public void setXpathUpload(String xpathUpload) {
+		this.xpathUpload = xpathUpload;
+	}
+	public String getXpathload() {
+		return xpathload;
+	}
+	public void setXpathload(String xpathload) {
+		this.xpathload = xpathload;
+	}
+	public String getXuuidName() {
+		return xuuidName;
+	}
+	public void setXuuidName(String xuuidName) {
+		this.xuuidName = xuuidName;
+	}
+	public Integer getxCount() {
+		return xCount;
+	}
+	public void setxCount(Integer xCount) {
+		this.xCount = xCount;
 	}
 	public String getXdefaultNy() {
 		return xdefaultNy;
@@ -154,11 +189,11 @@ public class BoardDto extends BaseDto {
 	public void setXdefaultNy(String xdefaultNy) {
 		this.xdefaultNy = xdefaultNy;
 	}
-	public String getXoriginalName() {
-		return xoriginalName;
+	public String getXext() {
+		return xext;
 	}
-	public void setXoriginalName(String xoriginalName) {
-		this.xoriginalName = xoriginalName;
+	public void setXext(String xext) {
+		this.xext = xext;
 	}
 	
 }

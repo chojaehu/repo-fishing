@@ -87,6 +87,11 @@ public class BoardService {
 		return dao.insertReview(dto);
 	};
 	
+	//이미지갯수
+	public BoardDto selectOneImageCount(BoardDto dto) throws Exception {
+		return dao.selectOneImageCount(dto);
+	};
+	
 	//이미지조회
 	public List<BoardDto> selectListImages(BoardDto dto) throws Exception {
 		return dao.selectListImages(dto);

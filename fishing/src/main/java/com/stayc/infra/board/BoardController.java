@@ -3,6 +3,7 @@ package com.stayc.infra.board;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,8 +16,14 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class BoardController {
+	@Value("${file_upload_type}")
+	private String fileUploadType;
+	
 	@Autowired
 	BoardService service;
+	
+	@Autowired
+	BoardImageService imageService;
 	
 	// 게시판 리스트화면 호출
 	@RequestMapping(value = "/boardList")
@@ -28,7 +35,7 @@ public class BoardController {
 	
 	// 게시판 상세화면 호출
 	@RequestMapping(value = "/boardForm")
-	public String boardForm( Model model, BoardDto dto) throws Exception {
+	public String boardForm( Model model, BoardDto dto, BoardDto dto2) throws Exception {
 		// 열람횟수 증가
 		if(dto.getBrdSeq() != null) {
 			service.updateOpen(dto);
@@ -38,6 +45,27 @@ public class BoardController {
 			
 			// 댓글조회
 			model.addAttribute("list", service.selectListReview(dto));
+			
+			model.addAttribute("uploadType", fileUploadType.toLowerCase());
+			
+			if(fileUploadType.toLowerCase().equals("nas")) {
+				// NAS 파일
+				/*
+				String pathFile = null;
+				if(service.getOs().equals("win")) {
+					pathFile = Constants.UPLOADED_PATH_PREFIX_LOCAL+dto.getXuuidName();
+				} else {
+					pathFile = Constants.UPLOADED_PATH_PREFIX_LOCAL_MAC+dto.getXuuidName();
+				}
+				*/
+				
+				// 파일갯수확인
+				dto2 = service.selectOneImageCount(dto);
+				if(dto2 != null) {
+					List<BoardDto> base64Image = imageService.getBase64ExternalImage(dto);
+					model.addAttribute("imageUrl", base64Image);
+				}			
+			}			
 		} else {
 			// 상세조회
 			model.addAttribute("item", null);

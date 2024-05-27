@@ -126,8 +126,39 @@
 								
 								<div class="row">
 									<div class="col">
+										<th:block th:if="${uploadType == 'aws'}">
+											<!--AWS S3 방식-->
+											<div th:if="${item.xpathUpload != null}">
+												<img th:src = "${item.xpathUpload}"
+									                style="position: absolute;
+														   top: 190px;
+														   right: 6%;
+														   width: 200px;
+														   height: 200px;
+														   border: 3px solid purple"/>
+											</div>
+										</th:block>
+										<th:block th:unless="${uploadType == 'aws'}">
+											<!--NAS방식-->
+											<div th:each="image : ${imageUrl}">
+										        <img th:if="${image.xext} == 'png'" th:src="'data:image/png;base64,' + ${image.xpathUpload}" alt="Buffered Image"
+											        style="width: 200px;height: 200px; border: 3px solid purple"/>
+											    <img th:unless="${image.xext} == 'png'" th:src="'data:image/jpeg;base64,' + ${image.xpathUpload}" alt="Buffered Image"
+											        style="width: 200px;height: 200px; border: 3px solid purple"/>
+										    </div>
+										    
+											<!--<div th:if="${imageUrl != null}">
+												<img th:src = "'data:image/jpeg;base64,' + ${imageUrl}" id="imageUrl" name="imageUrl"
+									                style="position: absolute;
+														   top: 190px;
+														   right: 6%;
+														   width: 200px;
+														   height: 200px;
+														   border: 3px solid purple"/>
+											</div>-->
+										</th:block>
 										<!--이미지표시영역-->
-										<div id="imageContainerWrapper"></div>
+										<!--<div id="imageContainerWrapper"></div>-->
 									</div>
 								</div>
 								
@@ -166,8 +197,8 @@
 							<!--댓글작성-->
 							<div class="account-content">
 								<form id="formReview" name="formReview" method="post" autocomplete="off">
-									<input th:if="${#lists.isEmpty(item)}" type="hidden" id="brdSeq" name="brdSeq" />
-									<input th:unless="${#lists.isEmpty(item)}" type="hidden" id="brdSeq" name="brdSeq" th:value="${item.brdSeq}" />
+									<!--<input th:if="${#lists.isEmpty(item)}" type="hidden" id="brdSeq" name="brdSeq" />
+									<input th:unless="${#lists.isEmpty(item)}" type="hidden" id="brdSeq" name="brdSeq" th:value="${item.brdSeq}" />-->
 									<h2 class="section-title m-b-2 appear-animate" data-animation-name="fadeInUpShorter">댓글리스트</h2>
 									<div class="row">
 										<div class="col">
@@ -315,7 +346,7 @@
 		
 		// controller 호출
 		function fnController() {
-			if(brdSeq.valeu == null || brdSeq.valeu == "" ) {
+			if(brdSeq.value == null || brdSeq.value == "" ) {
 				// 등록
 				form.action = "/boardInsert";				
 			} else {
@@ -357,6 +388,7 @@
 		
 		// controller 호출
 		function fnControllerReview() {
+			alert($("#brdSeq").val());
 			formReview.action = "/boardInsertReview";				
 			formReview.submit();					
 		}
