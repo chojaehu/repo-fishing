@@ -126,7 +126,7 @@
                             <img src="img/logo.png" alt="Logo" width="111" height="44">
                         </a>
                         <!--메인메뉴-->
-                        <div th:replace="~{infra/include/body :: menu}"></div>
+                        <div th:replace="~{infra/include/body :: menu(0)}"></div>
                         
 						<div class="align-items-center ml-5">
 							<nav aria-label="breadcrumb" class="breadcrumb-nav">
@@ -155,12 +155,14 @@
 					</ol>
 				</div>End .container 
 			</nav>-->
-
+			<form  id='forminsert' name ='forminsert' method='get' >
+			<input type="hidden" id="romSeq" name="romSeq" th:value="${item.romSeq}">
 			<div class="">
 				<div class="row">
 					<div class="col-lg-12">
 						<article class="post single">
-							<form  id='forminsert' name ='forminsert' method='get' >
+							
+							
 							<div class="container">
 								<div class="row justify-content-md-center">
 									<div class="col-md-8">
@@ -175,7 +177,7 @@
 															<!-- More comments go here -->
 															<div class="comment-form mt-3">
 																<!-- 부트스트랩 5 폼 컨트롤 사용 -->
-																<input type="hidden" th:value="${item.romSeq}">
+																
 																<div class="input-group">
 																	<input id="romTitle" name="romTitle" type="text" th:value="${item.romTitle}"
 																	class="form-control" placeholder="Add a comment..." aria-label="Add a comment..." aria-describedby="button-addon2">
@@ -261,7 +263,7 @@
 									</div>
 								</div>
 							</div>
-							</form>
+							
 						</article><!-- End .post -->
 
 					<hr class="mt-2 mb-1">
@@ -278,7 +280,9 @@
 				
 				</div>
 			</div>
+			</form>
 		</main>
+	</div>
 
 		<footer th:replace="~{infra/include/body :: footer}"></footer>
 	<!-- Plugins JS File -->
@@ -296,12 +300,12 @@
         function changeMainImg(imgSrc) {
             document.getElementById("mainImg").src = imgSrc;
         }
-        let goinsert = "/chatroominst";
+        let goupdate = "/chatupdates";
         let form = document.querySelector("form[name=forminsert]")
         
         
         document.getElementById("btn").onclick =function(){
-        	form.action = goinsert;
+        	form.action = goupdate;
         	form.submit();
         }
     </script>

@@ -31,6 +31,20 @@
 			room
 		where 1=1 and romSeq = #{romSeq}
 	 </select>
+	 
+	 <select id="roomMember" resultMap="resultMapObj">
+		select 
+			rckSeq
+			,mbrName 
+		from 
+			roomcheckin a
+		join 
+			members b
+		on 
+			a.mbrSeq = b.mbrSeq  
+		where 
+			romSeq =  #{romSeq};
+	 </select>
 	
 	
 	<insert id="chatroominst">
@@ -53,18 +67,17 @@
 	</insert>
 	
 	<update id = "chatupdates">
+	<selectKey resultType ="Integer" keyProperty="romSeq" order="AFTER">
+		 SELECT romSeq FROM room WHERE romSeq = #{romSeq}
+	</selectKey>
 	update room
-	(
-		romTitle,
-		romPersonnel,
-		romNote
-	) 
 	set
-	(
-		#{romTitle}
-		,#{romPersonnel}
-		,#{romNote}
-	)
+	
+		romTitle = #{romTitle},
+		romPersonnel = #{romPersonnel},
+		romNote = #{romNote}
+	
+	WHERE romSeq = #{romSeq}
 	</update>
 	
 </mapper>

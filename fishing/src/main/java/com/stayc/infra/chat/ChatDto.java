@@ -15,6 +15,16 @@ public class ChatDto {
 	private Integer mbrSeq;
 	
 	
+	private String mbrName;
+	
+	
+	
+	public String getMbrName() {
+		return mbrName;
+	}
+	public void setMbrName(String mbrName) {
+		this.mbrName = mbrName;
+	}
 	public Integer getRomSeq() {
 		return romSeq;
 	}

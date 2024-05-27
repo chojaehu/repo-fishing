@@ -116,6 +116,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">로고</a>
+            <p class="navbar-brand mx-auto" th:text="${item.romTitle}">로고</p>
             <button class="navbar-toggler toggle-sidebar-btn d-lg-none" type="button" aria-label="Toggle sidebar" onclick="toggleSidebar()">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -124,17 +125,15 @@
 
     <div class="sidebar-left d-lg-flex">
         <div>
-            <div class="sidebar-section">
+            <div class="sidebar-section" >
                 <h5>참여인원</h5>
-                <a href="#" class="sidebar-link">링크 1</a>
-                <a href="#" class="sidebar-link">링크 2</a>
-                <a href="#" class="sidebar-link">링크 3</a>
+                <a href="#" class="sidebar-link" th:each="mbrlist : ${mbrlist}" th:text ="${mbrlist.mbrName}"></a>
             </div>
         </div>
         <div>
             <div class="sidebar-section">
                 <h5></h5>
-                <a th:href="@{/chatupdate(romSeq=${seq})}" class="sidebar-link">채팅방 수정</a>
+                <a th:href="@{/chatupdate(romSeq=${item.romSeq})}" class="sidebar-link">채팅방 수정</a>
                 <a href="#" class="sidebar-link">채팅방 나가기</a>
             </div>
         </div>
