@@ -2,7 +2,9 @@ package com.stayc.infra.board;
 
 import java.util.Date;
 
-public class BoardDto {
+import com.stayc.common.base.BaseDto;
+
+public class BoardDto extends BaseDto {
 	// 게시판
 	private String  brdSeq;       // 순번
 	private String  brdDefaultNy; // 0:공지, 1:일반
@@ -26,6 +28,11 @@ public class BoardDto {
 	// 추가필드
 	private String  xrowNum;      // 레코드순번
 	private String  xmbrName;     // 회원성명
+	
+	// 이미지필드
+	private String xpath;
+	private String xdefaultNy;
+	private String xoriginalName;
 	
 	public String getBrdSeq() {
 		return brdSeq;
@@ -134,6 +141,24 @@ public class BoardDto {
 	}
 	public void setBrvModDt(Date brvModDt) {
 		this.brvModDt = brvModDt;
+	}
+	public String getXpath() {
+		return xpath;
+	}
+	public void setXpath(String xpath) {
+		this.xpath = xpath;
+	}
+	public String getXdefaultNy() {
+		return xdefaultNy;
+	}
+	public void setXdefaultNy(String xdefaultNy) {
+		this.xdefaultNy = xdefaultNy;
+	}
+	public String getXoriginalName() {
+		return xoriginalName;
+	}
+	public void setXoriginalName(String xoriginalName) {
+		this.xoriginalName = xoriginalName;
 	}
 	
 }

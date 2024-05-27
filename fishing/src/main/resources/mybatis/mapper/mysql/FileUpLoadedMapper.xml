@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.stayc.common.fileupload.FileUpLoadDao">
+
+	<resultMap id="resultMapObj" type="com.stayc.common.fileupload.FileUpLoadDto"></resultMap>
+	
+	<insert id="insertFileUpLoad">
+		INSERT INTO fileuploaded
+			( 
+			  category
+			, defaultNy
+			, sort
+			, pathName
+			, path
+			, originalName
+			, uuidName
+			, ext
+			, size
+			, delNy
+			, pseq
+			, regDateTime
+			)
+		VALUES
+			(
+			  #{category}
+			, #{defaultNy}
+			, #{sort}
+			, #{pathName}
+			, #{path}
+			, #{originalName}
+			, #{uuidName}
+			, #{ext}
+			, #{size}
+			, 0
+			, #{pseq}
+			, now()
+			)
+	</insert>
+
+	<update id="updateDefaultNy">
+		UPDATE fileuploaded
+		   SET defaultNy   = 1
+		     , regDateTime = now()
+		 WHERE category  = #{category}
+		   AND pseq      = #{pseq}
+		   AND defaultNy = 0
+	</update>
+
+	<update id="updateUuidName">
+		UPDATE fileuploaded
+		   SET uuidName   = #{uuidName}
+		     , regDateTime = now()
+		 WHERE category  = #{category}
+		   AND pseq      = #{pseq}
+		   AND defaultNy = 0
+	</update>
+		
+	<delete id="deleteFileUpLoad">
+		DELETE FROM fileuploaded
+		 WHERE uuidName = #{uuidName}
+	</delete>
+	
+	<select id="selectListUuidName" resultMap="resultMapObj">
+		SELECT uuidName
+		     , path
+		  FROM fileuploaded
+		 WHERE category = #{category}
+		   AND pseq     = #{pseq}
+	</select>
+
+</mapper>

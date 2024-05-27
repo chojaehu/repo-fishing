@@ -19,4 +19,6 @@ public interface BoardDao {
 	public List<BoardDto> selectListReview(BoardDto dto);
 	// 댓글등록
 	public int insertReview(BoardDto dto);
+	//이미지조회
+	public List<BoardDto> selectListImages(BoardDto dto);
 }

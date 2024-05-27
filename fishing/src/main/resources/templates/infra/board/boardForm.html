@@ -2,6 +2,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<div th:replace="~{infra/include/head :: head}"></div>
+	<link rel="stylesheet" href="css/fileupload.css">
+	<style>
+		 .image-container input[name="imageRadioLoad"] {
+            cursor: default; /* 기본 커서로 설정 */
+        }
+	</style>
 </head>
 
 <body>
@@ -80,7 +86,7 @@
                     
 					<div id="listData">
 						<div class="account-content">
-							<form id="form" name="form" method="post" autocomplete="off">
+							<form id="form" name="form" method="post" autocomplete="off" enctype="multipart/form-data">
 								<input th:if="${#lists.isEmpty(item)}" type="hidden" id="brdSeq" name="brdSeq" />
 								<input th:unless="${#lists.isEmpty(item)}" type="hidden" id="brdSeq" name="brdSeq" th:value="${item.brdSeq}" />
 								
@@ -106,6 +112,22 @@
 											<p>※내용이 없으면 저장되지 않습니다</p>
 											<span id="brdNoteValid" name="brdNoteValid" style="visibility: hidden;">입력값이 없습니다</span>
 										</div>
+									</div>
+								</div>
+								
+								<div class="row">
+									<div class="col">
+										<div class="form-group">
+											<label style="display: block;" for="brdNote">파일첨부</label>
+											<input type="file" class="form-input" id="uploadFiles" name="uploadFiles" accept="image/*" multiple></input>
+										</div>
+									</div>
+								</div>
+								
+								<div class="row">
+									<div class="col">
+										<!--이미지표시영역-->
+										<div id="imageContainerWrapper"></div>
 									</div>
 								</div>
 								
@@ -235,6 +257,10 @@
 
     <!-- Main JS File -->
     <script src="assets/js/main.min.js"></script>
+    
+    <!--이미지처리-->
+    <script src="js/fileupload.js"></script>
+    <script src="js/fileload.js"></script>
     
 	<script>
 		// validType : 1(한글), 2(영문), 3(숫자:정수), 4(숫자:실수), 5(숫자콤마)
