@@ -1,5 +1,6 @@
 package com.stayc.infra.board;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,15 +19,19 @@ public class BoardImageController {
 	// 이미지조회
 	@RequestMapping(value = "/boardLoadImage")
 	public List<BoardDto> boardLoadImage(BoardDto dto, BoardDto dto2) throws Exception {
-		if(fileUploadType.toLowerCase().equals("nas")) {
-			// 파일갯수확인
-			dto2 = service.selectOneImageCount(dto);
-			if(dto2 != null) {
-				List<BoardDto> returnList = service.getBase64ExternalImage(dto);
-				return returnList;			
+		
+		// 파일갯수확인
+		dto2 = service.selectOneImageCount(dto);
+		
+		if(dto2 != null) {
+			List<BoardDto> returnList = new ArrayList<>();
+			if(fileUploadType.toLowerCase().equals("nas")) {
+				returnList = service.getBase64ExternalImage(dto);				
 			} else {
-				return null;
+				returnList = service.selectListImages(dto);
 			}
+			
+			return returnList;
 		} else {
 			return null;
 		}

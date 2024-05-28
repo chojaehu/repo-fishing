@@ -34,7 +34,7 @@ public class BoardDto extends BaseDto {
 	private Integer xrowSeq;
 	private String  xfileName;
 	private String  xpathUpload;
-	private String  xpathload;
+	private String  xpathLoad;
 	private String  xuuidName;
 	private String  xext;
 	private String  xdefaultNy;
@@ -165,11 +165,11 @@ public class BoardDto extends BaseDto {
 	public void setXpathUpload(String xpathUpload) {
 		this.xpathUpload = xpathUpload;
 	}
-	public String getXpathload() {
-		return xpathload;
+	public String getXpathLoad() {
+		return xpathLoad;
 	}
-	public void setXpathload(String xpathload) {
-		this.xpathload = xpathload;
+	public void setXpathLoad(String xpathLoad) {
+		this.xpathLoad = xpathLoad;
 	}
 	public String getXuuidName() {
 		return xuuidName;
