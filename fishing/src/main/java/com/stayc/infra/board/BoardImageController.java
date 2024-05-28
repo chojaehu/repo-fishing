@@ -15,9 +15,6 @@ public class BoardImageController {
 	@Autowired
 	BoardService service;
 	
-	@Autowired
-	BoardImageService imageService;
-	
 	// 이미지조회
 	@RequestMapping(value = "/boardLoadImage")
 	public List<BoardDto> boardLoadImage(BoardDto dto, BoardDto dto2) throws Exception {
@@ -25,7 +22,7 @@ public class BoardImageController {
 			// 파일갯수확인
 			dto2 = service.selectOneImageCount(dto);
 			if(dto2 != null) {
-				List<BoardDto> returnList = imageService.getBase64ExternalImage(dto);
+				List<BoardDto> returnList = service.getBase64ExternalImage(dto);
 				return returnList;			
 			} else {
 				return null;

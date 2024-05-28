@@ -22,9 +22,6 @@ public class BoardController {
 	@Autowired
 	BoardService service;
 	
-	@Autowired
-	BoardImageService imageService;
-	
 	// 게시판 리스트화면 호출
 	@RequestMapping(value = "/boardList")
 	public String boardList(@ModelAttribute("vo") BoardVo vo, Model model, BoardDto dto) throws Exception {
@@ -46,26 +43,7 @@ public class BoardController {
 			// 댓글조회
 			model.addAttribute("list", service.selectListReview(dto));
 			
-			model.addAttribute("uploadType", fileUploadType.toLowerCase());
-			
-			if(fileUploadType.toLowerCase().equals("nas")) {
-				// NAS 파일
-				/*
-				String pathFile = null;
-				if(service.getOs().equals("win")) {
-					pathFile = Constants.UPLOADED_PATH_PREFIX_LOCAL+dto.getXuuidName();
-				} else {
-					pathFile = Constants.UPLOADED_PATH_PREFIX_LOCAL_MAC+dto.getXuuidName();
-				}
-				*/
-				
-				// 파일갯수확인
-				dto2 = service.selectOneImageCount(dto);
-				if(dto2 != null) {
-					List<BoardDto> base64Image = imageService.getBase64ExternalImage(dto);
-					model.addAttribute("imageUrl", base64Image);
-				}			
-			}			
+			model.addAttribute("uploadType", fileUploadType.toLowerCase());			
 		} else {
 			// 상세조회
 			model.addAttribute("item", null);
