@@ -3,8 +3,10 @@ package com.stayc.infra.reservation;
 import java.util.Date;
 
 public class reservationDto {
+	
 //	장소(place)
 	private String plcSeq;			// 순번
+	private String plcTypeCd;		// 낚시종류
 	private String plcName;			// 장소명
 	private String plcAreaCd;		// 지역
 	private int plcPersonnel;		// 좌석인원
@@ -17,6 +19,25 @@ public class reservationDto {
 	private Date plcModDt;			// 수정일시
 //	장소(place)	
 
+//	물고기(fish)
+	private String fisSeq;			// 순번
+	private String fisFishCd;		// 어종
+	private Integer fisDelNy;		// 삭제여부
+	private Date fisRegDt;			// 등록일시
+	private Date fisModDt;			// 수정일시
+//	물고기(fish)
+	
+//	장비(prepare)
+	private String prpSeq;			// 순번
+	private String prpFishingRod;	// 낚시대
+	private String prpReel;			// 릴
+	private String prpBait;			// 미끼
+	private String prpWeight;		// 추
+	private Integer prpDelNy;		// 삭제여부
+	private Date prpRegDt;			// 등록일시
+	private Date prpModDt;			// 수정일시
+//	장비(prepare)
+	
 //	예약(reservation)
 	private String revSeq;			// 순번
 	private Date revDate;			// 예약일자
@@ -33,6 +54,12 @@ public class reservationDto {
 	}
 	public void setPlcSeq(String plcSeq) {
 		this.plcSeq = plcSeq;
+	}
+	public String getPlcTypeCd() {
+		return plcTypeCd;
+	}
+	public void setPlcTypeCd(String plcTypeCd) {
+		this.plcTypeCd = plcTypeCd;
 	}
 	public String getPlcName() {
 		return plcName;
@@ -94,6 +121,84 @@ public class reservationDto {
 	public void setPlcModDt(Date plcModDt) {
 		this.plcModDt = plcModDt;
 	}
+	public String getFisSeq() {
+		return fisSeq;
+	}
+	public void setFisSeq(String fisSeq) {
+		this.fisSeq = fisSeq;
+	}
+	public String getFisFishCd() {
+		return fisFishCd;
+	}
+	public void setFisFishCd(String fisFishCd) {
+		this.fisFishCd = fisFishCd;
+	}
+	public Integer getFisDelNy() {
+		return fisDelNy;
+	}
+	public void setFisDelNy(Integer fisDelNy) {
+		this.fisDelNy = fisDelNy;
+	}
+	public Date getFisRegDt() {
+		return fisRegDt;
+	}
+	public void setFisRegDt(Date fisRegDt) {
+		this.fisRegDt = fisRegDt;
+	}
+	public Date getFisModDt() {
+		return fisModDt;
+	}
+	public void setFisModDt(Date fisModDt) {
+		this.fisModDt = fisModDt;
+	}
+	public String getPrpSeq() {
+		return prpSeq;
+	}
+	public void setPrpSeq(String prpSeq) {
+		this.prpSeq = prpSeq;
+	}
+	public String getPrpFishingRod() {
+		return prpFishingRod;
+	}
+	public void setPrpFishingRod(String prpFishingRod) {
+		this.prpFishingRod = prpFishingRod;
+	}
+	public String getPrpReel() {
+		return prpReel;
+	}
+	public void setPrpReel(String prpReel) {
+		this.prpReel = prpReel;
+	}
+	public String getPrpBait() {
+		return prpBait;
+	}
+	public void setPrpBait(String prpBait) {
+		this.prpBait = prpBait;
+	}
+	public String getPrpWeight() {
+		return prpWeight;
+	}
+	public void setPrpWeight(String prpWeight) {
+		this.prpWeight = prpWeight;
+	}
+	public Integer getPrpDelNy() {
+		return prpDelNy;
+	}
+	public void setPrpDelNy(Integer prpDelNy) {
+		this.prpDelNy = prpDelNy;
+	}
+	public Date getPrpRegDt() {
+		return prpRegDt;
+	}
+	public void setPrpRegDt(Date prpRegDt) {
+		this.prpRegDt = prpRegDt;
+	}
+	public Date getPrpModDt() {
+		return prpModDt;
+	}
+	public void setPrpModDt(Date prpModDt) {
+		this.prpModDt = prpModDt;
+	}
 	public String getRevSeq() {
 		return revSeq;
 	}
@@ -142,4 +247,7 @@ public class reservationDto {
 	public void setMbrSeq(String mbrSeq) {
 		this.mbrSeq = mbrSeq;
 	}
+
+	
+	
 }
