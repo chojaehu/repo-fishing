@@ -37,10 +37,8 @@ public class BoardImageService {
             
             // byte 배열을 Base64 문자열로 인코딩하여 반환
             dto2.setXpathUpload(Base64.getEncoder().encodeToString(imageBytes));
+            dto2.setXfileName(forDto.getXfileName());
             dto2.setXext(forDto.getXext().toLowerCase());
-             
-            System.out.println("dto2.getXpathUpload(): "+dto2.getXpathUpload());
-            System.out.println("dto2.getXext(): "+dto2.getXext());
             
             returnList.add(dto2);		
     	}

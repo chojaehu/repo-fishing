@@ -124,41 +124,30 @@
 									</div>
 								</div>
 								
+								<!--이미지표시-->
 								<div class="row">
 									<div class="col">
-										<th:block th:if="${uploadType == 'aws'}">
-											<!--AWS S3 방식-->
-											<div th:if="${item.xpathUpload != null}">
-												<img th:src = "${item.xpathUpload}"
-									                style="position: absolute;
-														   top: 190px;
-														   right: 6%;
-														   width: 200px;
-														   height: 200px;
-														   border: 3px solid purple"/>
-											</div>
-										</th:block>
-										<th:block th:unless="${uploadType == 'aws'}">
-											<!--NAS방식-->
-											<div th:each="image : ${imageUrl}">
-										        <img th:if="${image.xext} == 'png'" th:src="'data:image/png;base64,' + ${image.xpathUpload}" alt="Buffered Image"
-											        style="width: 200px;height: 200px; border: 3px solid purple"/>
-											    <img th:unless="${image.xext} == 'png'" th:src="'data:image/jpeg;base64,' + ${image.xpathUpload}" alt="Buffered Image"
-											        style="width: 200px;height: 200px; border: 3px solid purple"/>
-										    </div>
-										    
-											<!--<div th:if="${imageUrl != null}">
-												<img th:src = "'data:image/jpeg;base64,' + ${imageUrl}" id="imageUrl" name="imageUrl"
-									                style="position: absolute;
-														   top: 190px;
-														   right: 6%;
-														   width: 200px;
-														   height: 200px;
-														   border: 3px solid purple"/>
-											</div>-->
-										</th:block>
-										<!--이미지표시영역-->
-										<!--<div id="imageContainerWrapper"></div>-->
+										<input type="hidden" id="uploadType" name="uploadType" th:value="${uploadType}"/>
+										<!--<div id="imageListView" name="imageListView">
+											<th:block th:if="${uploadType == 'aws'}">
+												AWS S3 방식
+												<div th:if="${item.xpathUpload != null}">
+													<img th:src = "${item.xpathUpload}"
+										                style="width: 23%; height: auto;"/>
+												</div>
+											</th:block>
+											<th:block th:unless="${uploadType == 'aws'}">
+												NAS방식
+												<div th:each="image : ${imageUrl}">
+											        <img th:if="${image.xext} == 'png'" th:src="'data:image/png;base64,' + ${image.xpathUpload}" alt="Buffered Image"
+												        style="width: 23%; height: auto;"/>
+												    <img th:unless="${image.xext} == 'png'" th:src="'data:image/jpeg;base64,' + ${image.xpathUpload}" alt="Buffered Image"
+												        style="width: 23%;height: auto;"/>
+											    </div>
+											</th:block>
+										</div>-->
+										<!--동적으로 이미지표시영역-->
+										<div id="imageContainerWrapper"></div>
 									</div>
 								</div>
 								
