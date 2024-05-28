@@ -25,7 +25,8 @@ public class ChatController {
 	
 	@RequestMapping(value = "/chatroom")
 	public String chatroom(ChatDto dto ,Model model,HttpSession httpSession) {
-		
+		//httpSession.setAttribute("sessMbrSeq",  9);
+		httpSession.invalidate();
 		model.addAttribute("list", service.roomList(dto));
 		
 		
@@ -75,13 +76,40 @@ public class ChatController {
 	
 		return "redirect:/chatroom";
 	}
-	
+	@RequestMapping(value = "/roomcheckinst")
+	public String roomcheckinst(ChatDto dto,HttpSession httpSession)
+	{
+		dto.setMbrSeq((Integer) httpSession.getAttribute("sessMbrSeq"));
+		service.roomcheckinst(dto);
+		
+		return "redirect:/chatting" + "?romSeq=" + dto.getRomSeq();
+	}
 	@ResponseBody
 	@RequestMapping(value = "/checkroom")
-	public Map<String, Object> checkroom(Model model,HttpSession httpSession) throws Exception {
+	public Map<String, Object> checkroom(Model model,HttpSession httpSession,ChatDto dto) throws Exception {
 		Map<String, Object> returnMap = new HashMap<String, Object>();
-		returnMap.put("rt", "success");
 		
+		dto.setMbrSeq((Integer) httpSession.getAttribute("sessMbrSeq"));
+		System.out.println(dto.getMbrSeq()+"-----------------------------");
+		if(dto.getMbrSeq() != null)
+		{
+			ChatDto rDto = service.roomcheckinOne(dto);
+			if(rDto != null)
+			{
+				returnMap.put("rt", "success");
+			}
+			else
+			{
+				returnMap.put("rt", "success2");
+				
+			}
+			
+		}
+		else 
+		{
+			returnMap.put("rt", "false");
+			
+		}
 	
 		return returnMap;
 	}

@@ -45,7 +45,29 @@
 		where 
 			romSeq =  #{romSeq};
 	 </select>
+	 
+	 <select id="roomcheckinOne" resultMap="resultMapObj">
+		select * 
+		from 
+			roomcheckin
+		where 
+			mbrSeq = #{mbrSeq} and romSeq = #{romSeq};
+	 </select>
 	
+	<insert id="roomcheckinst">
+	insert into roomcheckin
+	(
+		rckDate,
+		mbrSeq, 
+		romSeq
+	)
+	values
+	(
+		NOW(),
+		#{mbrSeq},
+		#{romSeq}
+	)
+	</insert>
 	
 	<insert id="chatroominst">
 	insert into room

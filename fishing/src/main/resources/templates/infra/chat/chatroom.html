@@ -231,8 +231,11 @@
 	  myInput.focus()
 	})
 	
+	
 	function chekRoom(element){
 		 let romSeq = $(element).data("value");
+		 let gochatting = "/chatting";
+		 let gochattinginst = "/roomcheckinst";
 		//alert(romSeq)
 		$.ajax({
 			async: true 
@@ -242,9 +245,19 @@
 			,data : { "romSeq" : romSeq}
 			,success: function(response) {
 				if(response.rt == "success") {
-					
-					alert("참여하겠습니까?")
+					alert("가입된 채팅방");
+					window.open(gochatting +"?romSeq=" + romSeq); 	
 				} 
+				else if(response.rt == "false")
+				{
+					alert("로그인을 하세요")	
+					window.location.href = "/login"
+				}
+				else
+				{
+					alert("채팅방에 참여 하겠습니까?")
+					window.open(gochattinginst +"?romSeq=" + romSeq);
+				}
 			}
 			,error : function(jqXHR, textStatus, errorThrown){
 				alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);

@@ -23,11 +23,27 @@ public class ChatService {
 		return dao.roomMember(dto);
 	}
 	
+	
+//	채팅방 참여 확인
+
+	public ChatDto roomcheckinOne(ChatDto dto)
+	{
+		return dao.roomcheckinOne(dto);
+	}
+	
 //	채빙방
 	public ChatDto roomOne(ChatDto dto)
 	{
 		return dao.roomOne(dto);
 	}
+	
+	
+//	채팅방 가입
+	public int roomcheckinst(ChatDto dto)
+	{
+		return dao.roomcheckinst(dto);
+	}
+	
 //	채팅방 생성
 	public int chatroominst(ChatDto dto)
 	{
