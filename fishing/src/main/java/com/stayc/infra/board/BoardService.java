@@ -32,6 +32,11 @@ public class BoardService {
 		return dao.selectList(vo);
 	};
 	
+	// 전체자료건수
+	public int getCount() {
+		return dao.getCount();
+	};
+	
 	// 단일 조회
 	public BoardDto selectOne(BoardDto dto) throws Exception {
 		return dao.selectOne(dto);

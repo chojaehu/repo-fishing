@@ -1,7 +1,5 @@
 package com.stayc.infra.board;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -11,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.stayc.common.constants.Constants;
 import com.stayc.common.fileupload.FileUpLoadDto;
+import com.stayc.common.util.UtilFunction;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -25,10 +24,29 @@ public class BoardController {
 	// 게시판 리스트화면 호출
 	@RequestMapping(value = "/boardList")
 	public String boardList(@ModelAttribute("vo") BoardVo vo, Model model, BoardDto dto) throws Exception {
-		List<BoardDto> list = service.selectList(vo);
-		model.addAttribute("list", list);
+		UtilFunction.setSearch(vo);
+		
+		int rowCount = service.getCount();
+		
+		if(rowCount > 0) {			
+			vo.setPagingVo(rowCount);		
+			model.addAttribute("list", service.selectList(vo));
+		};
+		
 		return Constants.PATH_BOARD + "boardList";
 	}
+	
+	@RequestMapping(value = "/boardListPaging")
+	public String boardListPaging(@ModelAttribute("vo") BoardVo vo, Model model) throws Exception {
+		int rowCount = service.getCount();
+		
+		if(rowCount > 0) {			
+			vo.setPagingVo(rowCount);
+			model.addAttribute("list", service.selectList(vo));
+		};
+		
+		return Constants.PATH_BOARD + "boardListAjax";
+	}	
 	
 	// 게시판 상세화면 호출
 	@RequestMapping(value = "/boardForm")

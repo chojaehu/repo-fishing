@@ -46,7 +46,15 @@
 				 	   ) a
 		 	   ) a
 		 ORDER BY xrowNum DESC, a.brdSeq DESC
+		 LIMIT #{pgRowCount}
+    	OFFSET #{pgOffset}
 	 </select>
+	 
+    <!-- 카운팅 -->
+    <select id="getCount">
+        SELECT COUNT(*)
+      	  FROM board
+    </select>	 
 	 
 	 <select id="selectOne" resultMap="resultMapObj">
 		SELECT a.brdSeq
@@ -66,7 +74,6 @@
 		 WHERE 1 = 1
 		   AND a.brdSeq = #{brdSeq}
 	 </select>
-	
 	
 	<insert id="insert">
 		INSERT INTO board

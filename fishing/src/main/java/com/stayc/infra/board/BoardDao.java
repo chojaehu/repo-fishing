@@ -5,6 +5,8 @@ import java.util.List;
 public interface BoardDao {
 	// 전체조회
 	public List<BoardDto> selectList(BoardVo vo);
+	// 전체자료건수
+	public int getCount();
 	// 단일조회
 	public BoardDto selectOne(BoardDto dto);
 	// 등록
