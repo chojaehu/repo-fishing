@@ -163,6 +163,7 @@
 		  FROM fileuploaded
 		 WHERE pseq     = #{brdSeq}
 		   AND category = 1
+		   AND storage  = #{xstorage}
 	</select>
 
 	<!-- 이미지 조회 -->
@@ -170,10 +171,11 @@
 		SELECT defaultNy    xdefaultNy
 		     , path         xpathUpload
 		     , originalName xfileName
-		     , ext          xExt
+		     , ext          xext
 		  FROM fileuploaded
 		 WHERE pseq     = #{brdSeq}
 		   AND category = 1
+		   AND storage  = #{xstorage}
 		 ORDER BY sort
 	</select>
 </mapper>

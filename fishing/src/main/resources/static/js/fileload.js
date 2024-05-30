@@ -31,14 +31,16 @@ async function createImageGallery() {
 
         // 새로운 img 요소를 생성하여 이미지 추가
         const img = document.createElement('img');
-        if(uploadType.value == 'aws') {
+        if(uploadType.value == '0') {
 			img.src = image.xpathUpload;
 		} else {
-	        if(image.xext == 'png') {
+			let src = "data:image/" + image.xext + ";base64," + image.xpathUpload;
+			img.src = src;
+	        /*if(image.xext == 'png') {
 				img.src = 'data:image/png;base64,' + image.xpathUpload;
 			} else {
 				img.src = 'data:image/jpeg;base64,' + image.xpathUpload;
-			}			
+			}*/			
 		}
         
         // 파일명 요소 생성

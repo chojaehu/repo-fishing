@@ -20,6 +20,7 @@
 			, delNy
 			, pseq
 			, regDateTime
+		    , storage
 			)
 		VALUES
 			(
@@ -35,6 +36,7 @@
 			, 0
 			, #{pseq}
 			, now()
+			, #{storage}
 			)
 	</insert>
 
@@ -45,15 +47,17 @@
 		 WHERE category  = #{category}
 		   AND pseq      = #{pseq}
 		   AND defaultNy = 0
+		   AND storage   = #{storage}
 	</update>
 
 	<update id="updateUuidName">
 		UPDATE fileuploaded
-		   SET uuidName   = #{uuidName}
+		   SET uuidName    = #{uuidName}
 		     , regDateTime = now()
 		 WHERE category  = #{category}
 		   AND pseq      = #{pseq}
 		   AND defaultNy = 0
+		   AND storage   = #{storage}
 	</update>
 		
 	<delete id="deleteFileUpLoad">
@@ -67,6 +71,7 @@
 		  FROM fileuploaded
 		 WHERE category = #{category}
 		   AND pseq     = #{pseq}
+		   AND storage  = #{storage}
 	</select>
 
 </mapper>

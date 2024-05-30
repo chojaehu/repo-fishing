@@ -38,6 +38,7 @@ public class BoardDto extends BaseDto {
 	private String  xuuidName;
 	private String  xext;
 	private String  xdefaultNy;
+	private String  xstorage;
 	
 	public String getBrdSeq() {
 		return brdSeq;
@@ -194,6 +195,12 @@ public class BoardDto extends BaseDto {
 	}
 	public void setXext(String xext) {
 		this.xext = xext;
+	}
+	public String getXstorage() {
+		return xstorage;
+	}
+	public void setXstorage(String xstorage) {
+		this.xstorage = xstorage;
 	}
 	
 }

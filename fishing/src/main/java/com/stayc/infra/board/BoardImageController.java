@@ -1,6 +1,5 @@
 package com.stayc.infra.board;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +23,8 @@ public class BoardImageController {
 		dto2 = service.selectOneImageCount(dto);
 		
 		if(dto2 != null) {
-			List<BoardDto> returnList = new ArrayList<>();
-			if(fileUploadType.toLowerCase().equals("nas")) {
+			List<BoardDto> returnList;
+			if(fileUploadType.equals("1")) { // nas
 				returnList = service.getBase64ExternalImage(dto);				
 			} else {
 				returnList = service.selectListImages(dto);
