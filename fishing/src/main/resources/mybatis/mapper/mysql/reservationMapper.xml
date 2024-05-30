@@ -34,6 +34,7 @@
 		from place
 		where 1=1
 			AND plcSeq = #{plcSeq}
+			AND plcTypeCd = #{plcTypeCd}
 	</select>
 	 
 </mapper>
