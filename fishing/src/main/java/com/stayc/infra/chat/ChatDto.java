@@ -12,13 +12,23 @@ public class ChatDto {
 	private String romTitle;
 	private Integer romPersonnel;
 	private String romNote;
+	
+	
+	
 	private Integer mbrSeq;
-	
-	
 	private String mbrName;
 	
+//	채팅 메세지
+	private String rtkNote;
 	
 	
+	
+	public String getRtkNote() {
+		return rtkNote;
+	}
+	public void setRtkNote(String rtkNote) {
+		this.rtkNote = rtkNote;
+	}
 	public String getMbrName() {
 		return mbrName;
 	}
