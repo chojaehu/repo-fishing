@@ -93,10 +93,10 @@
 
 <body>
 	<form name="formList" id="formList" method="post" autocomplete="off">
-		<input type="hidden" id="plcSeq" name="plcSeq">
-		<input type="hidden" id="plcTypeCd" name="plctypeCd">
-		<input type="hidden" id="revSeat" name="revSeat">
-		<input type="hidden" id="revDate" name="revDate">
+		<input type="hidden" id="plcTypeCd" name="plcTypeCd" th:value="${item.plcTypeCd}">
+		<input type="hidden" id="plcName" name="plcName" th:value="${item.plcName}">
+		<input type="hidden" id="plcAmount" name="plcAmount" th:value="${item.plcAmount}">
+		<input type="hidden" id="plcSeq" name="plcSeq" th:value="${item.plcSeq}">
 	    <div class="page-wrapper">
 	        <header class="header">
 	            <div class="header-middle sticky-header font2">
@@ -402,16 +402,11 @@
 	                </nav>
 	
 	                <div class="product-single-container product-single-default">
-	                    <div class="cart-message d-none">
-	                        <strong class="single-cart-notice">“Aerin Rose Oil”</strong>
-	                        <span>has been added to your cart.</span>
-	                    </div>
-	
 	                    <div class="row">
 	                        <div class="col-lg-4 col-md-6 product-single-gallery">
 	                            <!-- 예약장소명 -->
 	                        <div>
-	                            <h2 class="product-title" id="plcName" name="plcName" th:value="${item.plcName}" th:text="${item.plcName}"></h2>
+	                            <h2 class="product-title" th:text="${item.plcName}"></h2>
 	                        </div>
 	                            <div class="product-slider-container">
 	                                <div class="product-single-carousel owl-carousel owl-theme show-nav-hover">
@@ -432,13 +427,13 @@
 	                        <div></div>
 	                        <div class="col-lg-8 col-md-6 product-single-details">
 	                            <div  class="my-3 d-flex justify-content-between align-items-center">
-	                                <h4 class="custom-box2">예약 날짜 : 2024년 6월 10일</h4>
-	                                <h4 class="custom-box">좌석번호 : 5</h4>
+	                                <h4 class="custom-box2" id="" name="">예약 날짜 : 2024년 6월 10일</h4>
+	                                <h4 class="custom-box" id="revSeat" name="revSeat"></h4>
 	                            </div>
 	                                <div class="seat-map" id="seatMap"></div>
 	                                <div class="my-lg-5 d-flex justify-content-between align-items-center">
-	                                    <span class="product-price"th:text="${#numbers.formatInteger(item.plcAmount,1,'COMMA')} + '원'" ></span>
-	                                    <a href="javascript:;" class="btn btn-dark add-cart mr-2" title="Add to Cart" onclick="reserveSeat()">예약하기</a>
+	                                    <span class="product-price" th:text="${#numbers.formatInteger(item.plcAmount,1,'COMMA')} + '원'" ></span>
+	                                    <a id="Checkoutbtn" class="btn btn-dark">예약하기</a>
 	                                </div>
 	                        </div><!-- End .product-single-details -->
 	                    </div><!-- End .row -->
@@ -521,39 +516,62 @@
     <!-- Main JS File -->
     <script src="assets/js/main.min.js"></script>
     <!-- 배 예약 -->
+     <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/plugins.min.js"></script>
+    <script src="assets/js/nouislider.min.js"></script>
+
+    <!-- Main JS File -->
+    <script src="assets/js/main.min.js"></script>
+    <!-- 배 예약 -->
     <script>
-        const seatMapElement = document.getElementById('seatMap');
-        const numberOfSeats = 16;
-        const centerX = seatMapElement.offsetWidth / 2;
-        const centerY = seatMapElement.offsetHeight / 2;
-        const semiMajorAxis = 350; // 타원의 장축 반지름 (가로)
-        const semiMinorAxis = 100; // 타원의 단축 반지름 (세로)
-        const angleIncrement = (Math.PI * 2) / numberOfSeats; // 좌석 간의 각도 간격
-
-        let selectedSeat = null; // 현재 선택된 좌석
-
-        for (let i = 0; i < numberOfSeats; i++) {
-            const angle = i * angleIncrement; // 현재 좌석의 각도 계산
-            const x = centerX + Math.cos(angle) * semiMajorAxis; // x 좌표 계산
-            const y = centerY + Math.sin(angle) * semiMinorAxis; // y 좌표 계산
-
-            const seatElement = document.createElement('div');
-            seatElement.classList.add('seat');
-            seatElement.textContent = i + 1;
-            seatElement.style.left = (x - 20) + 'px'; // 좌석의 너비 절반을 뺌
-            seatElement.style.top = (y - 20) + 'px'; // 좌석의 높이 절반을 뺌
-            
-            seatElement.addEventListener('click', function() {
-                if (selectedSeat) {
-                    selectedSeat.classList.remove('selected'); // 기존 선택된 좌석 해제
-                }
-                seatElement.classList.add('selected'); // 새로운 좌석 선택
-                selectedSeat = seatElement; // 선택된 좌석 갱신
-            });
-
-            seatMapElement.appendChild(seatElement);
-        }
-    </script>
+	    const seatMapElement = document.getElementById('seatMap');
+	    const numberOfSeats = 16;
+	    const centerX = seatMapElement.offsetWidth / 2;
+	    const centerY = seatMapElement.offsetHeight / 2;
+	    const semiMajorAxis = 350; // 타원의 장축 반지름 (가로)
+	    const semiMinorAxis = 100; // 타원의 단축 반지름 (세로)
+	    const angleIncrement = (Math.PI * 2) / numberOfSeats; // 좌석 간의 각도 간격
+	
+	    let selectedSeat = null; // 현재 선택된 좌석
+	    let selectedSeatNumber = null; // 선택된 좌석 번호
+	    let revSeat = null; // revSeat 변수 추가
+	
+	    for (let i = 0; i < numberOfSeats; i++) {
+	        const angle = i * angleIncrement; // 현재 좌석의 각도 계산
+	        const x = centerX + Math.cos(angle) * semiMajorAxis; // x 좌표 계산
+	        const y = centerY + Math.sin(angle) * semiMinorAxis; // y 좌표 계산
+	
+	        const seatElement = document.createElement('div');
+	        seatElement.classList.add('seat');
+	        seatElement.textContent = i + 1;
+	        seatElement.style.left = (x - 20) + 'px'; // 좌석의 너비 절반을 뺌
+	        seatElement.style.top = (y - 20) + 'px'; // 좌석의 높이 절반을 뺌
+	        
+	        seatElement.addEventListener('click', function() {
+	            if (selectedSeat) {
+	                selectedSeat.classList.remove('selected'); // 기존 선택된 좌석 해제
+	            }
+	            seatElement.classList.add('selected'); // 새로운 좌석 선택
+	            selectedSeat = seatElement; // 선택된 좌석 갱신
+	
+	            // 선택된 좌석 번호 업데이트
+	            selectedSeatNumber = parseInt(seatElement.textContent); // 좌석 번호를 int로 변환
+	            const revSeatElement = document.getElementById('revSeat');
+	            revSeatElement.textContent = '좌석번호 : ' + selectedSeatNumber;
+	
+	        });
+	        seatMapElement.appendChild(seatElement);
+	    }
+	    
+	    let goUrlCheckout = "/checkout";
+	    
+	    let form = document.querySelector("form[name=formList]");
+	    document.getElementById("Checkoutbtn").onclick = function(){
+	        form.action = goUrlCheckout;
+	        form.submit();
+	    }
+	</script>
 </body>
 
 </html>
