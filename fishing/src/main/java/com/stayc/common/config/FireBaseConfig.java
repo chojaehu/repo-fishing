@@ -25,6 +25,8 @@ public class FireBaseConfig {
 
             FirebaseApp.initializeApp(options);
 
+            
+            
             System.out.println("Firebase has been initialized successfully.");
         } catch (IOException e) {
             e.printStackTrace();
