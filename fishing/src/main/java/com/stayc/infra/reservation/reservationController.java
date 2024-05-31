@@ -28,18 +28,11 @@ public class reservationController {
 		
 		model.addAttribute("item", service.selectOne(dto));
 		
-		return "infra/reserve/seat";
+		return Constants.PATH_RESERVE + "seat";
 	}
 //	결제페이지
 	@RequestMapping(value = "/checkout")
 	public String checkout(reservationDto dto, Model model) throws Exception {
-		
-		System.out.println(dto.getPlcSeq() + "---------------1");
-		System.out.println(dto.getPlcName() + "---------------2");
-		System.out.println(dto.getPlcTypeCd() + "--------------3");
-		System.out.println(dto.getPlcAmount() + "---------------4");
-		System.out.println(dto.getRevSeat() + "------------------5");
-		System.out.println(dto.getRevDate() + "-------------------6");
 		
 		String plcSeq = dto.getPlcSeq();
 		String plcName = dto.getPlcName();
@@ -55,6 +48,15 @@ public class reservationController {
 	    model.addAttribute("revSeat", revSeat);
 	    model.addAttribute("revDate", revDate);
 	    
-		return "infra/reserve/checkout";
+		return Constants.PATH_RESERVE + "checkout";
+	}
+	
+//	결제완료 insert
+	@RequestMapping(value = "/insert")
+	public String insert(reservationDto dto) {
+		
+		service.insert(dto);
+		
+		return "redirect:/index";
 	}
 }

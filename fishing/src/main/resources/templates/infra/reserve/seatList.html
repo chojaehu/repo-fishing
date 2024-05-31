@@ -2,72 +2,42 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <title>Porto - Bootstrap eCommerce Template</title>
-
-    <meta name="keywords" content="HTML5 Template" />
-    <meta name="description" content="Porto - Bootstrap eCommerce Template">
-    <meta name="author" content="SW-THEMES">
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="assets/images/icons/favicon.png">
+	<div th:replace="~{infra/include/head :: head}"></div>
+	
     <style>
-.reservation {
-    margin: 0 auto;
-    padding: 15px;
-    max-width: 1400px; /* 기본 영역의 최대 너비를 늘림 */
-    background-color: #f8f9fa; /* 배경색 */
-}
-
-@media (min-width: 768px) {
-    .reservation {
-        padding: 30px; /* 패딩 증가 */
-    }
-}
-
-@media (min-width: 992px) {
-    .reservation {
-        padding: 50px; /* 패딩 추가 증가 */
-    }
-}
-
-@media (min-width: 1200px) {
-}
-.product-default {
-    align-items: stretch; /* 자식 요소의 높이를 동일하게 맞춤 */
-}
-
-.product-details {
-    flex-grow: 1;
-}
-
-.product-action.right-align {
-    align-self: flex-end;
-}
+		.reservation {
+		    margin: 0 auto;
+		    padding: 15px;
+		    max-width: 1400px; /* 기본 영역의 최대 너비를 늘림 */
+		    background-color: #f8f9fa; /* 배경색 */
+		}
+		
+		@media (min-width: 768px) {
+		    .reservation {
+		        padding: 30px; /* 패딩 증가 */
+		    }
+		}
+		
+		@media (min-width: 992px) {
+		    .reservation {
+		        padding: 50px; /* 패딩 추가 증가 */
+		    }
+		}
+		
+		@media (min-width: 1200px) {
+		}
+		.product-default {
+		    align-items: stretch; /* 자식 요소의 높이를 동일하게 맞춤 */
+		}
+		
+		.product-details {
+		    flex-grow: 1;
+		}
+		
+		.product-action.right-align {
+		    align-self: flex-end;
+		}
     </style>
-
-    <script>
-        WebFontConfig = {
-            google: { families: ['Playfair+Display:200,300,400,400italic,500,600,700,700italic,800,900italic', 'Poppins:200,300,400,500,600,700,800', 'Oswald:300,400,500,600,700,800'] }
-        };
-        (function (d) {
-            var wf = d.createElement('script'), s = d.scripts[0];
-            wf.src = 'assets/js/webfont.js';
-            wf.async = true;
-            s.parentNode.insertBefore(wf, s);
-        })(document);
-    </script>
-
-    <!-- Plugins CSS File -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-
-    <!-- Main CSS File -->
-    <link rel="stylesheet" href="assets/css/demo34.min.css">
-    <link rel="stylesheet" type="text/css" href="assets/vendor/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" type="text/css" href="assets/vendor/simple-line-icons/css/simple-line-icons.min.css">
 </head>
 
 <body>
@@ -81,121 +51,32 @@
 	                        <button class="mobile-menu-toggler pl-0" type="button">
 	                            <i class="fas fa-bars"></i>
 	                        </button>
-	                        <a href="demo34.html" class="logo">
-	                            <img src="" alt="Porto Logo" width="111" height="44">
+	                        <a href="/index" class="logo mr-5">
+	                            <img src="img/logo.png" alt="Logo" width="111" height="44">
 	                        </a>
-	                        <nav class="main-nav">
-	                            <ul class="menu">
-	                                <li>
-	                                    <a href="demo34.html">Home</a>
-	                                </li>
-	                                <li class="active">
-	                                    <a href="demo34-shop.html">Shop</a>
-	                                    <div class="megamenu megamenu-fixed-width megamenu-3cols">
-	                                        <div class="row">
-	                                            <div class="col-lg-4">
-	                                                <a href="#" class="nolink">VARIATION 1</a>
-	                                                <ul class="submenu">
-	                                                    <li><a href="category.html">Fullwidth Banner</a></li>
-	                                                    <li><a href="category-banner-boxed-slider.html">Boxed Slider
-	                                                            Banner</a>
-	                                                    </li>
-	                                                    <li><a href="category-banner-boxed-image.html">Boxed Image
-	                                                            Banner</a>
-	                                                    </li>
-	                                                    <li><a href="category.html">Left Sidebar</a></li>
-	                                                    <li><a href="category-sidebar-right.html">Right Sidebar</a></li>
-	                                                    <li><a href="category-off-canvas.html">Off Canvas Filter</a></li>
-	                                                    <li><a href="category-horizontal-filter1.html">Horizontal
-	                                                            Filter1</a>
-	                                                    </li>
-	                                                    <li><a href="category-horizontal-filter2.html">Horizontal
-	                                                            Filter2</a>
-	                                                    </li>
-	                                                </ul>
-	                                            </div>
-	                                            <div class="col-lg-4">
-	                                                <a href="#" class="nolink">VARIATION 2</a>
-	                                                <ul class="submenu">
-	                                                    <li><a href="category-list.html">List Types</a></li>
-	                                                    <li><a href="category-infinite-scroll.html">Ajax Infinite Scroll</a>
-	                                                    </li>
-	                                                    <li><a href="category.html">3 Columns Products</a></li>
-	                                                    <li><a href="category-4col.html">4 Columns Products</a></li>
-	                                                    <li><a href="category-5col.html">5 Columns Products</a></li>
-	                                                    <li><a href="category-6col.html">6 Columns Products</a></li>
-	                                                    <li><a href="category-7col.html">7 Columns Products</a></li>
-	                                                    <li><a href="category-8col.html">8 Columns Products</a></li>
-	                                                </ul>
-	                                            </div>
-	                                            <div class="col-lg-4 p-0">
-	                                                <div class="menu-banner">
-	                                                    <figure>
-	                                                        <img src="" alt="Menu banner"
-	                                                            width="300" height="300">
-	                                                    </figure>
-	                                                    <div class="banner-content">
-	                                                        <h4>
-	                                                            <span class="">UP TO</span><br />
-	                                                            <b class="">50%</b>
-	                                                            <i>OFF</i>
-	                                                        </h4>
-	                                                        <a href="category.html" class="btn btn-sm btn-dark">SHOP NOW</a>
-	                                                    </div>
-	                                                </div>
-	                                            </div>
-	                                        </div>
-	                                    </div><!-- End .megamenu -->
-	                                </li>
-	                                <li><a href="blog.html">Blog</a></li>
-	                                <li>
-	                                    <a href="#">Pages</a>
-	                                    <ul>
-	                                        <li><a href="wishlist.html">Wishlist</a></li>
-	                                        <li><a href="cart.html">Shopping Cart</a></li>
-	                                        <li><a href="checkout.html">Checkout</a></li>
-	                                        <li><a href="dashboard.html">Dashboard</a></li>
-	                                        <li><a href="about.html">About Us</a></li>
-	                                        <li><a href="#">Blog</a>
-	                                            <ul>
-	                                                <li><a href="blog.html">Blog</a></li>
-	                                                <li><a href="single.html">Blog Post</a></li>
-	                                            </ul>
-	                                        </li>
-	                                        <li><a href="contact.html">Contact Us</a></li>
-	                                        <li><a href="login.html">Login</a></li>
-	                                        <li><a href="forgot-password.html">Forgot Password</a></li>
-	                                    </ul>
-	                                </li>
-	                                <li><a href="#">Elements</a>
-	                                    <ul class="custom-scrollbar">
-	                                        <li><a href="element-accordions.html">Accordion</a></li>
-	                                        <li><a href="element-alerts.html">Alerts</a></li>
-	                                        <li><a href="element-animations.html">Animations</a></li>
-	                                        <li><a href="element-banners.html">Banners</a></li>
-	                                        <li><a href="element-buttons.html">Buttons</a></li>
-	                                        <li><a href="element-call-to-action.html">Call to Action</a></li>
-	                                        <li><a href="element-countdown.html">Count Down</a></li>
-	                                        <li><a href="element-counters.html">Counters</a></li>
-	                                        <li><a href="element-headings.html">Headings</a></li>
-	                                        <li><a href="element-icons.html">Icons</a></li>
-	                                        <li><a href="element-info-box.html">Info box</a></li>
-	                                        <li><a href="element-posts.html">Posts</a></li>
-	                                        <li><a href="element-products.html">Products</a></li>
-	                                        <li><a href="element-product-categories.html">Product Categories</a></li>
-	                                        <li><a href="element-tabs.html">Tabs</a></li>
-	                                        <li><a href="element-testimonial.html">Testimonials</a></li>
-	                                    </ul>
-	                                </li>
-	                                <li><a href="#" target="blank" class="nolink">Buy Porto!</a></li>
-	                            </ul>
-	                        </nav>
+	                        <!--메인메뉴-->
+	                        <div th:replace="~{infra/include/body :: menu(0)}"></div>
+	                        
+							<div class="align-items-center ml-5">
+								<nav aria-label="breadcrumb" class="breadcrumb-nav">
+									<div class="container">
+										<ol class="breadcrumb">
+											<li class="breadcrumb-item" style="color: blue;">
+												<a href="/index"><i class="fas fa-fish">&nbsp;</i><b>Home</b></a>
+											</li>
+											<li class="breadcrumb-item active" aria-current="page">Reservation</li>
+										</ol>
+									</div>
+								</nav>
+							</div>
 	                    </div>
-	
-	                    
+						<!--우측메뉴-->
+	                    <div th:replace="~{infra/include/body :: menuRight}"></div>
 	                </div>
 	            </div>
-	        </header><!-- End .header -->
+	            <!--예약일자-->
+				<div th:replace="~{infra/include/head :: date}"></div>	
+	        </header>
 	
 	        <main class="main">
 	            <!-- 낚시 좌대 리스트 -->
@@ -267,7 +148,7 @@
 	                                    </div>
 	                                    <!-- End .price-box -->
 	                                </div>
-									<button class="btn btn-dark"><a th:href="@{/seat(plcSeq=${list.plcSeq})}">예약하기</a></button>
+									<button type="submit" class="btn btn-dark"><a th:href="@{/seat(plcSeq=${list.plcSeq})}">예약하기</a></button>
 	                                <!-- End .product-details -->
 	                            </div>
 	                        </div>
@@ -293,8 +174,10 @@
 	                </div>
 	            </div>
 	        </main>
-	    </div><!-- End .page-wrapper -->
+	    </div>
 	</form>
+	<footer th:replace="~{infra/include/body :: footer}"></footer>
+    <a id="scroll-top" href="#top" title="Top" role="button"><i class="icon-angle-up"></i></a>    
     <!-- Plugins JS File -->
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
