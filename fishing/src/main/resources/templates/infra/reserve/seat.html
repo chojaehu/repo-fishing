@@ -2,18 +2,7 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <title>Porto - Bootstrap eCommerce Template</title>
-
-    <meta name="keywords" content="HTML5 Template" />
-    <meta name="description" content="Porto - Bootstrap eCommerce Template">
-    <meta name="author" content="SW-THEMES">
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="assets/images/icons/favicon.png">
+<div th:replace="~{infra/include/head :: head}"></div>
 
     <style>
 
@@ -69,26 +58,6 @@
             text-align: center;
         }
     </style>
-
-    <script>
-        WebFontConfig = {
-            google: { families: [ 'Playfair+Display:200,300,400,400italic,500,600,700,700italic,800,900italic', 'Poppins:200,300,400,500,600,700,800', 'Oswald:300,400,500,600,700,800' ] }
-        };
-        ( function ( d ) {
-            var wf = d.createElement( 'script' ), s = d.scripts[ 0 ];
-            wf.src = 'assets/js/webfont.js';
-            wf.async = true;
-            s.parentNode.insertBefore( wf, s );
-        } )( document );
-    </script>
-
-    <!-- Plugins CSS File -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-
-    <!-- Main CSS File -->
-    <link rel="stylesheet" href="assets/css/demo34.min.css">
-    <link rel="stylesheet" type="text/css" href="assets/vendor/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" type="text/css" href="assets/vendor/simple-line-icons/css/simple-line-icons.min.css">
 </head>
 
 <body>
@@ -97,6 +66,7 @@
 		<input type="hidden" id="plcName" name="plcName" th:value="${item.plcName}">
 		<input type="hidden" id="plcAmount" name="plcAmount" th:value="${item.plcAmount}">
 		<input type="hidden" id="plcSeq" name="plcSeq" th:value="${item.plcSeq}">
+		<input type="hidden" id="revSeatInput" name="revSeat">
 	    <div class="page-wrapper">
 	        <header class="header">
 	            <div class="header-middle sticky-header font2">
@@ -105,302 +75,32 @@
 	                        <button class="mobile-menu-toggler pl-0" type="button">
 	                            <i class="fas fa-bars"></i>
 	                        </button>
-	                        <a href="demo34.html" class="logo">
-	                            <img src="assets/images/logo-black.png" alt="Porto Logo" width="111" height="44">
+	                        <a href="/index" class="logo mr-5">
+	                            <img src="img/logo.png" alt="Logo" width="111" height="44">
 	                        </a>
-	                        <nav class="main-nav">
-	                            <ul class="menu">
-	                                <li>
-	                                    <a href="demo34.html">Home</a>
-	                                </li>
-	                                <li>
-	                                    <a href="demo34-shop.html">Shop</a>
-	                                    <div class="megamenu megamenu-fixed-width megamenu-3cols">
-	                                        <div class="row">
-	                                            <div class="col-lg-4">
-	                                                <a href="#" class="nolink">VARIATION 1</a>
-	                                                <ul class="submenu">
-	                                                    <li><a href="category.html">Fullwidth Banner</a></li>
-	                                                    <li><a href="category-banner-boxed-slider.html">Boxed Slider
-	                                                            Banner</a>
-	                                                    </li>
-	                                                    <li><a href="category-banner-boxed-image.html">Boxed Image
-	                                                            Banner</a>
-	                                                    </li>
-	                                                    <li><a href="category.html">Left Sidebar</a></li>
-	                                                    <li><a href="category-sidebar-right.html">Right Sidebar</a></li>
-	                                                    <li><a href="category-off-canvas.html">Off Canvas Filter</a></li>
-	                                                    <li><a href="category-horizontal-filter1.html">Horizontal
-	                                                            Filter1</a>
-	                                                    </li>
-	                                                    <li><a href="category-horizontal-filter2.html">Horizontal
-	                                                            Filter2</a>
-	                                                    </li>
-	                                                </ul>
-	                                            </div>
-	                                            <div class="col-lg-4">
-	                                                <a href="#" class="nolink">VARIATION 2</a>
-	                                                <ul class="submenu">
-	                                                    <li><a href="category-list.html">List Types</a></li>
-	                                                    <li><a href="category-infinite-scroll.html">Ajax Infinite Scroll</a>
-	                                                    </li>
-	                                                    <li><a href="category.html">3 Columns Products</a></li>
-	                                                    <li><a href="category-4col.html">4 Columns Products</a></li>
-	                                                    <li><a href="category-5col.html">5 Columns Products</a></li>
-	                                                    <li><a href="category-6col.html">6 Columns Products</a></li>
-	                                                    <li><a href="category-7col.html">7 Columns Products</a></li>
-	                                                    <li><a href="category-8col.html">8 Columns Products</a></li>
-	                                                </ul>
-	                                            </div>
-	                                            <div class="col-lg-4 p-0">
-	                                                <div class="menu-banner">
-	                                                    <figure>
-	                                                        <img src="assets/images/menu-banner.jpg" alt="Menu banner"
-	                                                            width="300" height="300">
-	                                                    </figure>
-	                                                    <div class="banner-content">
-	                                                        <h4>
-	                                                            <span class="">UP TO</span><br />
-	                                                            <b class="">50%</b>
-	                                                            <i>OFF</i>
-	                                                        </h4>
-	                                                        <a href="category.html" class="btn btn-sm btn-dark">SHOP NOW</a>
-	                                                    </div>
-	                                                </div>
-	                                            </div>
-	                                        </div>
-	                                    </div><!-- End .megamenu -->
-	                                </li>
-	                                <li class="active">
-	                                    <a href="demo34-product.html">Products</a>
-	                                    <div class="megamenu megamenu-fixed-width">
-	                                        <div class="row">
-	                                            <div class="col-lg-4">
-	                                                <a href="#" class="nolink">PRODUCT PAGES</a>
-	                                                <ul class="submenu">
-	                                                    <li><a href="demo34-product.html">SIMPLE PRODUCT</a></li>
-	                                                    <li><a href="product-variable.html">VARIABLE PRODUCT</a></li>
-	                                                    <li><a href="demo34-product.html">SALE PRODUCT</a></li>
-	                                                    <li><a href="demo34-product.html">FEATURED & ON SALE</a></li>
-	                                                    <li><a href="product-custom-tab.html">WITH CUSTOM TAB</a></li>
-	                                                    <li><a href="product-sidebar-left.html">WITH LEFT SIDEBAR</a></li>
-	                                                    <li><a href="product-sidebar-right.html">WITH RIGHT SIDEBAR</a></li>
-	                                                    <li><a href="product-addcart-sticky.html">ADD CART STICKY</a></li>
-	                                                </ul>
-	                                            </div><!-- End .col-lg-4 -->
-	
-	                                            <div class="col-lg-4">
-	                                                <a href="#" class="nolink">PRODUCT LAYOUTS</a>
-	                                                <ul class="submenu">
-	                                                    <li><a href="product-extended-layout.html">EXTENDED LAYOUT</a></li>
-	                                                    <li><a href="product-grid-layout.html">GRID IMAGE</a></li>
-	                                                    <li><a href="product-full-width.html">FULL WIDTH LAYOUT</a></li>
-	                                                    <li><a href="product-sticky-info.html">STICKY INFO</a></li>
-	                                                    <li><a href="product-sticky-both.html">LEFT & RIGHT STICKY</a></li>
-	                                                    <li><a href="product-transparent-image.html">TRANSPARENT IMAGE</a>
-	                                                    </li>
-	                                                    <li><a href="product-center-vertical.html">CENTER VERTICAL</a></li>
-	                                                    <li><a href="#">BUILD YOUR OWN</a></li>
-	                                                </ul>
-	                                            </div><!-- End .col-lg-4 -->
-	
-	                                            <div class="col-lg-4 p-0">
-	                                                <div class="menu-banner menu-banner-2">
-	                                                    <figure>
-	                                                        <img src="assets/images/menu-banner-1.jpg" alt="Menu banner"
-	                                                            class="product-promo" width="380" height="790">
-	                                                    </figure>
-	                                                    <i>OFF</i>
-	                                                    <div class="banner-content">
-	                                                        <h4>
-	                                                            <span class="">UP TO</span><br />
-	                                                            <b class="">50%</b>
-	                                                        </h4>
-	                                                    </div>
-	                                                    <a href="category.html" class="btn btn-sm btn-dark">SHOP NOW</a>
-	                                                </div>
-	                                            </div><!-- End .col-lg-4 -->
-	                                        </div><!-- End .row -->
-	                                    </div><!-- End .megamenu -->
-	                                </li>
-	                                <li><a href="blog.html">Blog</a></li>
-	                                <li>
-	                                    <a href="#">Pages</a>
-	                                    <ul>
-	                                        <li><a href="wishlist.html">Wishlist</a></li>
-	                                        <li><a href="cart.html">Shopping Cart</a></li>
-	                                        <li><a href="checkout.html">Checkout</a></li>
-	                                        <li><a href="dashboard.html">Dashboard</a></li>
-	                                        <li><a href="about.html">About Us</a></li>
-	                                        <li><a href="#">Blog</a>
-	                                            <ul>
-	                                                <li><a href="blog.html">Blog</a></li>
-	                                                <li><a href="single.html">Blog Post</a></li>
-	                                            </ul>
-	                                        </li>
-	                                        <li><a href="contact.html">Contact Us</a></li>
-	                                        <li><a href="login.html">Login</a></li>
-	                                        <li><a href="forgot-password.html">Forgot Password</a></li>
-	                                    </ul>
-	                                </li>
-	                                                                <li><a href="#">Elements</a>
-	                        <ul class="custom-scrollbar">
-	                            <li><a href="element-accordions.html">Accordion</a></li>
-	                            <li><a href="element-alerts.html">Alerts</a></li>
-	                            <li><a href="element-animations.html">Animations</a></li>
-	                            <li><a href="element-banners.html">Banners</a></li>
-	                            <li><a href="element-buttons.html">Buttons</a></li>
-	                            <li><a href="element-call-to-action.html">Call to Action</a></li>
-	                            <li><a href="element-countdown.html">Count Down</a></li>
-	                            <li><a href="element-counters.html">Counters</a></li>
-	                            <li><a href="element-headings.html">Headings</a></li>
-	                            <li><a href="element-icons.html">Icons</a></li>
-	                            <li><a href="element-info-box.html">Info box</a></li>
-	                            <li><a href="element-posts.html">Posts</a></li>
-	                            <li><a href="element-products.html">Products</a></li>
-	                            <li><a href="element-product-categories.html">Product Categories</a></li>
-	                            <li><a href="element-tabs.html">Tabs</a></li>
-	                            <li><a href="element-testimonial.html">Testimonials</a></li>
-	                        </ul>
-						</li>
-	                                <li><a href="#" target="blank" class="nolink">Buy Porto!</a></li>
-	                            </ul>
-	                        </nav>
+	                        <!--메인메뉴-->
+	                        <div th:replace="~{infra/include/body :: menu(0)}"></div>
+	                        
+							<div class="align-items-center ml-5">
+								<nav aria-label="breadcrumb" class="breadcrumb-nav">
+									<div class="container">
+										<ol class="breadcrumb">
+											<li class="breadcrumb-item" style="color: blue;">
+												<a href="/index"><i class="fas fa-fish">&nbsp;</i><b>Home</b></a>
+											</li>
+											<li class="breadcrumb-item active" aria-current="page">Reservation</li>
+										</ol>
+									</div>
+								</nav>
+							</div>
 	                    </div>
-	
-	                    <div class="header-right">
-	                        <div
-	                            class="header-search header-search-popup header-search-category w-lg-max text-right d-none d-sm-block">
-	                            <a href="#" class="search-toggle" role="button"><i class="icon-magnifier"></i></a>
-	                            <form action=" #" method="get">
-	                                <div class="header-search-wrapper">
-	                                    <input type="search" class="form-control" name="q" id="q" placeholder="Search..."
-	                                        required>
-	                                    <button class="btn icon-magnifier" title="search" type="submit"></button>
-	                                </div><!-- End .header-search-wrapper -->
-	                            </form>
-	                        </div><!-- End .header-search -->
-	
-	                        <a href="login.html" class="header-icon">
-	                            <i class="icon-user-2"></i>
-	                        </a>
-	
-	                        <a href="wishlist.html" class="header-icon position-relative">
-	                            <i class="icon-wishlist-2"></i>
-	                            <span class="cart-count badge-circle">2</span>
-	                        </a>
-	
-	                        <div class="dropdown cart-dropdown">
-	                            <a href="#" title="Cart" class="dropdown-toggle cart-toggle" role="button"
-	                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
-	                                <i class="icon-cart-thick"></i>
-	                                <span class="cart-count badge-circle">3</span>
-	                            </a>
-	
-	                            <div class="cart-overlay"></div>
-	
-	                            <div class="dropdown-menu mobile-cart">
-	                                <a href="#" title="Close (Esc)" class="btn-close">×</a>
-	
-	                                <div class="dropdownmenu-wrapper custom-scrollbar">
-	                                    <div class="dropdown-cart-header">Shopping Cart</div>
-	                                    <!-- End .dropdown-cart-header -->
-	
-	                                    <div class="dropdown-cart-products">
-	                                        <div class="product">
-	                                            <div class="product-details">
-	                                                <h4 class="product-title">
-	                                                    <a href="demo34-product.html">Ultimate 3D Bluetooth Speaker</a>
-	                                                </h4>
-	
-	                                                <span class="cart-product-info">
-	                                                    <span class="cart-product-qty">1</span>
-	                                                    × $99.00
-	                                                </span>
-	                                            </div><!-- End .product-details -->
-	
-	                                            <figure class="product-image-container">
-	                                                <a href="demo34-product.html" class="product-image">
-	                                                    <img src="assets/images/products/product-1.jpg" alt="product"
-	                                                        width="80" height="80">
-	                                                </a>
-	
-	                                                <a href="#" class="btn-remove" title="Remove Product"><span>×</span></a>
-	                                            </figure>
-	                                        </div><!-- End .product -->
-	
-	                                        <div class="product">
-	                                            <div class="product-details">
-	                                                <h4 class="product-title">
-	                                                    <a href="demo34-product.html">Brown Women Casual HandBag</a>
-	                                                </h4>
-	
-	                                                <span class="cart-product-info">
-	                                                    <span class="cart-product-qty">1</span>
-	                                                    × $35.00
-	                                                </span>
-	                                            </div><!-- End .product-details -->
-	
-	                                            <figure class="product-image-container">
-	                                                <a href="demo34-product.html" class="product-image">
-	                                                    <img src="assets/images/products/product-2.jpg" alt="product"
-	                                                        width="80" height="80">
-	                                                </a>
-	
-	                                                <a href="#" class="btn-remove" title="Remove Product"><span>×</span></a>
-	                                            </figure>
-	                                        </div><!-- End .product -->
-	
-	                                        <div class="product">
-	                                            <div class="product-details">
-	                                                <h4 class="product-title">
-	                                                    <a href="demo34-product.html">Circled Ultimate 3D Speaker</a>
-	                                                </h4>
-	
-	                                                <span class="cart-product-info">
-	                                                    <span class="cart-product-qty">1</span>
-	                                                    × $35.00
-	                                                </span>
-	                                            </div><!-- End .product-details -->
-	
-	                                            <figure class="product-image-container">
-	                                                <a href="demo34-product.html" class="product-image">
-	                                                    <img src="assets/images/products/product-3.jpg" alt="product"
-	                                                        width="80" height="80">
-	                                                </a>
-	                                                <a href="#" class="btn-remove" title="Remove Product"><span>×</span></a>
-	                                            </figure>
-	                                        </div><!-- End .product -->
-	                                    </div><!-- End .cart-product -->
-	
-	                                    <div class="dropdown-cart-total">
-	                                        <span>SUBTOTAL:</span>
-	
-	                                        <span class="cart-total-price float-right">$134.00</span>
-	                                    </div><!-- End .dropdown-cart-total -->
-	
-	                                    <div class="dropdown-cart-action">
-	                                        <a href="cart.html" class="btn btn-gray btn-block view-cart">View
-	                                            Cart</a>
-	                                        <a href="checkout.html" class="btn btn-dark btn-block">Checkout</a>
-	                                    </div><!-- End .dropdown-cart-total -->
-	                                </div><!-- End .dropdownmenu-wrapper -->
-	                            </div><!-- End .dropdown-menu -->
-	                        </div><!-- End .dropdown -->
-	                    </div>
+						<!--우측메뉴-->
+	                    <div th:replace="~{infra/include/body :: menuRight}"></div>
 	                </div>
 	            </div>
-	        </header><!-- End .header -->
-	
+	        </header>
 	        <main class="main">
 	            <div class="container">
-	                <nav aria-label="breadcrumb" class="breadcrumb-nav">
-	                    <ol class="breadcrumb">
-	                        <li class="breadcrumb-item"><a href="demo34.html"><i class="icon-home"></i></a></li>
-	                        <li class="breadcrumb-item active" aria-current="page"><a href="#">Products</a></li>
-	                    </ol>
-	                </nav>
-	
 	                <div class="product-single-container product-single-default">
 	                    <div class="row">
 	                        <div class="col-lg-4 col-md-6 product-single-gallery">
@@ -424,7 +124,6 @@
 	                                <p th:text="'제공시설 및 물품 : ' + ${item.plcNote}"></p>
 	                            </div>
 	                        </div><!-- End .product-single-gallery -->
-	                        <div></div>
 	                        <div class="col-lg-8 col-md-6 product-single-details">
 	                            <div  class="my-3 d-flex justify-content-between align-items-center">
 	                                <h4 class="custom-box2" id="" name="">예약 날짜 : 2024년 6월 10일</h4>
@@ -506,7 +205,8 @@
 	        </div>
 	    </div>
 	</form>
-    
+    <footer th:replace="~{infra/include/body :: footer}"></footer>
+    <a id="scroll-top" href="#top" title="Top" role="button"><i class="icon-angle-up"></i></a>
     <!-- Plugins JS File -->
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
@@ -525,53 +225,56 @@
     <script src="assets/js/main.min.js"></script>
     <!-- 배 예약 -->
     <script>
-	    const seatMapElement = document.getElementById('seatMap');
-	    const numberOfSeats = 16;
-	    const centerX = seatMapElement.offsetWidth / 2;
-	    const centerY = seatMapElement.offsetHeight / 2;
-	    const semiMajorAxis = 350; // 타원의 장축 반지름 (가로)
-	    const semiMinorAxis = 100; // 타원의 단축 반지름 (세로)
-	    const angleIncrement = (Math.PI * 2) / numberOfSeats; // 좌석 간의 각도 간격
-	
-	    let selectedSeat = null; // 현재 선택된 좌석
-	    let selectedSeatNumber = null; // 선택된 좌석 번호
-	    let revSeat = null; // revSeat 변수 추가
-	
-	    for (let i = 0; i < numberOfSeats; i++) {
-	        const angle = i * angleIncrement; // 현재 좌석의 각도 계산
-	        const x = centerX + Math.cos(angle) * semiMajorAxis; // x 좌표 계산
-	        const y = centerY + Math.sin(angle) * semiMinorAxis; // y 좌표 계산
-	
-	        const seatElement = document.createElement('div');
-	        seatElement.classList.add('seat');
-	        seatElement.textContent = i + 1;
-	        seatElement.style.left = (x - 20) + 'px'; // 좌석의 너비 절반을 뺌
-	        seatElement.style.top = (y - 20) + 'px'; // 좌석의 높이 절반을 뺌
-	        
-	        seatElement.addEventListener('click', function() {
-	            if (selectedSeat) {
-	                selectedSeat.classList.remove('selected'); // 기존 선택된 좌석 해제
-	            }
-	            seatElement.classList.add('selected'); // 새로운 좌석 선택
-	            selectedSeat = seatElement; // 선택된 좌석 갱신
-	
-	            // 선택된 좌석 번호 업데이트
-	            selectedSeatNumber = parseInt(seatElement.textContent); // 좌석 번호를 int로 변환
-	            const revSeatElement = document.getElementById('revSeat');
-	            revSeatElement.textContent = '좌석번호 : ' + selectedSeatNumber;
-	
-	        });
-	        seatMapElement.appendChild(seatElement);
-	    }
-	    
-	    let goUrlCheckout = "/checkout";
-	    
-	    let form = document.querySelector("form[name=formList]");
-	    document.getElementById("Checkoutbtn").onclick = function(){
-	        form.action = goUrlCheckout;
-	        form.submit();
-	    }
-	</script>
+        const seatMapElement = document.getElementById('seatMap');
+        const numberOfSeats = 16;
+        const centerX = seatMapElement.offsetWidth / 2;
+        const centerY = seatMapElement.offsetHeight / 2;
+        const semiMajorAxis = 350; // 타원의 장축 반지름 (가로)
+        const semiMinorAxis = 100; // 타원의 단축 반지름 (세로)
+        const angleIncrement = (Math.PI * 2) / numberOfSeats; // 좌석 간의 각도 간격
+
+        let selectedSeat = null; // 현재 선택된 좌석
+        let selectedSeatNumber = null; // 선택된 좌석 번호
+        let revSeat = null; // revSeat 변수 추가
+
+        for (let i = 0; i < numberOfSeats; i++) {
+            const angle = i * angleIncrement; // 현재 좌석의 각도 계산
+            const x = centerX + Math.cos(angle) * semiMajorAxis; // x 좌표 계산
+            const y = centerY + Math.sin(angle) * semiMinorAxis; // y 좌표 계산
+
+            const seatElement = document.createElement('div');
+            seatElement.classList.add('seat');
+            seatElement.textContent = i + 1;
+            seatElement.style.left = (x - 20) + 'px'; // 좌석의 너비 절반을 뺌
+            seatElement.style.top = (y - 20) + 'px'; // 좌석의 높이 절반을 뺌
+
+            seatElement.addEventListener('click', function() {
+                if (selectedSeat) {
+                    selectedSeat.classList.remove('selected'); // 기존 선택된 좌석 해제
+                }
+                seatElement.classList.add('selected'); // 새로운 좌석 선택
+                selectedSeat = seatElement; // 선택된 좌석 갱신
+
+                // 선택된 좌석 번호 업데이트
+                selectedSeatNumber = parseInt(seatElement.textContent); // 좌석 번호를 int로 변환
+                const revSeatElement = document.getElementById('revSeat');
+                revSeatElement.textContent = '좌석번호 : '+  selectedSeatNumber;
+
+                // 숨겨진 입력 필드 업데이트
+                const revSeatInputElement = document.getElementById('revSeatInput');
+                revSeatInputElement.value = selectedSeatNumber;
+            });
+            seatMapElement.appendChild(seatElement);
+        }
+        
+        let goUrlCheckout = "/checkout";
+        
+        let form = document.querySelector("form[name=formList]");
+        document.getElementById("Checkoutbtn").onclick = function(){
+            form.action = goUrlCheckout;
+            form.submit();
+        }
+    </script>
 </body>
 
 </html>

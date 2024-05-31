@@ -35,5 +35,25 @@
 		where 1=1
 			AND plcSeq = #{plcSeq}
 	</select>
+	<!-- 결제완료 insert -->
+	<insert id="insert">
+    	INSERT INTO reservation (
+    		revDate
+    		,revPlaceCd
+    		,revSeat
+    		,revDelNy
+    		,revRegDt
+    		,revModDt
+    		,mbrSeq
+    	)VALUES(
+    		#{revDate}
+    		,#{revPlaceCd}
+    		,#{revSeat}
+    		,0
+    		,now()
+    		,now()
+    		,#{mbrSeq}
+    	)
+    </insert>
 	 
 </mapper>
