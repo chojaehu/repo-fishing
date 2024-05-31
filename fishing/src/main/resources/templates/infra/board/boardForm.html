@@ -40,7 +40,6 @@
 			        </div>
 					<!--우측메뉴-->
 			        <div th:replace="~{infra/include/body :: menuRight}"></div>
-			        <br>
 			    </div>
 			</div>
 			
@@ -154,7 +153,7 @@
 									<div class="container text-center">
 										<div class="row justify-content-evenly">
 										    <div class="col-1">
-												<a th:href="@{/boardList}">
+												<a href="javascript:void(0)" th:onclick="javascript:fnGoList();">
 											    	<button type="button" class="btn btn-dark" style="border-radius: 15%;">
 														이전
 													</button>
@@ -187,6 +186,7 @@
 								<form id="formReview" name="formReview" method="post" autocomplete="off">
 									<!--<input th:if="${#lists.isEmpty(item)}" type="hidden" id="brdSeq" name="brdSeq" />
 									<input th:unless="${#lists.isEmpty(item)}" type="hidden" id="brdSeq" name="brdSeq" th:value="${item.brdSeq}" />-->
+									
 									<h2 class="section-title m-b-2 appear-animate" data-animation-name="fadeInUpShorter">댓글리스트</h2>
 									<div class="row">
 										<div class="col">
@@ -254,6 +254,12 @@
             <div class="bounce3"></div>
         </div>
     </div>
+    
+    <!--vo유지용-->
+    <form id="formList" name="formList" method="get">
+		<input type="hidden" id="pgRowCount" name="pgRowCount" th:value="${vo.pgRowCount}">
+		<input type="hidden" id="pgPage" name="pgPage" th:value="${vo.pgPage}">
+	</form>
 
 	<!--모바일 메뉴-->
 	<div th:replace="~{infra/include/body :: mobileMenu}"></div>
@@ -296,6 +302,7 @@
 		let textArr = [dispText];
 				
 		let form         = document.querySelector("#form");
+		let formList     = document.querySelector("#formList");
 		let formReview   = document.querySelector("#formReview");
 		let brdSeq       = document.querySelector("#brdSeq");       // 게시판 순번
 		let brdNote      = document.querySelector("#brdNote");      // 게시판 내용
@@ -379,6 +386,12 @@
 			alert($("#brdSeq").val());
 			formReview.action = "/boardInsertReview";				
 			formReview.submit();					
+		}
+		
+		// 이전버튼클릭
+		function fnGoList() {
+			formList.action = "/boardList";
+			formList.submit(); 
 		}
 		
 	</script>    

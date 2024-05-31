@@ -32,10 +32,9 @@
 							</nav>
 						</div>
 			        </div>
-			        <br>
-			    </div>
 					<!--우측메뉴-->
 			        <div th:replace="~{infra/include/body :: menuRight}"></div>
+			    </div>
 			</div>
 			
 			<!--예약일자-->
@@ -80,6 +79,7 @@
                     
                     <form id="form" name="form" method="post">
 						<input type="hidden" id="pgPage" name="pgPage" th:value="${vo.pgPage}" default="1">
+						<input type="hidden" id="brdSeq" name="brdSeq">
 						
 						<!--전체건수, 표시라인수-->
 						<div th:replace="~{infra/include/body :: bodyPaging}"></div>
@@ -127,7 +127,7 @@
 												</td>
 												<!--제목-->
 												<td class="text-left">
-													<a th:href="@{/boardForm(brdSeq=${list.brdSeq})}">
+													<a href="javascript:void(0)" th:onclick="javascript:fnGoDetail([[${list.brdSeq}]]);">
 														<span class="tip tip-new">new</span>
 														<span th:text="${list.brdTitle}"></span>
 													</a>
@@ -210,6 +210,17 @@
     <!-- Main JS File -->
     <script src="assets/js/main.min.js"></script>
 
+	<script>
+		let form = document.querySelector("#form");
+		
+		function fnGoDetail(brdSeq) {
+			//let pgRowCount = $("#pgRowCount option:selected").val();
+			//location.href = "/boardForm?brdSeq="+brdSeq+"&pgRowCount="+pgRowCount;
+			$("#brdSeq").val(brdSeq);
+			form.action = "/boardForm";
+			form.submit();
+		}
+	</script>
 </body>
 
 </html>

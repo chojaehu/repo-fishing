@@ -50,7 +50,8 @@ public class BoardController {
 	
 	// 게시판 상세화면 호출
 	@RequestMapping(value = "/boardForm")
-	public String boardForm( Model model, BoardDto dto, BoardDto dto2) throws Exception {
+	public String boardForm(@ModelAttribute("vo") BoardVo vo, Model model, BoardDto dto, BoardDto dto2) throws Exception {
+		System.out.println("vo.pgRowCount================================="+vo.getPgRowCount());
 		// 열람횟수 증가
 		if(dto.getBrdSeq() != null) {
 			service.updateOpen(dto);

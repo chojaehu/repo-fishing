@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.stayc.common.constants.Constants;
+
 @Controller
 public class reservationController {
 
@@ -18,7 +20,7 @@ public class reservationController {
 		
 		model.addAttribute("list", service.selectList(dto));
 		
-		return "infra/reserve/seatList";
+		return Constants.PATH_RESERVE + "seatList";
 	}
 //	예약상세 리스트
 	@RequestMapping(value = "/seat")

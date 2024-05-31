@@ -7,8 +7,8 @@
             <li th:if="${pageIndex} == 0" class="active"><a href="/index">Home</a></li>
             <li th:unless="${pageIndex} == 0"><a href="/index">Home</a></li>
             
-            <li th:if="${pageIndex} == 1" class="active" title="예약"><a href="javascript:void(0)">Reservation</a></li>
-            <li th:unless="${pageIndex} == 1" title="예약"><a href="javascript:void(0)">Reservation</a></li>
+            <li th:if="${pageIndex} == 1" class="active" title="예약"><a href="/seatList">Reservation</a></li>
+            <li th:unless="${pageIndex} == 1" title="예약"><a href="/seatList">Reservation</a></li>
             
             <li th:if="${pageIndex} == 2" class="active" title="게시판"><a href="/boardList">Board</a></li>
             <li th:unless="${pageIndex} == 2" title="게시판"><a href="/boardList">Board</a></li>
@@ -22,17 +22,16 @@
 <!--상단 우측 메뉴-->
 <div th:fragment="menuRight" class="header-right">
 	<!--낚시터검색-->
-    <div
-        class="header-search header-search-popup header-search-category w-lg-max text-right d-none d-sm-block">
+<!--    <div class="header-search header-search-popup header-search-category w-lg-max text-right d-none d-sm-block">
         <a href="#" class="search-toggle header-icon" role="button"><i class="icon-magnifier"></i></a>
         <form action=" #" method="get">
             <div class="header-search-wrapper">
-                <input type="search" class="form-control" name="q" id="q" placeholder="낚시터 Search..."
-                    required>
-                <button class="btn icon-magnifier" title="search" type="submit"></button>
-            </div><!-- End .header-search-wrapper -->
+                <input type="search" class="form-control" name="shPlcName" id="shPlcName" placeholder="낚시터 Search..."
+                    onkeyup="fnKeyupSearch();" required>
+                <button class="btn icon-magnifier" title="search" type="button" onclick="fnSearch();"></button>
+            </div> End .header-search-wrapper 
         </form>        
-    </div><!-- End .header-search -->
+    </div> End .header-search -->
 
 	<!--로그인-->
     <nav class="main-nav">
