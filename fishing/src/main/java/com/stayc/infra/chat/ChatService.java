@@ -1,15 +1,28 @@
 package com.stayc.infra.chat;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.google.api.core.ApiFuture;
+import com.google.cloud.firestore.CollectionReference;
+import com.google.cloud.firestore.DocumentReference;
+import com.google.cloud.firestore.Firestore;
+import com.google.cloud.firestore.QuerySnapshot;
+import com.google.cloud.firestore.WriteResult;
+import com.google.firebase.cloud.FirestoreClient;
 
 @Service
 public class ChatService {
 
 	@Autowired
 	ChatDao dao;
+	
+	@Autowired
+    private Firestore firestore;
 	
 	
 //	채팅방목록 리스트
@@ -47,7 +60,13 @@ public class ChatService {
 //	채팅방 생성
 	public int chatroominst(ChatDto dto)
 	{
-		return dao.chatroominst(dto);
+		dao.chatroominst(dto);
+//		String roomSeq = String.valueOf(dto.getRomSeq());
+//		String memberSeq = String.valueOf(dto.getMbrSeq());
+//		CollectionReference apiFuture = firestore.collection(roomSeq);
+//		DocumentReference documentReference = apiFuture.document(memberSeq);
+		
+		return 1; 
 	}
 	
 //	채팅방 수정
@@ -55,4 +74,7 @@ public class ChatService {
 	{
 		return dao.chatupdates(dto);
 	}
+	
+	
+
 }

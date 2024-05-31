@@ -1,0 +1,26 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.stayc.infra.chattalk.ChattalkDao">
+
+	<resultMap id="resultMapObj" type="com.stayc.infra.chattalk.ChattalkDto"></resultMap>
+
+	<insert id="talkinsert">
+	<selectKey resultType ="Integer" keyProperty="rtkSeq" order="AFTER">
+		SELECT LAST_INSERT_ID()
+	</selectKey>
+	insert into roomtalk
+	(
+	rtkDate, 
+	rtkNote, 
+	mbrSeq, 
+	romSeq
+	)
+	values
+	(
+	NOW(),
+	#{rtkNote},
+	#{mbrSeq},
+	#{romSeq}
+	)
+	</insert>
+</mapper>

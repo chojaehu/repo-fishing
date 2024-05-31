@@ -25,8 +25,8 @@ public class ChatController {
 	
 	@RequestMapping(value = "/chatroom")
 	public String chatroom(ChatDto dto ,Model model,HttpSession httpSession) {
-		//httpSession.setAttribute("sessMbrSeq",  9);
-		httpSession.invalidate();
+		httpSession.setAttribute("sessMbrSeq",  2);
+		//httpSession.invalidate();
 		model.addAttribute("list", service.roomList(dto));
 		
 		
@@ -69,8 +69,9 @@ public class ChatController {
 	
 	
 	@RequestMapping(value = "/chatroominst")
-	public String chatroominst(ChatDto dto)
+	public String chatroominst(ChatDto dto,HttpSession httpSession)
 	{
+		dto.setMbrSeq((Integer) httpSession.getAttribute("sessMbrSeq"));
 		service.chatroominst(dto);
 		
 	
@@ -84,6 +85,12 @@ public class ChatController {
 		
 		return "redirect:/chatting" + "?romSeq=" + dto.getRomSeq();
 	}
+	
+	
+	
+	
+	
+//	채팅방 참여여부 검사
 	@ResponseBody
 	@RequestMapping(value = "/checkroom")
 	public Map<String, Object> checkroom(Model model,HttpSession httpSession,ChatDto dto) throws Exception {

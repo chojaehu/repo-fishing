@@ -70,6 +70,9 @@
 	</insert>
 	
 	<insert id="chatroominst">
+	<selectKey resultType ="Integer" keyProperty="romSeq" order="AFTER">
+		SELECT LAST_INSERT_ID()
+	</selectKey>
 	insert into room
 	(
 		romDate,
@@ -84,7 +87,7 @@
 		,#{romTitle}
 		,#{romPersonnel}
 		,#{romNote}
-		,1
+		,#{mbrSeq}
 	)
 	</insert>
 	

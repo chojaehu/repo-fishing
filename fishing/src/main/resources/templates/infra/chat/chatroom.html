@@ -30,6 +30,8 @@
 
 	<!-- Plugins CSS File -->
 	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	
+	<link rel="stylesheet" type="text/css" href="css/date.css">
 
 	<!-- Main CSS File -->
 	<link rel="stylesheet" href="assets/css/demo34.min.css">
@@ -43,34 +45,26 @@
 	<div class="page-wrapper">
 
 		<header class="header">
-            <div class="header-middle sticky-header font2">
-                <div class="container-fluid">
-                    <div class="header-left">
-                        <button class="mobile-menu-toggler pl-0" type="button">
-                            <i class="fas fa-bars"></i>
-                        </button>
-                        <a href="/index" class="logo">
-                            <img src="img/logo.png" alt="Logo" width="111" height="44">
-                        </a>
-                        <!--메인메뉴-->
-                        <div th:replace="~{infra/include/body :: menu(0)}"></div>
-                        
-						<div class="align-items-center ml-5">
-							<nav aria-label="breadcrumb" class="breadcrumb-nav">
-								<div class="container">
-									<ol class="breadcrumb">
-										<li class="breadcrumb-item" style="color: blue;"><a href="/index"><b>Home</b></a></li>
-										<li class="breadcrumb-item active" aria-current="page">Chatroom</li>
-									</ol>
-								</div>
-							</nav>
-						</div>
-                    </div>
-                    
+			<div class="header-middle sticky-header font2">
+			    <div class="container-fluid">
+			        <div class="header-left">
+			            <button class="mobile-menu-toggler pl-0" type="button">
+			                <i class="fas fa-bars"></i>
+			            </button>
+			            <a href="/index" class="logo mr-5">
+			                <img src="img/logo.png" alt="Logo" width="111" height="44">
+			            </a>
+			            <!--메인메뉴-->
+			            <div th:replace="~{infra/include/body :: menu(0)}"></div>
+			        </div>
 					<!--우측메뉴-->
-                    <div th:replace="~{infra/include/body :: menuRight}"></div>
-                </div>
-            </div>
+			        <div th:replace="~{infra/include/body :: menuRight}"></div>
+			        <br>
+			    </div>
+			</div>
+			
+			<!--예약일자-->
+			<div th:replace="~{infra/include/head :: date}"></div>		
         </header><!-- End .header -->
 
 		<main class="main">

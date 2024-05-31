@@ -2,7 +2,7 @@ package com.stayc.common.config;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.List;
+
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,11 +18,13 @@ import jakarta.annotation.PostConstruct;
 @Configuration
 public class FireBaseConfig {
 	
-	 @PostConstruct
+	 private static Firestore firestore;
+	
+
+	    @PostConstruct
 	    public void initialize() {
 	        try {
-	            List<FirebaseApp> firebaseApps = FirebaseApp.getApps();
-	            if (firebaseApps.isEmpty()) {
+	            if (FirebaseApp.getApps().isEmpty()) {
 	                FileInputStream serviceAccount = new FileInputStream("src/main/resources/firebase/fishing-9e7dc-firebase-adminsdk-jc98j-b5455f934e.json");
 
 	                FirebaseOptions options = FirebaseOptions.builder()
@@ -34,14 +36,21 @@ public class FireBaseConfig {
 	            } else {
 	                System.out.println("FirebaseApp already initialized.");
 	            }
+
+	            if (firestore == null) {
+	                firestore = FirestoreClient.getFirestore();
+	            }
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	            System.err.println("Failed to initialize Firebase: " + e.getMessage());
 	        }
 	    }
-	 @Bean
-	    public Firestore getFirestore() {
-	        return FirestoreClient.getFirestore();
-	    }
 
+	    @Bean
+	    public Firestore getFirestore() {
+	        return firestore;
+	    }
+	    
+	    
+	    
 }

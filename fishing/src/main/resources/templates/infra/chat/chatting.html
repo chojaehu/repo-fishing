@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>채팅</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
     <style>
         body {
             margin: 0;
@@ -122,61 +123,131 @@
             </button>
         </div>
     </nav>
-
-    <div class="sidebar-left d-lg-flex">
-        <div>
-            <div class="sidebar-section" >
-                <h5>참여인원</h5>
-                <a href="#" class="sidebar-link" th:each="mbrlist : ${mbrlist}" th:text ="${mbrlist.mbrName}"></a>
-            </div>
-        </div>
-        <div>
-            <div class="sidebar-section">
-                <h5></h5>
-                <a th:href="@{/chatupdate(romSeq=${item.romSeq})}" class="sidebar-link">채팅방 수정</a>
-                <a href="#" class="sidebar-link">채팅방 나가기</a>
-            </div>
-        </div>
-    </div>
-
-    <button class="btn btn-primary toggle-sidebar-btn d-lg-none" onclick="toggleSidebar()">사이드바 열기</button>
     
-    <div class="chat-box">
-        <div class="card-body chat-messages">
-            <div class="d-flex flex-column mb-4 align-items-end">
-                <div class="profile mb-1 text-end">
-                    <strong>나 자신</strong>
-                </div>
-                <div class="message-bubble p-2 bg-primary text-white rounded mb-1 align-self-end">안녕하세요!</div>
-            </div>
-            <div class="d-flex flex-column mb-4 align-items-start">
-                <div class="profile mb-1">
-                    <strong>김철수</strong> - 과장
-                </div>
-                <div class="message-bubble p-2 bg-light rounded">안녕하세요! 반가워요.</div>
-            </div>
-            <div class="d-flex flex-column mb-4 align-items-start">
-                <div class="profile mb-1">
-                    <strong>박민수</strong> - 팀장
-                </div>
-                <div class="message-bubble p-2 bg-light rounded">네, 잘 지내고 있어요. 당신은요?</div>
-            </div>
-        </div>
-        <div class="card-footer">
-            <div class="input-group">
-                <textarea class="form-control" id="message-input" placeholder="메시지 입력..." rows="1"></textarea>
-                <button class="btn btn-primary" type="button" onclick="sendMessage()">전송</button>
-            </div>
-        </div>
-    </div>
+    
 
+ 	<form id='formList' name ='formList' method='get' >
+ 		<input type="hidden" th:value="${item.romSeq}" id="romSeq" name="romSeq">
+	    <div class="sidebar-left d-lg-flex">
+	        <div>
+	            <div class="sidebar-section" >
+	                <h5>참여인원</h5>
+	                <a href="#" class="sidebar-link" th:each="mbrlist : ${mbrlist}" th:text ="${mbrlist.mbrName}"></a>
+	            </div>
+	        </div>
+	        <div>
+	            <div class="sidebar-section">
+	                <h5></h5>
+	                <a th:href="@{/chatupdate(romSeq=${item.romSeq})}" class="sidebar-link">채팅방 수정</a>
+	                <a href="#" class="sidebar-link">채팅방 나가기</a>
+	            </div>
+	        </div>
+	    </div>
+	
+	    <button class="btn btn-primary toggle-sidebar-btn d-lg-none" onclick="toggleSidebar()">사이드바 열기</button>
+	    
+	    <div class="chat-box">
+	        <div class="card-body chat-messages">
+	            <div class="d-flex flex-column mb-4 align-items-end">
+	                <div class="profile mb-1 text-end">
+	                    <strong>나 자신</strong>
+	                </div>
+	                <div class="message-bubble p-2 bg-primary text-white rounded mb-1 align-self-end">안녕하세요!</div>
+	            </div>
+	            <div class="d-flex flex-column mb-4 align-items-start">
+	                <div class="profile mb-1">
+	                    <strong>김철수</strong> - 과장
+	                </div>
+	                <div class="message-bubble p-2 bg-light rounded">안녕하세요! 반가워요.</div>
+	            </div>
+	            <div class="d-flex flex-column mb-4 align-items-start">
+	                <div class="profile mb-1">
+	                    <strong>박민수</strong> - 팀장
+	                </div>
+	                <div class="message-bubble p-2 bg-light rounded">네, 잘 지내고 있어요. 당신은요?</div>
+	            </div>
+	        </div>
+	        <div class="card-footer">
+	            <div class="input-group">
+	                <textarea class="form-control" id="rtkNote" name="rtkNote" placeholder="메시지 입력..." rows="1"></textarea>
+	                <button class="btn btn-primary" type="button" id="chatbtn" name="chatbtn" >전송</button>
+	            </div>
+	        </div>
+	    </div>
+    </form>
+    <script  src="https://www.gstatic.com/firebase/10.7.0/firebase-installations.js"></script>
+	<!-- const app = firebase.initializeApp(firebaseConfig);
+    		const db = firebase.firestore();  -->
+	
+	
+	<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
+  import { getFirestore, doc, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyDYxTUx7Yex6iEiHHtGxzHk--mTdOSZywY",
+    authDomain: "fishing-9e7dc.firebaseapp.com",
+    projectId: "fishing-9e7dc",
+    storageBucket: "fishing-9e7dc.appspot.com",
+    messagingSenderId: "794808530270",
+    appId: "1:794808530270:web:ddc7f51e34dc23fb4bcbcf",
+    measurementId: "G-MTKSE261KH"
+  };
+
+
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const db = getFirestore(app);
+
+        const chatMessages = document.getElementById('chatMessages');
+        const romSeq = document.getElementById('romSeq').value; 
+		const docRef = doc(db, "1", "2");
+		const messagesCollectionRef = collection(docRef, "messages");
+
+// 서브컬렉션의 문서들을 실시간으로 감지
+const unsub = onSnapshot(messagesCollectionRef, (snapshot) => {
+  snapshot.forEach((doc) => {
+    console.log("Current data: ", doc.data());
+  });
+});
+	</script>
     <script>
+    
+    
+  			
+    		
+
+	    
         function scrollToBottom() {
             var chatMessages = document.querySelector('.chat-messages');
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
-
-        function sendMessage() {
+        document.getElementById("chatbtn").onclick = function(){
+            $.ajax({
+                async: true,
+                cache: false,
+                type: "post",
+                url: "/chattinginsert",
+                data: $("#formList").serialize(),
+                success: function(response) {
+                    if (response.rt == "success") {
+                        alert("성공");
+                    } else {
+                        alert("실패");
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert("ajaxUpdate " + textStatus + " : " + errorThrown);
+                }
+            });
+        }
+        /* function sendMessage() {
             var messageInput = document.getElementById('message-input');
             var messageText = messageInput.value.trim();
 
@@ -201,14 +272,14 @@
 
                 scrollToBottom();
             }
-        }
+        } */
 
-        document.getElementById('message-input').addEventListener('keydown', function(event) {
+        /* document.getElementById('message-input').addEventListener('keydown', function(event) {
             if (event.key === 'Enter' && !event.shiftKey) {
                 event.preventDefault();
                 sendMessage();
             }
-        });
+        }); */
 
         function toggleSidebar() {
             var sidebar = document.querySelector('.sidebar-left');
@@ -220,7 +291,7 @@
             scrollToBottom();
         });
     </script>
-
+	<script src="assets/js/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 </body>
