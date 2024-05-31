@@ -57,7 +57,7 @@ function updateMonth(year, month) {
         button.type = "button";
         
         if(nowYear == yearNumber && ((nowMonth+1)+"월") == monthName && nowDay == i) { // 오늘 비교
-	        button.classList.add("btnDay", "date-today");			
+	        button.classList.add("btnDay", "date-today");	
 		} else {
 	        button.classList.add("btnDay", "date-item");
 		}
