@@ -13,8 +13,8 @@
             <li th:if="${pageIndex} == 2" class="active" title="게시판"><a href="/boardList">Board</a></li>
             <li th:unless="${pageIndex} == 2" title="게시판"><a href="/boardList">Board</a></li>
             
-            <li th:if="${pageIndex} == 3" class="active" title="열린대화방"><a href="javascript:void(0)">chat room</a></li>            
-            <li th:unless="${pageIndex} == 3" title="열린대화방"><a href="javascript:void(0)">chat room</a></li>            
+            <li th:if="${pageIndex} == 3" class="active" title="열린대화방"><a href="/chatroom">chat room</a></li>            
+            <li th:unless="${pageIndex} == 3" title="열린대화방"><a href="/chatroom">chat room</a></li>            
         </ul>
     </nav>
 </div>
