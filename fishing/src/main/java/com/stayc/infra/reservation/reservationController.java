@@ -1,7 +1,5 @@
 package com.stayc.infra.reservation;
 
-import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +24,9 @@ public class reservationController {
 	@RequestMapping(value = "/seat")
 	public String seat(reservationDto dto, Model model) throws Exception {
 		
+		model.addAttribute("reservDD", dto.getReservDD());
+		model.addAttribute("reservMM", dto.getReservMM());
+		model.addAttribute("reservYY", dto.getReservYY());
 		model.addAttribute("item", service.selectOne(dto));
 		
 		return Constants.PATH_RESERVE + "seat";
@@ -34,19 +35,14 @@ public class reservationController {
 	@RequestMapping(value = "/checkout")
 	public String checkout(reservationDto dto, Model model) throws Exception {
 		
-		String plcSeq = dto.getPlcSeq();
-		String plcName = dto.getPlcName();
-		String plcTypeCd = dto.getPlcTypeCd();
-	    Double plcAmount = dto.getPlcAmount();
-	    int revSeat = dto.getRevSeat();
-	    Date revDate = dto.getRevDate();
-		
-	    model.addAttribute("plcSeq", plcSeq);
-	    model.addAttribute("plcName", plcName);
-	    model.addAttribute("plcTypeCd", plcTypeCd);
-	    model.addAttribute("plcAmount", plcAmount);
-	    model.addAttribute("revSeat", revSeat);
-	    model.addAttribute("revDate", revDate);
+	    model.addAttribute("plcSeq", dto.getPlcSeq());
+	    model.addAttribute("plcName", dto.getPlcName());
+	    model.addAttribute("plcTypeCd", dto.getPlcTypeCd());
+	    model.addAttribute("plcAmount", dto.getPlcAmount());
+	    model.addAttribute("revSeat", dto.getRevSeat());
+	    model.addAttribute("reservDD", dto.getReservDD());
+		model.addAttribute("reservMM", dto.getReservMM());
+		model.addAttribute("reservYY", dto.getReservYY());
 	    
 		return Constants.PATH_RESERVE + "checkout";
 	}

@@ -42,6 +42,10 @@
 
 <body>
 	<form name="formList" id="formList" method="post" autocomplete="off">
+		<input type="hidden" id="reservDD" name="reservDD">
+		<input type="hidden" id="reservMM" name="reservMM">
+		<input type="hidden" id="reservYY" name="reservYY">
+		<input type="hidden" id="plcSeq" name="plcSeq">
 	<!-- <input type="hidden" name="thisPage" th:value="${vo.thisPage}" default="1"/> -->
 	    <div class="page-wrapper">
 	        <header class="header">
@@ -148,7 +152,7 @@
 	                                    </div>
 	                                    <!-- End .price-box -->
 	                                </div>
-									<button type="submit" class="btn btn-dark"><a th:href="@{/seat(plcSeq=${list.plcSeq})}">예약하기</a></button>
+									<button type="button" id="Checkoutbtn" name="Checkoutbtn" class="btn btn-dark" th:onclick="javascript:fnGoDetail([[${list.plcSeq}]]);">예약하기</button>
 	                                <!-- End .product-details -->
 	                            </div>
 	                        </div>
@@ -187,6 +191,19 @@
 
     <!-- Main JS File -->
     <script src="assets/js/main.min.js"></script>
+    
+    <script type="text/javascript">
+	    let goUrlCheckout = "/seat";
+	    
+	    let form = document.querySelector("form[name=formList]");
+	    
+	    function fnGoDetail(plcSeq) {
+			$("#plcSeq").val(plcSeq);
+			form.action = goUrlCheckout;
+			form.submit();
+		}
+    </script>
+    
 </body>
 
 </html>
