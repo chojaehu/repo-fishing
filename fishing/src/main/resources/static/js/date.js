@@ -29,6 +29,14 @@ let clickedButton = null;
 
 // 클릭 이벤트 핸들러
 function onDateButtonClick(event) {
+    const selectedDate = new Date(currentYear, currentMonth, parseInt(event.target.textContent));
+
+    // 오늘 날짜보다 이전인지 확인
+    if (selectedDate < toDay) {
+        // 오늘 날짜 이전이면 선택 막기
+        return;
+    }
+
     // 이전에 클릭된 버튼이 있다면 스타일 초기화
     if (clickedButton) {
         clickedButton.classList.remove('clicked');

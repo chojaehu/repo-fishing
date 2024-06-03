@@ -1,0 +1,51 @@
+.seat-map {
+    width: 800px; /* 맵의 너비 */
+    height: 410px; /* 맵의 높이 */
+    position: relative;
+}
+
+.seat {
+    position: absolute;
+    width: 40px; /* 좌석의 너비 */
+    height: 40px; /* 좌석의 높이 */
+    background-color: #fff; /* 좌석의 기본 배경색 */
+    border: 1px solid #000; /* 좌석의 테두리 색상 */
+    border-radius: 20px; /* 타원형 모양 */
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer; /* 마우스 커서를 포인터로 변경하여 클릭 가능한 것을 나타냄 */
+}
+
+.seat.selected {
+    background-color: blue; /* 선택된 좌석의 배경색 */
+    color: #ffffff; /* 선택된 좌석의 텍스트 색상 */
+}
+
+.seat-map {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 780px;
+    border-radius: 10px;
+    background-color: #f4f4f4;
+}
+.seat {
+    width: 40px;
+    height: 40px;
+    margin: 5px;
+    border-radius: 50%;
+    border: 2px solid #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.seat.selected {
+    background-color: #3b58ff;
+    color: white;
+}
+.product-action {
+    margin-top: 20px;
+    text-align: center;
+}

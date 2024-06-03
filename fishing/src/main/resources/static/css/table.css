@@ -1,0 +1,32 @@
+.fishing-map {
+    width: 400px; /* 맵의 너비 */
+    height: 300px; /* 맵의 높이 */
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 780px;
+    border-radius: 10px;
+    background-color: #f4f4f4;
+}
+
+.fishing {
+    position: absolute;
+    width: 40px; /* 좌석의 너비 */
+    height: 40px; /* 좌석의 높이 */
+    background-color: #ffffff; /* 좌석의 기본 배경색을 흰색으로 변경 */
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer; /* 마우스 커서를 포인터로 변경하여 클릭 가능한 것을 나타냄 */
+    border: 2px solid #ccc; /* 좌석 테두리를 회색으로 설정 */
+}
+
+.fishing.selected {
+    background-color: #3b58ff; /* 선택된 좌석의 배경색 */
+    color: #ffffff; /* 선택된 좌석의 텍스트 색상 */
+}
+.product-action {
+    margin-top: 20px;
+    text-align: center;
+}

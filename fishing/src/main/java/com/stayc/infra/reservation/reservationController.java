@@ -31,6 +31,7 @@ public class reservationController {
 		
 		return Constants.PATH_RESERVE + "seat";
 	}
+	
 //	결제페이지
 	@RequestMapping(value = "/checkout")
 	public String checkout(reservationDto dto, Model model) throws Exception {

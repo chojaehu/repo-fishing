@@ -122,7 +122,7 @@
 	                            <div class="col-sm-12 col-6 product-default left-details product-list mb-2" th:each= "list : ${list}">
 	                                <!-- 메인 이미지 -->
 	                                <figure>
-	                                    <a th:href="@{/seat(plcSeq=${list.plcSeq})}">
+	                                    <a>
 	                                        <img src="" width="250" height="250" alt="product" />
 	                                    </a>
 	                                </figure>
@@ -194,9 +194,8 @@
     
     <script type="text/javascript">
 	    let goUrlCheckout = "/seat";
-	    
 	    let form = document.querySelector("form[name=formList]");
-	    
+
 	    function fnGoDetail(plcSeq) {
 			$("#plcSeq").val(plcSeq);
 			form.action = goUrlCheckout;
