@@ -67,6 +67,11 @@
 		<input type="hidden" id="plcAmount" name="plcAmount" th:value="${item.plcAmount}">
 		<input type="hidden" id="plcSeq" name="plcSeq" th:value="${item.plcSeq}">
 		<input type="hidden" id="revSeatInput" name="revSeat">
+		
+		<input type="hidden" id="reservDD" name="reservDD" th:value="${reservDD}">
+		<input type="hidden" id="reservMM" name="reservMM" th:value="${reservMM}">
+		<input type="hidden" id="reservYY" name="reservYY" th:value="${reservYY}">
+		
 	    <div class="page-wrapper">
 	        <header class="header">
 	            <div class="header-middle sticky-header font2">
@@ -126,7 +131,7 @@
 	                        </div><!-- End .product-single-gallery -->
 	                        <div class="col-lg-8 col-md-6 product-single-details">
 	                            <div  class="my-3 d-flex justify-content-between align-items-center">
-	                                <h4 class="custom-box2" id="" name="">예약 날짜 : 2024년 6월 10일</h4>
+	                                <h4 class="custom-box2" id="" name="" th:text="${reservYY} + '년' + ${reservMM} + '월' + ${reservDD} + '일'"></h4>
 	                                <h4 class="custom-box" id="revSeat" name="revSeat"></h4>
 	                            </div>
 	                                <div class="seat-map" id="seatMap"></div>

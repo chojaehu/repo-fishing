@@ -35,7 +35,6 @@
 								</nav>
 							</div>
 	                    </div>
-	                    
 						<!--우측메뉴-->
 	                    <div th:replace="~{infra/include/body :: menuRight}"></div>
 	                </div>
@@ -62,13 +61,12 @@
 	                                <tbody>
 	                                    <tr>
 	                                        <th id="plcName" name="plcName" th:value="${plcName}" th:text="${plcName}"></th>
-	                                        <th id="revDate" name="revDate" th:value="${revDate}" th:text="${revDate}"></th>
+	                                        <th id="revDate" name="revDate" th:value="${revDate}" th:text="${reservYY} + '년' + ${reservMM} + '월' + ${reservDD} + '일'"></th>
 	                                        <th id="revPlaceCd" name="revPlaceCd" th:value="${plcTypeCd}" th:text="${@codeService.selectOneCachedCode(plcTypeCd)} + '낚시'"></th>
 	                                        <th id="revSeat" name="revSeat" th:value="${revSeat}" th:text="${revSeat} +'번'"></th>
 	                                        <th id="plcAmount" name="plcAmount" th:value="${plcAmount}" th:text="${#numbers.formatInteger(plcAmount,1,'COMMA')} + '원'"></th>
 	                                    </tr>
 	                                </tbody>
-	                                
 	                            </table>
 	                        </div>
 	                        <div class="order-summary">

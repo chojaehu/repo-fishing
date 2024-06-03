@@ -1,4 +1,3 @@
-// 대한민국의 공휴일 날짜 (간단히 예시로 몇 가지만 지정합니다)
 const holidays = [
     { month: 1, day: 1 },
     { month: 3, day: 1 },
@@ -7,8 +6,9 @@ const holidays = [
     { month: 8, day: 15 },
     { month: 10, day: 3 },
     { month: 10, day: 9 },
-    { month: 12, day: 25 }];
-    
+    { month: 12, day: 25 }
+];
+
 const toDay    = new Date();    
 const nowYear  = toDay.getFullYear(); // 년    
 const nowMonth = toDay.getMonth();    // 월
@@ -36,6 +36,21 @@ function onDateButtonClick(event) {
     // 현재 클릭된 버튼 스타일 변경
     clickedButton = event.target;
     clickedButton.classList.add('clicked');
+    
+    const day = event.target.textContent;
+    const month = currentMonth + 1;
+    const year = currentYear;
+    
+    // 로컬 스토리지에 날짜 정보 저장
+    localStorage.setItem('selectedDate', JSON.stringify({ year, month, day }));
+    
+    // Hidden input에 날짜 정보 설정
+    $("#reservDD").val(day);
+    $("#reservMM").val(month);
+    $("#reservYY").val(year);
+    
+    // 페이지 이동
+    window.location.href = '/seatList'; // 페이지 이동 주소를 여기에 입력하세요.
 }
 
 // 월 변경 및 날짜 갱신 함수
@@ -43,7 +58,7 @@ function updateMonth(year, month) {
     const dateContainer = document.getElementById("dateContainer");
     dateContainer.innerHTML = "";
 	
-	// 월의 마지막일자
+    // 월의 마지막일자
     const daysInMonth = new Date(year, month + 1, 0).getDate();
     // 월
     const monthName   = new Date(year, month).toLocaleString('default', { month: 'long' });
@@ -57,7 +72,7 @@ function updateMonth(year, month) {
         button.type = "button";
         
         if(nowYear == yearNumber && ((nowMonth+1)+"월") == monthName && nowDay == i) { // 오늘 비교
-	        button.classList.add("btnDay", "date-today");	
+	        button.classList.add("btnDay", "date-today");			
 		} else {
 	        button.classList.add("btnDay", "date-item");
 		}
@@ -79,7 +94,33 @@ function updateMonth(year, month) {
 let currentYear  = nowYear;
 let currentMonth = nowMonth;
 
-updateMonth(currentYear, currentMonth);
+// 페이지 로드 시 로컬 스토리지에서 날짜 정보 읽기
+window.onload = function() {
+    const storedDate = localStorage.getItem('selectedDate');
+    
+    if (storedDate) {
+        const { year, month, day } = JSON.parse(storedDate);
+        currentYear = parseInt(year);
+        currentMonth = parseInt(month) - 1;
+        
+        updateMonth(currentYear, currentMonth);
+        
+        // 선택된 날짜 버튼 강조
+        const buttons = document.querySelectorAll('.btnDay');
+        buttons.forEach(button => {
+            if (button.textContent == day) {
+                button.classList.add('clicked');
+            }
+        });
+        
+        // Hidden input에 날짜 정보 설정
+        $("#reservDD").val(day);
+        $("#reservMM").val(month);
+        $("#reservYY").val(year);
+    } else {
+        updateMonth(currentYear, currentMonth);
+    }
+};
 
 document.getElementById("prevMonth").addEventListener("click", () => {
     if (currentMonth === 0) {
