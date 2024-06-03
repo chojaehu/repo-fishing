@@ -25,7 +25,7 @@ public class ChatController {
 	
 	@RequestMapping(value = "/chatroom")
 	public String chatroom(ChatDto dto ,Model model,HttpSession httpSession) {
-		httpSession.setAttribute("sessMbrSeq",  2);
+		httpSession.setAttribute("sessMbrSeq",  3);
 		//httpSession.invalidate();
 		model.addAttribute("list", service.roomList(dto));
 		

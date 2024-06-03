@@ -1,5 +1,8 @@
 package com.stayc.infra.chattalk;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,8 +31,11 @@ public class ChattalkService {
 //	파이어 베이스 인설트 테스트
 	public void chattinginst(ChattalkDto dto ) throws Exception {
 		String roomSeq = String.valueOf(dto.getRomSeq());
-		String rtkSeq = String.valueOf(dto.getRtkSeq());
-		ApiFuture<WriteResult> apiFuture = firestore.collection(roomSeq).document(rtkSeq).set(dto);
+		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date now = new Date();         
+		String nowtime = date.format(now);
+
+		ApiFuture<WriteResult> apiFuture = firestore.collection(roomSeq).document(nowtime).set(dto);
 
 	    // ApiFuture 결과 처리
 		 WriteResult writeResult = apiFuture.get(); // 블로킹 호출
