@@ -76,41 +76,7 @@
         }
     </style>
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-	<title>Porto - Bootstrap eCommerce Template</title>
-
-	<meta name="keywords" content="HTML5 Template" />
-	<meta name="description" content="Porto - Bootstrap eCommerce Template">
-	<meta name="author" content="SW-THEMES">
-
-	<!-- Favicon -->
-	<link rel="icon" type="image/x-icon" href="assets/images/icons/favicon.png">
-	
-	<link rel="stylesheet" type="text/css" href="css/date.css">
-
-
-	<script>
-        WebFontConfig = {
-            google: { families: ['Playfair+Display:200,300,400,400italic,500,600,700,700italic,800,900italic', 'Poppins:200,300,400,500,600,700,800', 'Oswald:300,600,700'] }
-        };
-        (function (d) {
-            var wf = d.createElement('script'), s = d.scripts[0];
-            wf.src = 'assets/js/webfont.js';
-            wf.async = true;
-            s.parentNode.insertBefore(wf, s);
-        })(document);
-    </script>
-
-	<!-- Plugins CSS File -->
-	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-
-	<!-- Main CSS File -->
-	<link rel="stylesheet" href="assets/css/demo34.min.css">
-    <link rel="stylesheet" type="text/css" href="assets/vendor/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" type="text/css" href="assets/vendor/simple-line-icons/css/simple-line-icons.min.css">
+	<div th:replace="~{infra/include/head :: head}"></div>
 </head>
 
 <body>
@@ -128,17 +94,53 @@
 			                <img src="img/logo.png" alt="Logo" width="111" height="44">
 			            </a>
 			            <!--메인메뉴-->
-			            <div th:replace="~{infra/include/body :: menu(0)}"></div>
+			            <div th:replace="~{infra/include/body :: menu(2)}"></div>
+                        
+						<div class="align-items-center ml-5">
+							<nav aria-label="breadcrumb" class="breadcrumb-nav">
+								<div class="container">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item" style="color: blue;">
+											<a href="/index"><i class="fas fa-fish">&nbsp;</i><b>Home</b></a>
+										</li>
+										<li class="breadcrumb-item active" aria-current="page">chat room</li>
+									</ol>
+								</div>
+							</nav>
+						</div>
 			        </div>
 					<!--우측메뉴-->
+			        <div th:replace="~{infra/include/body :: menuRight}"></div>
+			    </div>
+			</div>
+			
+			<!--예약일자-->
+			<div th:replace="~{infra/include/head :: date}"></div>	
+        </header>
+
+
+		<!-- <header class="header">
+			<div class="header-middle sticky-header font2">
+			    <div class="container-fluid">
+			        <div class="header-left">
+			            <button class="mobile-menu-toggler pl-0" type="button">
+			                <i class="fas fa-bars"></i>
+			            </button>
+			            <a href="/index" class="logo mr-5">
+			                <img src="img/logo.png" alt="Logo" width="111" height="44">
+			            </a>
+			            메인메뉴
+			            <div th:replace="~{infra/include/body :: menu(0)}"></div>
+			        </div>
+					우측메뉴
 			        <div th:replace="~{infra/include/body :: menuRight}"></div>
 			        <br>
 			    </div>
 			</div>
 			
-			<!--예약일자-->
+			예약일자
 			<div th:replace="~{infra/include/head :: date}"></div>		
-        </header><!-- End .header -->
+        </header> --><!-- End .header -->
 
 		<main class="main">
 			<!-- <nav aria-label="breadcrumb" class="breadcrumb-nav">
@@ -204,13 +206,13 @@
 																<img src="https://via.placeholder.com/150/FF5733/FFFFFF" alt="Small Image 1" class="small-img" onclick="changeMainImg('https://via.placeholder.com/600x400/FF5733/FFFFFF')">
 															</div>
 															<div class="col-6 col-sm-4 col-md-3">
-																<img src="https://via.placeholder.com/150/C70039/FFFFFF" alt="Small Image 2" class="small-img" onclick="changeMainImg('https://via.placeholder.com/600x400/C70039/FFFFFF')">
+																<img src="https://via.placeholder.com/150/C70039/FFFFFF" alt="Small Image 2" class="small-img" onclick="changeMainImg('https://via.placeholder.com/600x400/FF5733/FFFFFF')">
 															</div>
 															<div class="col-6 col-sm-4 col-md-3">
-																<img src="https://via.placeholder.com/150/900C3F/FFFFFF" alt="Small Image 3" class="small-img" onclick="changeMainImg('https://via.placeholder.com/600x400/900C3F/FFFFFF')">
+																<img src="https://via.placeholder.com/150/900C3F/FFFFFF" alt="Small Image 3" class="small-img" onclick="changeMainImg('https://via.placeholder.com/600x400/FF5733/FFFFFF')">
 															</div>
 															<div class="col-6 col-sm-4 col-md-3">
-																<img src="https://via.placeholder.com/150/581845/FFFFFF" alt="Small Image 4" class="small-img" onclick="changeMainImg('https://via.placeholder.com/600x400/581845/FFFFFF')">
+																<img src="https://via.placeholder.com/150/581845/FFFFFF" alt="Small Image 4" class="small-img" onclick="changeMainImg('https://via.placeholder.com/600x400/FF5733/FFFFFF')">
 															</div>
                                                             <div class="col-6 col-sm-4 col-md-3">
 																<img src="https://via.placeholder.com/150/FF5733/FFFFFF" alt="Small Image 1" class="small-img" onclick="changeMainImg('https://via.placeholder.com/600x400/FF5733/FFFFFF')">

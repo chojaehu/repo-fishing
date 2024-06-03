@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head>
+	<div th:replace="~{infra/include/head :: head}"></div>
+</head>
+<!-- <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,7 +14,7 @@
 	<meta name="description" content="Porto - Bootstrap eCommerce Template">
 	<meta name="author" content="SW-THEMES">
 
-	<!-- Favicon -->
+
 	<link rel="icon" type="image/x-icon" href="assets/images/icons/favicon.png">
 
 
@@ -27,19 +29,17 @@
 			s.parentNode.insertBefore( wf, s );
 		} )( document );
 	</script>
-
-	<!-- Plugins CSS File -->
+	
 	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
 	
 	<link rel="stylesheet" type="text/css" href="css/date.css">
 
-	<!-- Main CSS File -->
 	<link rel="stylesheet" href="assets/css/demo34.min.css">
     <link rel="stylesheet" type="text/css" href="assets/vendor/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="assets/vendor/simple-line-icons/css/simple-line-icons.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     
-</head>
+</head> -->
 
 <body>
 	<div class="page-wrapper">
@@ -55,17 +55,30 @@
 			                <img src="img/logo.png" alt="Logo" width="111" height="44">
 			            </a>
 			            <!--메인메뉴-->
-			            <div th:replace="~{infra/include/body :: menu(0)}"></div>
+			            <div th:replace="~{infra/include/body :: menu(3)}"></div>
+                        
+						<div class="align-items-center ml-5">
+							<nav aria-label="breadcrumb" class="breadcrumb-nav">
+								<div class="container">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item" style="color: blue;">
+											<a href="/index"><i class="fas fa-fish">&nbsp;</i><b>Home</b></a>
+										</li>
+										<li class="breadcrumb-item active" aria-current="page">chat room</li>
+									</ol>
+								</div>
+							</nav>
+						</div>
 			        </div>
 					<!--우측메뉴-->
 			        <div th:replace="~{infra/include/body :: menuRight}"></div>
-			        <br>
 			    </div>
 			</div>
 			
 			<!--예약일자-->
-			<div th:replace="~{infra/include/head :: date}"></div>		
+			<div th:replace="~{infra/include/head :: date}"></div>	
         </header><!-- End .header -->
+
 
 		<main class="main">
 			<nav aria-label="breadcrumb" class="breadcrumb-nav">
@@ -115,19 +128,52 @@
 						<i class="fas fa-sliders-h"></i>
 					</div>
 					<div class="sidebar-overlay"></div>
-					<aside class="sidebar mobile-sidebar col-lg-3">
+					<aside class="sidebar-shop col-lg-3 order-lg-first mobile-sidebar">
+						<!-- <div class="sidebar-wrapper">
+	                            <div class="widget">
+	                            <div class="widget widget-color">
+	                                <h3 class="widget-title">
+	                                    <a data-toggle="collapse" href="#widget-body-4" role="button" aria-expanded="true" aria-controls="widget-body-4">방만들기</a>
+	                                </h3>
+	
+	                                <a th:href="@{/chatcreate}">
+	                                    <div class="info-box-content">
+	                                        <br><i class="fas fa-plus-circle"></i>
+	                                    </div>
+	                                </a>
+	                            </div>
+	
+	
+	                            <div class="widget widget-featured">
+	                                <h3 class="widget-title">내 채팅방</h3>
+	
+	                                <div class="widget-body">
+	                                    <div class="owl-carousel widget-featured-products">
+	                                        <div class="featured-col">
+	                                            <div class="product-default left-details product-widget">
+	                                                <figure>
+	                                                    <a href="product.html">
+	                                                        <img src="assets/images/products/small/product-4.jpg" width="75" height="75" alt="product" />
+	                                                        <img src="assets/images/products/small/product-4-2.jpg" width="75" height="75" alt="product" />
+	                                                    </a>
+	                                                </figure>
+	                                                <div class="product-details">
+	                                                    <h3 class="product-title"> <a>낚시모임</a> </h3>
+	                                                </div>
+	
+	                                            </div>
+	                                        </div>
+	
+	                                    </div>
+	
+	                                </div>
+	
+	                            </div>
+	                        </div>
+	                    </div> -->
 						<div class="sidebar-wrapper" data-sticky-sidebar-options='{"offsetTop": 72}'>
 							<div class="widget widget-categories">
 								<br><br><br>
-
-								<!-- <article class="post">
-									<div class="post-media">
-										<a href="single.html">
-											<img src="assets/images/blog/home/post-3.jpg" alt="Post" width="225"
-												height="280">
-										</a>
-									</div>
-								</article> -->
                                 <div class="info-box info-box-icon-top">
                                     <a th:href="@{/chatcreate}">
                                     <div class="info-box-content">
@@ -137,7 +183,7 @@
                                     </a>
                                     
                                 </div>
-							</div><!-- End .widget -->
+							</div>
 
 							<div class="widget widget-post">
 								<h4 class="widget-title">내 채팅방</h4>
@@ -148,39 +194,15 @@
 											<a href="single.html">
 												<img src="assets/images/blog/widget/post-1.jpg" alt="Post">
 											</a>
-										</div><!-- End .post-media -->
+										</div>
 										<div class="post-info">
 											<a href="single.html">낚시 모임</a>
-											<div class="post-meta">February 26, 2018</div>
-											<!-- End .post-meta -->
-										</div><!-- End .post-info -->
-									</li>
-
-									<li>
-										<div class="post-media">
-											<a href="single.html">
-												<img src="assets/images/blog/widget/post-2.jpg" alt="Post">
-											</a>
-										</div><!-- End .post-media -->
-										<div class="post-info">
-											<a href="single.html">몰래 여행가기방</a>
-											<div class="post-meta">February 26, 2018</div><!-- End .post-meta -->
-										</div><!-- End .post-info -->
-									</li>
-                                    <li>
-										<div class="post-media">
-											<a href="single.html">
-												<img src="assets/images/blog/widget/post-2.jpg" alt="Post">
-											</a>
-										</div><!-- End .post-media -->
-										<div class="post-info">
-											<a href="single.html">노하우 공유방</a>
-											<div class="post-meta">February 26, 2018</div><!-- End .post-meta -->
-										</div><!-- End .post-info -->
+											
+										</div>
 									</li>
 								</ul>
-							</div><!-- End .widget -->
-						</div><!-- End .sidebar-wrapper -->
+							</div>
+						</div>
 					</aside><!-- End .col-lg-3 -->
 				</div><!-- End .row -->
 			</div><!-- End .container -->
