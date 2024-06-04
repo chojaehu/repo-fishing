@@ -5,20 +5,41 @@
 
 	<resultMap id="resultMapObj" type="com.stayc.infra.chat.ChatDto"></resultMap>
 	
-	
+	<!-- 채팅방리스트 -->
 	 <select id="roomList" resultMap="resultMapObj">
 		select 
-			romSeq, 
-		    romDate, 
-		    romTitle, 
-		    romPersonnel, 
-		    romNote, 
-		    mbrSeq
+			a.romSeq, 
+		    a.romDate, 
+		    a.romTitle, 
+		    a.romPersonnel, 
+		    a.romNote, 
+		    a.mbrSeq,
+		    a.romDelNy,
+		    (
+            select count(*) 
+		    from roomcheckin aa
+            where aa.romSeq = a.romSeq and a.romDelNy = 0
+            ) as currentStaff
 		from 
-			room
+			room a
 		where 1=1
 	 </select>
 	 
+	 <!--  -->
+	 <select id ="myroomList" resultMap="resultMapObj">
+	 select 
+		a.romSeq,
+		a.romTitle
+		from 
+			room a
+		join 
+			roomcheckin b
+		on 
+			a.romSeq = b.romSeq and b.mbrSeq = 3
+		ORDER BY a.romSeq DESC
+	 </select>
+	 
+	 <!-- 채팅방 정보 -->
 	 <select id="roomOne" resultMap="resultMapObj">
 		select 
 			romSeq, 
@@ -26,12 +47,19 @@
 		    romTitle, 
 		    romPersonnel, 
 		    romNote, 
-		    mbrSeq
+		    mbrSeq,
+		    (
+            select count(*) 
+		    from roomcheckin aa
+            where aa.romSeq = #{romSeq}
+            ) as currentStaff
 		from 
 			room
 		where 1=1 and romSeq = #{romSeq}
 	 </select>
 	 
+	 
+	 <!-- 채팅방 참여 -->
 	 <select id="roomMember" resultMap="resultMapObj">
 		select 
 			rckSeq
@@ -46,6 +74,8 @@
 			romSeq =  #{romSeq};
 	 </select>
 	 
+	 
+	 <!-- 채팅방 참여 유효성 검사 -->
 	 <select id="roomcheckinOne" resultMap="resultMapObj">
 		select * 
 		from 
@@ -54,21 +84,27 @@
 			mbrSeq = #{mbrSeq} and romSeq = #{romSeq};
 	 </select>
 	
+	
+	<!-- 채팅방 참여 -->
 	<insert id="roomcheckinst">
 	insert into roomcheckin
 	(
 		rckDate,
+		rckmanagerNY,
 		mbrSeq, 
 		romSeq
 	)
 	values
 	(
 		NOW(),
+		0,
 		#{mbrSeq},
 		#{romSeq}
 	)
 	</insert>
 	
+	
+	<!-- 채팅방 만들기 -->
 	<insert id="chatroominst">
 	<selectKey resultType ="Integer" keyProperty="romSeq" order="AFTER">
 		SELECT LAST_INSERT_ID()
@@ -88,6 +124,23 @@
 		,#{romPersonnel}
 		,#{romNote}
 		,#{mbrSeq}
+	)
+	</insert>
+	
+	<insert id="chatroommanager">
+	insert into roomcheckin
+	(
+		rckDate,
+		rckmanagerNY,
+		mbrSeq, 
+		romSeq
+	)
+	values
+	(
+		NOW(),
+		1,
+		#{mbrSeq},
+		#{romSeq}
 	)
 	</insert>
 	

@@ -25,9 +25,10 @@ public class ChatController {
 	
 	@RequestMapping(value = "/chatroom")
 	public String chatroom(ChatDto dto ,Model model,HttpSession httpSession) {
-		httpSession.setAttribute("sessMbrSeq",  2);
+		httpSession.setAttribute("sessMbrSeq",  3);
 		//httpSession.invalidate();
 		model.addAttribute("list", service.roomList(dto));
+		model.addAttribute("mylist", service.myroomList(dto));
 		
 		
 		return Constants.PATH_CHAT + "chatroom";
@@ -58,7 +59,7 @@ public class ChatController {
 	
 	
 	
-	
+//	채팅방 수정
 	@RequestMapping(value ="/chatupdates")
 	public String chatupdates(ChatDto dto, RedirectAttributes redirectAttributes) throws Exception
 	{
@@ -67,16 +68,18 @@ public class ChatController {
 		return "redirect:/chatting";
 	}
 	
-	
+//	채팅방 만들기
 	@RequestMapping(value = "/chatroominst")
 	public String chatroominst(ChatDto dto,HttpSession httpSession)
 	{
 		dto.setMbrSeq((Integer) httpSession.getAttribute("sessMbrSeq"));
 		service.chatroominst(dto);
-		
+		service.chatroommanager(dto);
 	
 		return "redirect:/chatroom";
 	}
+	
+//	채팅방 참여
 	@RequestMapping(value = "/roomcheckinst")
 	public String roomcheckinst(ChatDto dto,HttpSession httpSession)
 	{
@@ -101,16 +104,20 @@ public class ChatController {
 		if(dto.getMbrSeq() != null)
 		{
 			ChatDto rDto = service.roomcheckinOne(dto);
-			if(rDto != null)
+			ChatDto rDto2 = service.roomOne(dto);
+			if(rDto != null && rDto2.getRomPersonnel() >= rDto2.getCurrentStaff())
 			{
 				returnMap.put("rt", "success");
+			}
+			else if(rDto2.getRomPersonnel() <= rDto2.getCurrentStaff())
+			{
+				returnMap.put("rt", "full");
 			}
 			else
 			{
 				returnMap.put("rt", "success2");
 				
 			}
-			
 		}
 		else 
 		{

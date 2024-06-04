@@ -116,7 +116,7 @@
 												<p th:text="${list.romNote}"></p>
 											</div><!-- End .post-content -->
 											<a  class="post-comment">참여인원 : </a>
-											<a  class="post-comment" th:text="${list.romPersonnel}"></a>
+											<a  class="post-comment" th:text="${list.romPersonnel} +'/'+ ${list.currentStaff}"></a>
 										</div><!-- End .post-body -->
 									</article><!-- End .post -->
 								</div>
@@ -189,14 +189,15 @@
 								<h4 class="widget-title">내 채팅방</h4>
 
 								<ul class="simple-post-list">
-									<li>
+									<li th:if="${!#lists.isEmpty(mylist)}"
+										th:each="mylist : ${mylist}">
 										<div class="post-media">
 											<a href="single.html">
 												<img src="assets/images/blog/widget/post-1.jpg" alt="Post">
 											</a>
 										</div>
 										<div class="post-info">
-											<a href="single.html">낚시 모임</a>
+											<a th:href="@{/chatting(romSeq=${mylist.romSeq})}" target="_blank" th:text ="${mylist.romTitle}">낚시 모임</a>
 											
 										</div>
 									</li>
@@ -268,6 +269,10 @@
 				{
 					alert("로그인을 하세요")	
 					window.location.href = "/login"
+				}
+				else if(response.rt == "full")
+				{
+					alert("인원이 꽉차 참여가 불가능 합니다.")
 				}
 				else
 				{

@@ -30,6 +30,11 @@ public class ChatService {
 	{
 		return dao.roomList(dto);
 	}
+//	참여한 채팅방 리스트
+	public List<ChatDto> myroomList(ChatDto dto)
+	{
+		return dao.myroomList(dto);
+	}
 //	채팅방 참여인원 리스트
 	public List<ChatDto> roomMember(ChatDto dto)
 	{
@@ -67,6 +72,11 @@ public class ChatService {
 //		DocumentReference documentReference = apiFuture.document(memberSeq);
 		
 		return 1; 
+	}
+//	채팅방 개설시 방장 인설트
+	public int chatroommanager(ChatDto dto )
+	{
+		return dao.chatroommanager(dto);
 	}
 	
 //	채팅방 수정
