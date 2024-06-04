@@ -61,7 +61,7 @@
 }
 
 .clicked {
-    background-color: gray !important; /* 클릭된 버튼의 배경색을 변경 */
+    background-color: rgb(255, 128, 192) !important; /* 클릭된 버튼의 배경색을 변경 */
     color: black !important; /* 클릭된 버튼의 글자색을 변경 */
 }
 

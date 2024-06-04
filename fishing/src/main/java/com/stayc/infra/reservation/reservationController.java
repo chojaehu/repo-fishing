@@ -28,6 +28,8 @@ public class reservationController {
 		model.addAttribute("reservMM", dto.getReservMM());
 		model.addAttribute("reservYY", dto.getReservYY());
 		model.addAttribute("item", service.selectOne(dto));
+		model.addAttribute("fisList", service.fisList(dto));
+		model.addAttribute("prpList", service.prpList(dto));
 		
 		return Constants.PATH_RESERVE + "seat";
 	}

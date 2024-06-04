@@ -12,4 +12,10 @@ public interface reservationDao {
 	
 //	결제완료 insert
 	public int insert(reservationDto dto);
+
+//	어종 리스트
+	public List<reservationDto> fisList(reservationDto dto);
+	
+//	채집도구 리스트
+	public List<reservationDto> prpList(reservationDto dto);
 }

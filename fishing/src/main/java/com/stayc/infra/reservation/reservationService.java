@@ -25,4 +25,14 @@ public class reservationService {
 	public int insert(reservationDto dto) {
 		return dao.insert(dto);
 	}
+	
+//	어종 리스트
+	public List<reservationDto> fisList(reservationDto dto) {
+		return dao.fisList(dto);
+	}
+	
+//	채집도구 리스트
+	public List<reservationDto> prpList(reservationDto dto) {
+		return dao.prpList(dto);
+	}
 }

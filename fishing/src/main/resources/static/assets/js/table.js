@@ -13,6 +13,9 @@ const fishingMapElement = document.getElementById('fishingMap');
 
     let selectedFishing = null; // 선택된 좌석을 추적하기 위한 변수
 
+    const revSeatElement = document.getElementById('revSeat');
+    const revSeatInputElement = document.getElementById('revSeatInput');
+
     for (let row = 0; row < numberOfRows; row++) {
         j=1;
         for (let seat = 0; seat < seatsPerRow; seat++) {
@@ -58,10 +61,22 @@ const fishingMapElement = document.getElementById('fishingMap');
                 selectedFishing.classList.add('selected');
                 
                 // 선택된 좌석 번호를 다루거나 보여주는 다른 동작을 수행할 수 있습니다.
+                const selectedSeatNumber = parseInt(fishingElement.textContent); // 좌석 번호를 int로 변환
+                revSeatElement.textContent = '좌석번호 : ' + selectedSeatNumber;
+
+                // 숨겨진 입력 필드 업데이트
+                revSeatInputElement.value = selectedSeatNumber;
             });
 
             fishingMapElement.appendChild(fishingElement);
 
             fishingNumber++; // 다음 좌석 번호로 이동합니다.
+        }
+        let goUrlCheckout = "/checkout";
+        
+        let form = document.querySelector("form[name=formList]");
+        document.getElementById("Checkoutbtn").onclick = function(){
+            form.action = goUrlCheckout;
+            form.submit();
         }
     }

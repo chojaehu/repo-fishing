@@ -19,6 +19,29 @@
 		from place
 		where 1=1
 	</select>
+	<!-- 어종리스트 -->
+	<select id="fisList">
+	 	select 
+	 		fisSeq
+	 		,fisFishCd
+		from fish
+		where 1=1
+			AND plcSeq = #{plcSeq}
+	</select>
+	
+	<!-- 도구리스트 -->
+	<select id="prpList">
+	 	select 
+	 		prpSeq
+	 		,prpFishingRod
+	 		,prpReel
+	 		,prpBait
+	 		,prpWeight
+		from prepare
+		where 1=1
+			AND plcSeq = #{plcSeq}
+	</select>
+	
 	<!-- 예약상세 -->
 	<select id="selectOne">
 		select
