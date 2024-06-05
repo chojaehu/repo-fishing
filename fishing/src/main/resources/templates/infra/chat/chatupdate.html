@@ -76,39 +76,7 @@
         }
     </style>
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-	<title>Porto - Bootstrap eCommerce Template</title>
-
-	<meta name="keywords" content="HTML5 Template" />
-	<meta name="description" content="Porto - Bootstrap eCommerce Template">
-	<meta name="author" content="SW-THEMES">
-
-	<!-- Favicon -->
-	<link rel="icon" type="image/x-icon" href="assets/images/icons/favicon.png">
-
-
-	<script>
-        WebFontConfig = {
-            google: { families: ['Playfair+Display:200,300,400,400italic,500,600,700,700italic,800,900italic', 'Poppins:200,300,400,500,600,700,800', 'Oswald:300,600,700'] }
-        };
-        (function (d) {
-            var wf = d.createElement('script'), s = d.scripts[0];
-            wf.src = 'assets/js/webfont.js';
-            wf.async = true;
-            s.parentNode.insertBefore(wf, s);
-        })(document);
-    </script>
-
-	<!-- Plugins CSS File -->
-	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-
-	<!-- Main CSS File -->
-	<link rel="stylesheet" href="assets/css/demo34.min.css">
-    <link rel="stylesheet" type="text/css" href="assets/vendor/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" type="text/css" href="assets/vendor/simple-line-icons/css/simple-line-icons.min.css">
+	<div th:replace="~{infra/include/head :: head}"></div>
 </head>
 
 <body>
@@ -245,6 +213,8 @@
 													  <textarea th:text="${item.romNote}" id="romNote" name ="romNote" class="form-control"   rows="3"></textarea>
 													</div>
 													<div class="col-12">
+													<!-- <button type="button" data-bs-target="#exampleModal"  class="btn btn-danger btn-rounded btn-lg float-left" style="margin-top: 30px" >삭제하기</button> -->
+													 <a  data-bs-toggle="modal" data-bs-target="#exampleModal"  class="btn btn-danger btn-rounded btn-lg float-left" style="margin-top: 30px; color: white;">채팅방 삭제</a>
 													<button id="btn" name="btn" class="btn btn-dark btn-rounded btn-lg float-right" style="margin-top: 30px">수정하기</button>
 													  <!-- <ul class="btn-list">
 															<li><button class="btn btn-default btn-rounded btn-md">default</button></li>
@@ -281,6 +251,23 @@
 				</div>
 			</div>
 			</form>
+			<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="exampleModalLabel">채팅방 삭제</h5>
+			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			      </div>
+			      <div class="modal-body">
+			      	채팅방을정말 삭제 하곗습니까?
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >아니요</button>
+			        <button type="button" class="btn btn-primary" id="deletebtn">예</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
 		</main>
 	</div>
 
@@ -297,10 +284,12 @@
 	<!-- Main JS File -->
 	<script src="assets/js/main.min.js"></script>
 	<script>
+	
         function changeMainImg(imgSrc) {
             document.getElementById("mainImg").src = imgSrc;
         }
         let goupdate = "/chatupdates";
+        let goroomdelete = "/roomdelete"
         let form = document.querySelector("form[name=forminsert]")
         
         
@@ -308,6 +297,11 @@
         	form.action = goupdate;
         	form.submit();
         }
+        document.getElementById("deletebtn").onclick = function(){
+        	form.action = goroomdelete;
+        	form.submit();
+        }
+        
     </script>
 </body>
 

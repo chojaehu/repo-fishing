@@ -19,15 +19,25 @@ public class ChatDto {
 	
 	private Integer mbrSeq;
 	private String mbrName;
-	private Integer rckmanagerNY;
+	
 	
 //	채팅 메세지
 	private String rtkNote;
+	private Integer rckDelNY;
+	private Integer rckmanagerNY;
 	
 	private Integer currentStaff;
 	
 	
 	
+	
+	public Integer getRckDelNY() {
+		return rckDelNY;
+	}
+
+	public void setRckDelNY(Integer rckDelNY) {
+		this.rckDelNY = rckDelNY;
+	}
 
 	public Integer getRomDelNy() {
 		return romDelNy;

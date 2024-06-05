@@ -26,9 +26,13 @@ public class ChatService {
 	
 	
 //	채팅방목록 리스트
-	public List<ChatDto> roomList(ChatDto dto)
+	public List<ChatDto> roomList(ChatVo vo)
 	{
-		return dao.roomList(dto);
+		return dao.roomList(vo);
+	}
+	public int roomCount()
+	{
+		return dao.roomCount();
 	}
 //	참여한 채팅방 리스트
 	public List<ChatDto> myroomList(ChatDto dto)
@@ -83,6 +87,22 @@ public class ChatService {
 	public int chatupdates(ChatDto dto)
 	{
 		return dao.chatupdates(dto);
+	}
+	
+//	채팅방 삭제 및 참여인원 삭제
+	public int roomdelete(ChatDto dto)
+	{
+		//채팅방 인원 삭제
+		dao.roommemberdelete(dto);
+		//채팅방 삭제
+		dao.roomdelete(dto);
+		return 1;
+	}
+	
+//	채팅방 나가기 
+	public int memberdelete(ChatDto dto)
+	{
+		return dao.memberdelete(dto);
 	}
 	
 	

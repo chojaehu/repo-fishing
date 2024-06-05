@@ -22,10 +22,16 @@
             ) as currentStaff
 		from 
 			room a
-		where 1=1
+		where 1=1 and romDelNy = 0
 	 </select>
 	 
-	 <!--  -->
+	 <select id="roomCount">
+	 select COUNT(*) 
+	 from room
+	 where 1=1 and romDelNy = 0
+	 </select>
+	 
+	 <!-- 참여한 채팅방  -->
 	 <select id ="myroomList" resultMap="resultMapObj">
 	 select 
 		a.romSeq,
@@ -35,7 +41,7 @@
 		join 
 			roomcheckin b
 		on 
-			a.romSeq = b.romSeq and b.mbrSeq = 3
+			a.romSeq = b.romSeq and b.mbrSeq = #{mbrSeq} and romDelNy = 0
 		ORDER BY a.romSeq DESC
 	 </select>
 	 
@@ -52,18 +58,24 @@
             select count(*) 
 		    from roomcheckin aa
             where aa.romSeq = #{romSeq}
-            ) as currentStaff
+            ) as currentStaff,
+            (
+            select rckmanagerNY
+            from roomcheckin bb
+            where bb.romSeq = #{romSeq} and bb.mbrSeq = #{mbrSeq}
+            ) as rckmanagerNY
 		from 
 			room
 		where 1=1 and romSeq = #{romSeq}
 	 </select>
 	 
 	 
-	 <!-- 채팅방 참여 -->
+	 <!-- 채팅방 참여한 사람 목록 -->
 	 <select id="roomMember" resultMap="resultMapObj">
 		select 
-			rckSeq
-			,mbrName 
+			a.rckSeq
+			,a.rckDelNY
+			,b.mbrName 
 		from 
 			roomcheckin a
 		join 
@@ -71,7 +83,7 @@
 		on 
 			a.mbrSeq = b.mbrSeq  
 		where 
-			romSeq =  #{romSeq};
+			romSeq =  #{romSeq} and rckDelNY = 0;
 	 </select>
 	 
 	 
@@ -85,18 +97,20 @@
 	 </select>
 	
 	
-	<!-- 채팅방 참여 -->
+	<!-- 채팅방 참여 insert -->
 	<insert id="roomcheckinst">
 	insert into roomcheckin
 	(
 		rckDate,
 		rckmanagerNY,
+		rckDelNY,
 		mbrSeq, 
 		romSeq
 	)
 	values
 	(
 		NOW(),
+		0,
 		0,
 		#{mbrSeq},
 		#{romSeq}
@@ -127,11 +141,13 @@
 	)
 	</insert>
 	
+	<!-- 방 개설자 채팅참여목록 insert -->
 	<insert id="chatroommanager">
 	insert into roomcheckin
 	(
 		rckDate,
 		rckmanagerNY,
+		rckDelNY,
 		mbrSeq, 
 		romSeq
 	)
@@ -139,11 +155,14 @@
 	(
 		NOW(),
 		1,
+		0,
 		#{mbrSeq},
 		#{romSeq}
 	)
 	</insert>
 	
+	
+	<!-- 채팅방 정보 변경 -->
 	<update id = "chatupdates">
 	<selectKey resultType ="Integer" keyProperty="romSeq" order="AFTER">
 		 SELECT romSeq FROM room WHERE romSeq = #{romSeq}
@@ -156,6 +175,29 @@
 		romNote = #{romNote}
 	
 	WHERE romSeq = #{romSeq}
+	</update>
+	
+	<update id="memberdelete">
+	update roomcheckin
+	set
+		rckDelNY = 1
+	where romSeq = #{romSeq} and mbrSeq = #{mbrSeq}
+	</update>
+	
+	<!-- 채팅방 삭제 -->
+	<update id="roomdelete">
+		update room
+		set
+		romDelNY = 1
+		where romSeq = #{romSeq}
+	</update>
+	
+	<!-- 채팅방 인원 삭제 -->
+	<update id ="roommemberdelete">
+		update roomcheckin
+		set
+		rckDelNY = 1
+		where romSeq = #{romSeq}
 	</update>
 	
 </mapper>

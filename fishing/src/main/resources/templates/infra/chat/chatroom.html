@@ -1,45 +1,57 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-	<div th:replace="~{infra/include/head :: head}"></div>
-</head>
 <!-- <head>
+	<div th:replace="~{infra/include/head :: head}"></div>
+</head> -->
+<head>
 	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<title>Porto - Bootstrap eCommerce Template</title>
+    <title>유체이탈(자유를 찾아서)</title>
 
-	<meta name="keywords" content="HTML5 Template" />
-	<meta name="description" content="Porto - Bootstrap eCommerce Template">
-	<meta name="author" content="SW-THEMES">
+    <meta name="keywords" content="TEAM PROJECT ONE-Q" />
+    <meta name="description" content="TEAM PROJECT ONE-Q">
+    <meta name="author" content="ONE-Q TEAM">
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="img/logo.png">
 
-	<link rel="icon" type="image/x-icon" href="assets/images/icons/favicon.png">
-
-
-	<script>
-		WebFontConfig = {
-			google: { families: [ 'Open+Sans:300,400,600,700,800', 'Poppins:300,400,500,600,700', 'Shadows+Into+Light:400' ] }
-		};
-		( function ( d ) {
-			var wf = d.createElement( 'script' ), s = d.scripts[ 0 ];
-			wf.src = 'assets/js/webfont.js';
-			wf.async = true;
-			s.parentNode.insertBefore( wf, s );
-		} )( document );
-	</script>
-	
-	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-	
-	<link rel="stylesheet" type="text/css" href="css/date.css">
-
-	<link rel="stylesheet" href="assets/css/demo34.min.css">
+    <script>
+        WebFontConfig = {
+            google: { families: ['Playfair+Display:200,300,400,400italic,500,600,700,700italic,800,900italic', 'Poppins:200,300,400,500,600,700,800', 'Oswald:300,600,700'] }
+        };
+        (function (d) {
+            var wf = d.createElement('script'), s = d.scripts[0];
+            wf.src = 'assets/js/webfont.js';
+            wf.async = true;
+            s.parentNode.insertBefore(wf, s);
+        })(document);
+    </script>
+    
+	<!-- Main CSS File -->
+	<!--<link rel="stylesheet" href="assets/css/demo34.min.css">-->
+	<link rel="stylesheet" href="assets/css/demo4.min.css">
     <link rel="stylesheet" type="text/css" href="assets/vendor/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="assets/vendor/simple-line-icons/css/simple-line-icons.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    	
+	<!-- Plugins CSS File -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/css/style.min.css">
+	
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+	
+	<!-- 달력 CSS File -->
+    <link rel="stylesheet" type="text/css" href="css/date.css">
+    <!-- 좌석 CSS File -->
+    <link rel="stylesheet" type="text/css" href="css/ship.css">
+    <link rel="stylesheet" type="text/css" href="css/table.css">
     
-</head> -->
+    <!-- 사용자 스크립트 -->
+    <script src="js/validation.js"></script>
+    <script src="js/search.js"></script>   
+</head> 
 
 <body>
 	<div class="page-wrapper">
@@ -88,11 +100,12 @@
 					</ol>
 				</div><!-- End .container -->
 			</nav>
-
+			<form id="form" name="form" method="post">
+			<input type="hidden" id="pgPage" name="pgPage" th:value="${vo.pgPage}" default="1">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-9">
-						<div class="row" style="padding: 20px;">
+						<div class="row" style="padding: 20px;" id="listData">
 							<div class="col-md-6 col-lg-4" th:if="${!#lists.isEmpty(list)}"
 								th:each="list : ${list}">
 								<div onclick="chekRoom(this)" th:data-value="${list.romSeq}">
@@ -122,6 +135,7 @@
 								</div>
 							</div>
 						</div>
+						<div th:replace="~{infra/include/body :: bodyPagingBtn}"></div>
 					</div><!-- End .col-lg-9 -->
 
 					<div class="sidebar-toggle custom-sidebar-toggle">
@@ -207,29 +221,8 @@
 					</aside><!-- End .col-lg-3 -->
 				</div><!-- End .row -->
 			</div><!-- End .container -->
+			</form>
 		</main><!-- End .main -->
-		<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-		  Launch demo modal
-		</button>
-		
-		<!-- Modal -->
-		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		  <div class="modal-dialog modal-sm">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h3 class="modal-title fs-5" id="exampleModalLabel">참여하겠습니까?</h3>
-		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
-		      </div>
-		      <div class="modal-body">
-		        ...
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-		        <button type="button" class="btn btn-primary">Save changes</button>
-		      </div>
-		    </div>
-		  </div>
-		</div>
 
 		<footer th:replace="~{infra/include/body :: footer}"></footer>
 
@@ -241,13 +234,6 @@
 	<!-- Main JS File -->
 	<script src="assets/js/main.min.js"></script>
 	<script>
-	const myModal = document.getElementById('myModal')
-	const myInput = document.getElementById('myInput')
-
-	myModal.addEventListener('shown.bs.modal', () => {
-	  myInput.focus()
-	})
-	
 	
 	function chekRoom(element){
 		 let romSeq = $(element).data("value");
@@ -281,6 +267,25 @@
 				}
 			}
 			,error : function(jqXHR, textStatus, errorThrown){
+				alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+			}
+		});
+	}
+	fnGoList = function(pgPage) {
+	    document.querySelector("input[name=pgPage]").value = pgPage;
+	        
+	    let queryString = $("#form").serialize();
+	    
+	    $.ajax({
+			async: true
+			, cache: false
+			, type: "post"
+			, url: "/roomListPaging?"+queryString
+			, success: function(fragment) {
+				$("#listData").replaceWith(fragment);
+			}
+			, error: function(jqXHR, textStatus, errorThrown) {
+				//fnModalCaptionChange(0,"오류", "ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
 				alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
 			}
 		});

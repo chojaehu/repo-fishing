@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -136,10 +136,15 @@
 	            </div>
 	        </div>
 	        <div>
-	            <div class="sidebar-section">
+	            <div class="sidebar-section" th:if="${item.rckmanagerNY} != 0">
 	                <h5></h5>
 	                <a th:href="@{/chatupdate(romSeq=${item.romSeq})}" class="sidebar-link">채팅방 수정</a>
-	                <a href="#" class="sidebar-link">채팅방 나가기</a>
+	                <!-- <a href="#" class="sidebar-link">채팅방 나가기</a> -->
+	            </div>
+	            <div class="sidebar-section" th:unless="${item.rckmanagerNY} != 0">
+	                <h5></h5>
+	                <!-- <a th:href="@{/chatupdate(romSeq=${item.romSeq})}" class="sidebar-link">채팅방 수정</a> -->
+	                <a  data-bs-toggle="modal" data-bs-target="#exampleModal" name="deletebtn" class="sidebar-link">채팅방 나가기</a>
 	            </div>
 	        </div>
 	    </div>
@@ -169,12 +174,35 @@
 	        </div>
 	    </div>
     </form>
+    
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">채팅방 탈되</h5>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	        정말로 나가겠습니까?
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >아니요</button>
+	        <button type="button" class="btn btn-primary" id="deletebtn">예</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
     <script  src="https://www.gstatic.com/firebase/10.7.0/firebase-installations.js"></script>
 	<!-- const app = firebase.initializeApp(firebaseConfig);
     		const db = firebase.firestore();  -->
 	
 
-    <script>    
+    <script>  
+    	let gomemberDelete = "/memberdelete"
+    	
+    	let form = document.querySelector("form[name=formList]")
+    	
+    	
         function scrollToBottom() {
             var chatMessages = document.querySelector('.chat-messages');
             chatMessages.scrollTop = chatMessages.scrollHeight;
@@ -188,6 +216,10 @@
                 sendMessage();
             }
         });
+        document.getElementById("deletebtn").onclick = function(){
+        	form.action = gomemberDelete;
+        	form.submit();
+        }
         function sendMessage(){
             $.ajax({
                 async: true,

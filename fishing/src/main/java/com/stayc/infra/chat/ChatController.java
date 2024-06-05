@@ -6,12 +6,14 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.stayc.common.constants.Constants;
+import com.stayc.common.util.UtilFunction;
 import com.stayc.infra.member.MemberDto;
 
 import jakarta.servlet.http.HttpSession;
@@ -24,33 +26,62 @@ public class ChatController {
 	ChatService service;
 	
 	@RequestMapping(value = "/chatroom")
-	public String chatroom(ChatDto dto ,Model model,HttpSession httpSession) {
-		httpSession.setAttribute("sessMbrSeq",  3);
-		//httpSession.invalidate();
-		model.addAttribute("list", service.roomList(dto));
-		model.addAttribute("mylist", service.myroomList(dto));
+	public String chatroom(@ModelAttribute("vo") ChatVo vo,ChatDto dto ,Model model,HttpSession httpSession) throws Exception {
+		
+		UtilFunction.setSearch(vo);
+		
+		int roomcount = service.roomCount();
+		
+		if(roomcount > 0)
+		{
+			vo.setPagingVo(roomcount);
+			httpSession.setAttribute("sessMbrSeq",  3);
+			dto.setMbrSeq((Integer) httpSession.getAttribute("sessMbrSeq"));
+			//httpSession.invalidate();
+			model.addAttribute("list", service.roomList(vo));
+			model.addAttribute("mylist", service.myroomList(dto));
+		}
+		
 		
 		
 		return Constants.PATH_CHAT + "chatroom";
 	}
+	@RequestMapping(value = "/roomListPaging")
+	public String roomListPaging(@ModelAttribute("vo") ChatVo vo,ChatDto dto ,Model model,HttpSession httpSession) throws Exception {
+		
+		UtilFunction.setSearch(vo);
+		
+		int roomcount = service.roomCount();
+		
+		if(roomcount > 0)
+		{
+			vo.setPagingVo(roomcount);		
+			model.addAttribute("list", service.roomList(vo));
+		}
+	
+		return Constants.PATH_CHAT + "chatroomAjax";
+	}
+	
 	
 	@RequestMapping(value = "/chatting")
-	public String chatting(@RequestParam("romSeq") String romSeq, ChatDto dto, Model model) {
+	public String chatting(@RequestParam("romSeq") String romSeq, ChatDto dto, Model model,HttpSession httpSession) throws Exception{
 		dto.setRomSeq(Integer.parseInt(romSeq));
+		dto.setMbrSeq((Integer) httpSession.getAttribute("sessMbrSeq"));
 		model.addAttribute("item", service.roomOne(dto));
 		model.addAttribute("mbrlist", service.roomMember(dto));
 		return Constants.PATH_CHAT + "chatting";
 	}
 	
 	@RequestMapping(value = "/chatcreate")
-	public String chatcreate() {
+	public String chatcreate() throws Exception {
 		
 		return Constants.PATH_CHAT + "chatcreate";
 	}
 	
 	@RequestMapping(value="/chatupdate")
-	public String chatupdate(ChatDto dto, Model model)
+	public String chatupdate(ChatDto dto, Model model,HttpSession httpSession) throws Exception
 	{
+		dto.setMbrSeq((Integer) httpSession.getAttribute("sessMbrSeq"));
 		model.addAttribute("item", service.roomOne(dto));
 		return Constants.PATH_CHAT + "chatupdate";
 	}
@@ -70,7 +101,7 @@ public class ChatController {
 	
 //	채팅방 만들기
 	@RequestMapping(value = "/chatroominst")
-	public String chatroominst(ChatDto dto,HttpSession httpSession)
+	public String chatroominst(ChatDto dto,HttpSession httpSession) throws Exception
 	{
 		dto.setMbrSeq((Integer) httpSession.getAttribute("sessMbrSeq"));
 		service.chatroominst(dto);
@@ -81,7 +112,7 @@ public class ChatController {
 	
 //	채팅방 참여
 	@RequestMapping(value = "/roomcheckinst")
-	public String roomcheckinst(ChatDto dto,HttpSession httpSession)
+	public String roomcheckinst(ChatDto dto,HttpSession httpSession) throws Exception
 	{
 		dto.setMbrSeq((Integer) httpSession.getAttribute("sessMbrSeq"));
 		service.roomcheckinst(dto);
@@ -89,6 +120,23 @@ public class ChatController {
 		return "redirect:/chatting" + "?romSeq=" + dto.getRomSeq();
 	}
 	
+//	채팅방나가기
+	@RequestMapping(value= "/memberdelete")
+	public String memberdelete(ChatDto dto , HttpSession httpSession) throws Exception
+	{
+		dto.setMbrSeq((Integer)httpSession.getAttribute("sessMbrSeq"));
+		service.memberdelete(dto);
+		
+		return "redirect:/chatroom";
+	}
+	
+//	채팅방 삭제 
+	@RequestMapping(value ="/roomdelete")
+	public String roomdelete(ChatDto dto) throws Exception
+	{
+		service.roomdelete(dto);
+		return "redirect:/chatroom";
+	}
 	
 	
 	
@@ -127,8 +175,6 @@ public class ChatController {
 	
 		return returnMap;
 	}
-	
-	
 
 
 }

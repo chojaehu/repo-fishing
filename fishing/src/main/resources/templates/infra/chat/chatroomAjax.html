@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<div class="row" style="padding: 20px;" id="listData">
+		<div class="col-md-6 col-lg-4" th:if="${!#lists.isEmpty(list)}"
+			th:each="list : ${list}">
+			<div onclick="chekRoom(this)" th:data-value="${list.romSeq}">
+				<article class="post" >
+					<div class="post-media">
+						<!-- <a th:href="@{/chatting(romSeq=${list.romSeq})}" target="_blank">
+							<img th:href src="assets/images/blog/home/post-1.jpg" alt="Post" width="225"
+								height="280">
+						</a> -->
+						<div>
+							<img th:href src="assets/images/blog/home/post-1.jpg" alt="Post" width="225"
+								height="280">
+						</div>
+					</div><!-- End .post-media -->
+
+					<div class="post-body">
+						<h2 class="post-title">
+							<a th:text="${list.romTitle}"></a>
+						</h2>
+						<div class="post-content">
+							<p th:text="${list.romNote}"></p>
+						</div><!-- End .post-content -->
+						<a  class="post-comment">참여인원 : </a>
+						<a  class="post-comment" th:text="${list.romPersonnel} +'/'+ ${list.currentStaff}"></a>
+					</div><!-- End .post-body -->
+				</article><!-- End .post -->
+			</div>
+		</div>
+	</div>
+						
+
+</html>
