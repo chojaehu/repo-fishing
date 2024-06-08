@@ -5,22 +5,33 @@
 
 	<resultMap id="resultMapObj" type="com.stayc.infra.reservation.reservationDto"></resultMap>
 	<!-- 예약장소 리스트 -->
-	<select id="selectList">
-	 	select 
-		 	plcSeq
-		 	,plcTypeCd
-		 	,plcName
-		 	,plcAreaCd
-		 	,plcPersonnel
-		 	,plcAmount
-		 	,plcOperatingFrom
-		 	,plcOperatingTo
-		 	,plcNote
-		from place
-		where 1=1
+	<select id="selectList" resultMap="resultMapObj">
+	 	SELECT plcSeq
+		 	 , plcTypeCd
+		 	 , plcName
+		 	 , plcAreaCd
+		 	 , plcPersonnel
+		 	 , plcAmount
+		 	 , plcOperatingFrom
+		 	 , plcOperatingTo
+		 	 , plcNote
+		  FROM place
+		 WHERE 1=1
+		   AND plcTypeCd = #{shTypeCd}
+		 LIMIT #{pgRowCount}
+    	OFFSET #{pgOffset}		
 	</select>
+	
+	<!-- 낚시터 카운터 -->
+	<select id="selectOneCount">
+	 	SELECT COUNT(*)
+		  FROM place
+		 WHERE 1=1
+		   AND plcTypeCd = #{shTypeCd}
+	</select>
+		
 	<!-- 어종리스트 -->
-	<select id="fisList">
+	<select id="fisList" resultMap="resultMapObj">
 	 	select 
 	 		fisSeq
 	 		,fisFishCd
@@ -30,7 +41,7 @@
 	</select>
 	
 	<!-- 도구리스트 -->
-	<select id="prpList">
+	<select id="prpList" resultMap="resultMapObj">
 	 	select 
 	 		prpSeq
 	 		,prpFishingRod
@@ -43,7 +54,7 @@
 	</select>
 	
 	<!-- 예약상세 -->
-	<select id="selectOne">
+	<select id="selectOne" resultMap="resultMapObj">
 		select
 			plcSeq
 		 	,plcTypeCd
@@ -58,6 +69,7 @@
 		where 1=1
 			AND plcSeq = #{plcSeq}
 	</select>
+	
 	<!-- 결제완료 insert -->
 	<insert id="insert">
     	INSERT INTO reservation (

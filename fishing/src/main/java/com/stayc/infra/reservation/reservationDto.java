@@ -17,6 +17,7 @@ public class reservationDto {
 	private Integer plcDelNy;		// 삭제여부
 	private Date plcRegDt;			// 등록일시
 	private Date plcModDt;			// 수정일시
+	private Integer xCount;
 //	장소(place)	
 
 //	물고기(fish)
@@ -269,8 +270,10 @@ public class reservationDto {
 	public void setReservYY(String reservYY) {
 		this.reservYY = reservYY;
 	}
-	
-
-	
-	
+	public Integer getxCount() {
+		return xCount;
+	}
+	public void setxCount(Integer xCount) {
+		this.xCount = xCount;
+	}
 }

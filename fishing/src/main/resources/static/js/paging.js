@@ -11,7 +11,7 @@ fnGoList = function(pgPage) {
 		async: true
 		, cache: false
 		, type: "post"
-		, url: "/boardListPaging?"+queryString
+		, url: listPaging+"?"+queryString
 		, success: function(fragment) {
 			$("#listData").replaceWith(fragment);
 		}

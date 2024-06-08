@@ -1,90 +1,8 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
-<head>
-	<div th:replace="~{infra/include/head :: head}"></div>
-	
-    <style>
-		.reservation {
-		    margin: 0 auto;
-		    padding: 15px;
-		    max-width: 1400px; /* 기본 영역의 최대 너비를 늘림 */
-		    background-color: #f8f9fa; /* 배경색 */
-		}
-		
-		@media (min-width: 768px) {
-		    .reservation {
-		        padding: 30px; /* 패딩 증가 */
-		    }
-		}
-		
-		@media (min-width: 992px) {
-		    .reservation {
-		        padding: 50px; /* 패딩 추가 증가 */
-		    }
-		}
-		
-		@media (min-width: 1200px) {
-		}
-		.product-default {
-		    align-items: stretch; /* 자식 요소의 높이를 동일하게 맞춤 */
-		}
-		
-		.product-details {
-		    flex-grow: 1;
-		}
-		
-		.product-action.right-align {
-		    align-self: flex-end;
-		}
-    </style>
-</head>
-
 <body>
-	<form name="form" id="form" method="post" autocomplete="off">
-		<input type="hidden" id="reservDD" name="reservDD">
-		<input type="hidden" id="reservMM" name="reservMM">
-		<input type="hidden" id="reservYY" name="reservYY">
-		<input type="hidden" id="plcSeq" name="plcSeq">
-	 	<input type="hidden" id="pgPage" name="pgPage" th:value="${vo.pgPage}" default="1">
-	 	
-	    <div class="page-wrapper">
-	        <header class="header">
-	            <div class="header-middle sticky-header font2">
-	                <div class="container-fluid">
-	                    <div class="header-left">
-	                        <button class="mobile-menu-toggler pl-0" type="button">
-	                            <i class="fas fa-bars"></i>
-	                        </button>
-	                        <a href="/index" class="logo mr-5">
-	                            <img src="img/logo.png" alt="Logo" width="111" height="44">
-	                        </a>
-	                        <!--메인메뉴-->
-	                        <div th:replace="~{infra/include/body :: menu(0)}"></div>
-	                        
-							<div class="align-items-center ml-5">
-								<nav aria-label="breadcrumb" class="breadcrumb-nav">
-									<div class="container">
-										<ol class="breadcrumb">
-											<li class="breadcrumb-item" style="color: blue;">
-												<a href="/index"><i class="fas fa-fish">&nbsp;</i><b>Home</b></a>
-											</li>
-											<li class="breadcrumb-item active" aria-current="page">Reservation</li>
-										</ol>
-									</div>
-								</nav>
-							</div>
-	                    </div>
-						<!--우측메뉴-->
-	                    <div th:replace="~{infra/include/body :: menuRight}"></div>
-	                </div>
-	            </div>
-	            <!--예약일자-->
-				<div th:replace="~{infra/include/head :: date}"></div>	
-	        </header>
-	
-	        <main class="main">
-	            <!-- 낚시 좌대 리스트 -->
+
 	            <div  id="listData" class="reservation">
 	                <div class="row">
 	                    <div class="col-lg-12 main-content">
@@ -154,32 +72,6 @@
 	                    </div>
 	                </div>
 	            </div>
-	        </main>
-	    </div>
-	</form>
-	<footer th:replace="~{infra/include/body :: footer}"></footer>
-    <a id="scroll-top" href="#top" title="Top" role="button"><i class="icon-angle-up"></i></a>    
-    <!-- Plugins JS File -->
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/plugins.min.js"></script>
-    <script src="assets/js/nouislider.min.js"></script>
-    <script src="assets/js/jquery.countdown.min.js"></script>
-
-    <!-- Main JS File -->
-    <script src="assets/js/main.min.js"></script>
-    
-    <script type="text/javascript">
-	    let goUrlCheckout = "/seat";
-		let listPaging = "/seatListPaging";
-		let form = document.querySelector("#form");
-
-	    function fnGoDetail(plcSeq) {
-			$("#plcSeq").val(plcSeq);
-			form.action = goUrlCheckout;
-			form.submit();
-		}
-    </script>
     
 </body>
 

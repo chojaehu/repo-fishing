@@ -5,7 +5,7 @@ import java.util.List;
 public interface reservationDao {
 	
 //	예약장소 리스트
-	public List<reservationDto> selectList(reservationDto dto);
+	public List<reservationDto> selectList(reservationVo vo);
 	
 //	예약상세 리스트
 	public reservationDto selectOne(reservationDto dto);
@@ -18,4 +18,7 @@ public interface reservationDao {
 	
 //	채집도구 리스트
 	public List<reservationDto> prpList(reservationDto dto);
+	
+	// 낚시터 갯수
+	public int selectOneCount(reservationVo vo);
 }
