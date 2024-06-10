@@ -80,4 +80,5 @@ public class reservationController {
 		
 		return "redirect:/index";
 	}
+	
 }
