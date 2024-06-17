@@ -14,11 +14,14 @@ public interface ChatDao {
 	public List<ChatDto> myroomList(ChatDto dto);
 //	채팅방 참여 인원 리스트
 	public List<ChatDto> roomMember(ChatDto dto);
+//	채팅방 생성 이미지
+	public List<ChatDto> roomimg();
 	
 //	채팅방 참여 확인
 	public ChatDto roomcheckinOne(ChatDto dto);
 //	채빙방
 	public ChatDto roomOne(ChatDto dto);
+	
 	
 	
 //	채팅방 가입

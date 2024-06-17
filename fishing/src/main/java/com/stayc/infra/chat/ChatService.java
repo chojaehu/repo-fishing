@@ -1,19 +1,15 @@
 package com.stayc.infra.chat;
 
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.google.api.core.ApiFuture;
-import com.google.cloud.firestore.CollectionReference;
-import com.google.cloud.firestore.DocumentReference;
+
 import com.google.cloud.firestore.Firestore;
-import com.google.cloud.firestore.QuerySnapshot;
-import com.google.cloud.firestore.WriteResult;
-import com.google.firebase.cloud.FirestoreClient;
+
 
 @Service
 public class ChatService {
@@ -43,6 +39,11 @@ public class ChatService {
 	public List<ChatDto> roomMember(ChatDto dto)
 	{
 		return dao.roomMember(dto);
+	}
+//	채팅방 생성 이미지
+	public List<ChatDto> roomimg()
+	{
+		return dao.roomimg();
 	}
 	
 	

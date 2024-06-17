@@ -30,10 +30,19 @@ public class ChatDto {
 	
 	
 	private String path;
+	private Integer iuSeq;
 	
 	
 	
 	
+	public Integer getIuSeq() {
+		return iuSeq;
+	}
+
+	public void setIuSeq(Integer iuSeq) {
+		this.iuSeq = iuSeq;
+	}
+
 	public String getPath() {
 		return path;
 	}

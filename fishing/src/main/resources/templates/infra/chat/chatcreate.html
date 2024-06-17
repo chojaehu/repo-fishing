@@ -157,6 +157,7 @@
 					<div class="col-lg-12">
 						<article class="post single">
 							<form  id='forminsert' name ='forminsert' method='get' >
+							<input type="hidden" id="iuSeq" name="iuSeq">
 							<div class="container">
 								<div class="row justify-content-md-center">
 									<div class="col-md-8">
@@ -202,30 +203,12 @@
 														<!-- <img src="https://via.placeholder.com/600x400" alt="Post Image" class="img-fluid post-img" id="mainImg"> -->
                                                         
 														<div class="row">
-															<div class="col-6 col-sm-4 col-md-3">
-																<img src="https://via.placeholder.com/150/FF5733/FFFFFF" alt="Small Image 1" class="small-img" onclick="changeMainImg('https://via.placeholder.com/600x400/FF5733/FFFFFF')">
+															<div class="col-6 col-sm-4 col-md-3" th:if="${!#lists.isEmpty(list)}" th:each="list : ${list}">
+																<img th:src="${list.path}" th:value="${list.iuSeq}" alt="Small Image 1" class="small-img"   onclick="changeMainImg(this.getAttribute('src'),this.getAttribute('value'))">
 															</div>
-															<div class="col-6 col-sm-4 col-md-3">
+															<!-- <div class="col-6 col-sm-4 col-md-3">
 																<img src="https://via.placeholder.com/150/C70039/FFFFFF" alt="Small Image 2" class="small-img" onclick="changeMainImg('https://via.placeholder.com/600x400/FF5733/FFFFFF')">
-															</div>
-															<div class="col-6 col-sm-4 col-md-3">
-																<img src="https://via.placeholder.com/150/900C3F/FFFFFF" alt="Small Image 3" class="small-img" onclick="changeMainImg('https://via.placeholder.com/600x400/FF5733/FFFFFF')">
-															</div>
-															<div class="col-6 col-sm-4 col-md-3">
-																<img src="https://via.placeholder.com/150/581845/FFFFFF" alt="Small Image 4" class="small-img" onclick="changeMainImg('https://via.placeholder.com/600x400/FF5733/FFFFFF')">
-															</div>
-                                                            <div class="col-6 col-sm-4 col-md-3">
-																<img src="https://via.placeholder.com/150/FF5733/FFFFFF" alt="Small Image 1" class="small-img" onclick="changeMainImg('https://via.placeholder.com/600x400/FF5733/FFFFFF')">
-															</div>
-															<div class="col-6 col-sm-4 col-md-3">
-																<img src="https://via.placeholder.com/150/C70039/FFFFFF" alt="Small Image 2" class="small-img" onclick="changeMainImg('https://via.placeholder.com/600x400/C70039/FFFFFF')">
-															</div>
-															<div class="col-6 col-sm-4 col-md-3">
-																<img src="https://via.placeholder.com/150/900C3F/FFFFFF" alt="Small Image 3" class="small-img" onclick="changeMainImg('https://via.placeholder.com/600x400/900C3F/FFFFFF')">
-															</div>
-															<div class="col-6 col-sm-4 col-md-3">
-																<img src="https://via.placeholder.com/150/581845/FFFFFF" alt="Small Image 4" class="small-img" onclick="changeMainImg('https://via.placeholder.com/600x400/581845/FFFFFF')">
-															</div>
+															</div> -->
 														</div>
 													</div>
                                                     <div class="col-8 mt-3">
@@ -288,8 +271,9 @@
 	<!-- Main JS File -->
 	<script src="assets/js/main.min.js"></script>
 	<script>
-        function changeMainImg(imgSrc) {
+        function changeMainImg(imgSrc,value) {
             document.getElementById("mainImg").src = imgSrc;
+            document.getElementById("iuSeq").value = value;
         }
         
         

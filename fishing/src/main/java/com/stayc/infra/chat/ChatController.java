@@ -73,8 +73,8 @@ public class ChatController {
 	}
 	
 	@RequestMapping(value = "/chatcreate")
-	public String chatcreate() throws Exception {
-		
+	public String chatcreate(Model model) throws Exception {
+		model.addAttribute("list", service.roomimg());
 		return Constants.PATH_CHAT + "chatcreate";
 	}
 	
