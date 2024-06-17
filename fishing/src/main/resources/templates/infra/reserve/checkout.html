@@ -64,7 +64,7 @@
 	                                        <th id="revDate" name="revDate" th:value="${revDate}" th:text="${reservYY} + '년' + ${reservMM} + '월' + ${reservDD} + '일'"></th>
 	                                        <th id="revPlaceCd" name="revPlaceCd" th:value="${plcTypeCd}" th:text="${@codeService.selectOneCachedCode(plcTypeCd)} + '낚시'"></th>
 	                                        <th id="revSeat" name="revSeat" th:value="${revSeat}" th:text="${revSeat} +'번'"></th>
-	                                        <th id="plcAmount" name="plcAmount" th:value="${plcAmount}" th:text="${#numbers.formatInteger(plcAmount,1,'COMMA')} + '원'"></th>
+	                                        <th id="revAmount" name="revAmount" th:value="${plcAmount}" th:text="${#numbers.formatInteger(plcAmount,1,'COMMA')} + '원'"></th>
 	                                    </tr>
 	                                </tbody>
 	                            </table>
@@ -76,42 +76,42 @@
 	                                    <div class="col-6">
 	                                        <div class="select-custom">
 	                                            <h4>카드사명<abbr class="required" title="required">*</abbr></label></h4>
-	                                            <select name="orderby" class="form-control">
+	                                            <select class="form-control" id="payCardCd" name="payCardCd">
 	                                                <option value="">선택</option>
-	                                                <option value="1">신한</option>
-	                                                <option value="2">삼성</option>
-	                                                <option value="3">농협</option>
+	                                                <option value="44">신한</option>
+	                                                <option value="45">삼성</option>
+	                                                <option value="46">농협</option>
 	                                            </select>
 	                                        </div>
 	                                    </div>
 	                                    <div class="col-6">
 	                                        <div class="form-group">
 	                                            <h4>성함<abbr class="required" title="required">*</abbr></label></h4>
-	                                            <input type="text" class="form-control"  />
+	                                            <input type="text" class="form-control" id="payName" name="payName">
 	                                        </div>
 	                                    </div>
 	                                    <div class="col-12">
 	                                        <div class="form-group">
 	                                            <h4>카드번호<abbr class="required" title="required">*</abbr></label></h4>
-	                                            <input type="text" class="form-control"  />
+	                                            <input type="text" class="form-control" id="payNunber" name="payNunber">
 	                                        </div>
 	                                    </div>
 	                                    <div class="col-4">
 	                                        <div class="form-group">
 	                                            <h4>MM<abbr class="required" title="required">*</abbr></label></h4>
-	                                            <input type="text" class="form-control"  />
+	                                            <input type="text" class="form-control" id="payMM" name="payMM">
 	                                        </div>
 	                                    </div>
 	                                    <div class="col-4">
 	                                        <div class="form-group">
 	                                            <h4>YY<abbr class="required" title="required">*</abbr></label></h4>
-	                                            <input type="text" class="form-control"  />
+	                                            <input type="text" class="form-control" id="payYY" name="payYY">
 	                                        </div>
 	                                    </div>
 	                                    <div class="col-4">
 	                                        <div class="form-group">
 	                                            <h4>cvc<abbr class="required" title="required">*</abbr></label></h4>
-	                                            <input type="text" class="form-control"  />
+	                                            <input type="text" class="form-control" id="payCVC" name="payCVC" >
 	                                        </div>
 	                                    </div>
 	                                </div>
