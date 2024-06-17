@@ -71,8 +71,13 @@
 	                                </span>
 	                            </div>
 	                            <div class="product-desc">
-									<p th:text="'운영시간 : '+ ${item.plcOperatingFrom} + '시' + ' ~ ' + ${item.plcOperatingTo} + '시'"></p>
-	                                <p th:text="'제공시설 및 물품 : ' + ${item.plcNote}"></p>
+									<h5 th:text="'운영시간 : '+ ${item.plcOperatingFrom} + '시' + ' ~ ' + ${item.plcOperatingTo} + '시'"></h5>
+	                                <h5 th:text="'제공시설 및 물품 : ' + ${item.plcNote}"></h5>
+                                   <h5> 어종 : 
+									    <span th:each="fisList, fisListStat : ${fisList}">
+									        <span th:text="${fisListStat.index > 0 ? ',' : ''} + ${@codeService.selectOneCachedCode(fisList.fisFishCd)}"></span>
+									    </span>
+									</h5>
 	                            </div>
 	                        </div><!-- End .product-single-gallery -->
 	                        <div class="col-lg-8 col-md-6 product-single-details">
@@ -95,27 +100,29 @@
                         <li class="nav-item">
                             <a class="nav-link active" id="product-tab-desc" data-toggle="tab"
                                 href="#product-desc-content" role="tab" aria-controls="product-desc-content"
-                                aria-selected="true">Description</a>
+                                aria-selected="true">채집도구</a>
                         </li>
                     </ul>
                     <div class="tab-content font2">
-                        <div class="tab-pane fade show active" id="product-desc-content"
-                           >
-                            <table class="table" >
-                                <tbody>
-                                    <tr>
-                                        <th>어종</th>
-                                        <td th:each= "fisList : ${fisList}">
-                                        	<a th:text="${@codeService.selectOneCachedCode(fisList.fisFishCd)}"></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>낚시대</th>
-                                        <td th:each= "prpList : ${prpList}" th:text="${@codeService.selectOneCachedCode(prpList.prpFishingRod)}">
-                                        </td>
-                                    </tr>
-                                </tbody>
-               				</table>
+                        <div class="tab-pane fade show active" id="product-desc-content">
+               				<table class="table">
+								<thead>
+								    <tr>
+								      	<th class="col-3">낚시대</th>
+								      	<th class="col-4">릴</th>
+								      	<th class="col-4">미끼</th>
+								    	<th class="col-4">추</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+								    	<td th:each="prpList : ${prpList}" th:text="${@codeService.selectOneCachedCode(prpList.prpFishingRod)}"></td>
+								      	<td th:each="prpList : ${prpList}" th:text="${@codeService.selectOneCachedCode(prpList.prpReel)}"></td>
+								      	<td th:each="prpList : ${prpList}" th:text="${@codeService.selectOneCachedCode(prpList.prpBait)}"></td>
+								      	<td th:each="prpList : ${prpList}" th:text="${@codeService.selectOneCachedCode(prpList.prpWeight)}"></td>
+									</tr>
+								</tbody>
+							</table>
                         </div><!-- End .tab-pane -->
 	                </div><!-- End .product-reviews-content -->
 	            </div><!-- End .tab-pane -->
