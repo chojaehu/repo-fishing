@@ -62,13 +62,10 @@
 	                            <div class="product-slider-container">
 	                                <div class="product-single-carousel owl-carousel owl-theme show-nav-hover">
 	                                    <div class="product-item">
-	                                        <img class="product-single-image" src="assets/images/demoes/demo34/products/zoom/product-1.jpg" data-zoom-image="assets/images/demoes/demo34/products/zoom/product-1-big.jpg"width="468" height="468" alt="product" />
+	                                        <img th:src="${item.path}" />
 	                                    </div>
 	                                </div>
-	                                <!-- End .product-single-carousel -->
-	                                <span class="prod-full-screen">
-	                                    <i class="icon-plus"></i>
-	                                </span>
+	                                <br>
 	                            </div>
 	                            <div class="product-desc">
 									<h5 th:text="'운영시간 : '+ ${item.plcOperatingFrom} + '시' + ' ~ ' + ${item.plcOperatingTo} + '시'"></h5>

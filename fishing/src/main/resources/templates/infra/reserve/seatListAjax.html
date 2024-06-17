@@ -30,27 +30,16 @@
 	                                <!-- 메인 이미지 -->
 	                                <figure>
 	                                    <a>
-	                                        <img src="" width="250" height="250" alt="product" />
+	                                        <img th:src="${list.path}" class="fixed-size-img" alt="product" />
 	                                    </a>
 	                                </figure>
-	                                <div class="product-details" >
+	                                <div class="product-details">
 	                                    <!-- 예약카테고리표기(좌대낚시, 배낚시) -->
 	                                    <div class="category-list">
 	                                        <a class="product-category" th:text="${@codeService.selectOneCachedCode(list.plcTypeCd)}+'낚시'"></a>
 	                                    </div>
 	                                    <!-- 제품명 -->
 	                                    <h3 class="product-title" th:text="${list.plcName}"> <a href="product.html"></a> </h3>
-	                                    <!-- 별점 수정 및 삭제예정 -->
-	                                    <!-- <div class="ratings-container">
-	                                        <div class="product-ratings">
-	                                            <span class="ratings" style="width:100%"></span>
-	                                            End .ratings
-	                                            <span class="tooltiptext tooltip-top"></span>
-	                                        </div>
-	                                        End .product-ratings
-	                                    </div> -->
-	                                    <!-- End .product-container -->
-	                                    <!-- 예약 설명 -->
 	                                    <p th:text="'운영시간 : '+ ${list.plcOperatingFrom} + '시' + ' ~ ' + ${list.plcOperatingTo} + '시'"></p>
 	                                    <p th:text="'제공시설 및 물품 : ' + ${list.plcNote}"></p>
 	                                    <!-- 금액 -->

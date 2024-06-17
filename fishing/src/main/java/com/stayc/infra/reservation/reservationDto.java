@@ -58,7 +58,9 @@ public class reservationDto extends BaseDto {
 	private String reservMM;		// 예약월
 	private String reservYY;		// 예약년도
 	
-
+	private String iuSeq;			// 이미지순번
+	private String path;			// 주소명
+	
 
 	public String getPlcSeq() {
 		return plcSeq;
@@ -356,4 +358,21 @@ public class reservationDto extends BaseDto {
 		this.reservYY = reservYY;
 	}
 
+	public String getIuSeq() {
+		return iuSeq;
+	}
+
+	public void setIuSeq(String iuSeq) {
+		this.iuSeq = iuSeq;
+	}
+
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+
+	
 }
