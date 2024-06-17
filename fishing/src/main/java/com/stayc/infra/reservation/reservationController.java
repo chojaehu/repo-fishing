@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.stayc.common.constants.Constants;
+import com.stayc.common.fileupload.FileUpLoadDto;
 import com.stayc.common.util.UtilFunction;
 
 @Controller
@@ -29,7 +30,7 @@ public class reservationController {
 		return Constants.PATH_RESERVE + "seatList";
 	}
 
-	// 페이징
+//	페이징
 	@RequestMapping(value = "/seatListPaging")
 	public String boardListPaging(@ModelAttribute("vo") reservationVo vo, Model model) throws Exception {
 		int rowCount = service.selectOneCount(vo);
@@ -71,6 +72,13 @@ public class reservationController {
 	    
 		return Constants.PATH_RESERVE + "checkout";
 	}
+
+//	예약상세 리스트
+	@RequestMapping(value = "/upload")
+	public String upload(reservationDto dto, Model model) throws Exception {
+		
+		return Constants.PATH_RESERVE + "upload";
+	}
 	
 //	결제완료 insert
 	@RequestMapping(value = "/insert")
@@ -80,5 +88,13 @@ public class reservationController {
 		
 		return "redirect:/index";
 	}
-	
+//	이미지 업로드
+	@RequestMapping(value = "/fileUploadsS3")
+	public String fileUploadsS3(FileUpLoadDto dto, FileUpLoadDto fDto,reservationDto dto2) throws Exception{
+		
+		service.fileUploadsS3(dto2.getUploadFiles(), dto, fDto);
+		
+		return "redirect:/upload";
+		
+	}
 }

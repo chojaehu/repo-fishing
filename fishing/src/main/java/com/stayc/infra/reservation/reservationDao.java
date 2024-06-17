@@ -19,6 +19,7 @@ public interface reservationDao {
 //	채집도구 리스트
 	public List<reservationDto> prpList(reservationDto dto);
 	
-	// 낚시터 갯수
+// 	낚시터 갯수
 	public int selectOneCount(reservationVo vo);
+
 }

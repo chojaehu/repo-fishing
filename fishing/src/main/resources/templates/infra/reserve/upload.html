@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<div th:replace="~{infra/include/head :: head}"></div>
+</head>
+
+<body>
+	<form name="formName" id="formName" method="post" autocomplete="off" enctype="multipart/form-data">
+	    <div class="page-wrapper">
+	        <header class="header">
+	            <div class="header-middle sticky-header font2">
+	                <div class="container-fluid">
+	                    <div class="header-left">
+	                        <button class="mobile-menu-toggler pl-0" type="button">
+	                            <i class="fas fa-bars"></i>
+	                        </button>
+	                        <a href="/index" class="logo mr-5">
+	                            <img src="img/logo.png" alt="Logo" width="111" height="44">
+	                        </a>
+	                        <!--메인메뉴-->
+	                        <div th:replace="~{infra/include/body :: menu(0)}"></div>
+	                        
+							<div class="align-items-center ml-5">
+								<nav aria-label="breadcrumb" class="breadcrumb-nav">
+									<div class="container">
+										<ol class="breadcrumb">
+											<li class="breadcrumb-item" style="color: blue;">
+												<a href="/index"><i class="fas fa-fish">&nbsp;</i><b>Home</b></a>
+											</li>
+											<li class="breadcrumb-item active" aria-current="page">Reservation</li>
+										</ol>
+									</div>
+								</nav>
+							</div>
+	                    </div>
+						<!--우측메뉴-->
+	                    <div th:replace="~{infra/include/body :: menuRight}"></div>
+	                </div>
+	            </div>
+	            <!--예약일자-->
+				<div th:replace="~{infra/include/head :: date}"></div>	
+	        </header>
+	
+	        <main class="main">
+	        	<div id="carouselExampleAutoplaying" class="carousel slide " data-bs-ride="carousel">
+				<div class="carousel-inner" style="height: 350px;">
+					<div class="carousel-item active">
+						<img src="img/loginimage.jpg" class="d-block w-100" alt="Full Width Image">
+					</div>
+					<div class="carousel-item">
+						<img src="img/registerimage.jpg" class="d-block w-100" alt="Full Width Image">
+					</div>
+					<div class="carousel-item">
+						<img src="img/loginimage.jpg" class="d-block w-100" alt="Full Width Image">
+					</div>
+					<div class="carousel-item">
+						<img src="img/registerimage.jpg" class="d-block w-100" alt="Full Width Image">
+					</div>
+				</div>
+				<button class="carousel-control-prev" type="button"
+					data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+						class="visually-hidden">Previous</span>
+				</button>
+				<button class="carousel-control-next" type="button"
+					data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span> <span
+						class="visually-hidden">Next</span>
+				</button>
+			</div>		
+				
+            <section class="category-section">
+                <div class="container mt-3">
+                    <h2 class="section-title m-b-2 appear-animate" data-animation-name="fadeInUpShorter">이미지 업로드</h2>
+                    <h5 class="section-info p-b-4 mb-2 appear-animate" data-animation-name="fadeInUpShorter"
+                        data-animation-delay="200">
+                    </h5>
+                    
+					<div id="listData">
+						<div class="account-content">
+							<form id="form" name="form" method="post" autocomplete="off" enctype="multipart/form-data">
+								<div class="col-3">
+                                    <div class="select-custom">
+                                        <label style="display: block;" for="brdNote">구분</label>
+                                        <select id="category" name="category" class="form-control">
+                                            <option value="">선택</option>
+                                            <option value="1">게시판</option>
+                                            <option value="2">예약목록</option>
+                                            <option value="3">채팅방</option>
+                                        </select>
+                                    </div>
+                                </div>
+								<div class="row">
+									<div class="col-3">
+										<div class="form-group">
+											<label style="display: block;" for="brdNote">파일첨부</label>
+											<input type="file" class="form-input" id="uploadFiles" name="uploadFiles" accept="image/png, image/jpeg" multiple></input>
+										</div>
+									</div>
+								</div>
+								<div class="form-footer mb-3">
+									<div class="container text-center">
+										<div class="row justify-content-evenly">
+										    <div class="col-1">
+												<a href="javascript:void(0)" th:onclick="javascript:fnGoList();">
+											    	<button type="button" class="btn btn-dark" style="border-radius: 15%;">
+														이전
+													</button>
+												</a>
+										    </div>
+										    <div class="col-10"></div>
+										    <div class="col-1">
+										    	<button type="button" class="btn btn-primary" id="additional" name="additional" style="border-radius: 15%;">
+													저장
+												</button>
+										    </div>
+										</div>
+									</div>
+								</div>	
+							</form>
+						</div>
+					</div>
+				</div>
+            </section>
+	        </main>
+	    </div>
+	</form>
+	<footer th:replace="~{infra/include/body :: footer}"></footer>
+    <a id="scroll-top" href="#top" title="Top" role="button"><i class="icon-angle-up"></i></a>    
+    <!-- Plugins JS File -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/plugins.min.js"></script>
+    <script src="assets/js/nouislider.min.js"></script>
+    <script src="assets/js/jquery.countdown.min.js"></script>
+
+    <!-- Main JS File -->
+    <script src="assets/js/main.min.js"></script>
+    
+    <script type="text/javascript">
+    document.getElementById("additional").onclick = function () {
+		insertCall();
+    }
+    let form = document.querySelector("form[name=formName]")
+		 insertCall = function() {
+			form.action = "/fileUploadsS3";
+			form.submit();
+		}
+    </script>
+</body>
+
+</html>
