@@ -207,7 +207,7 @@
 										th:each="mylist : ${mylist}">
 										<div class="post-media">
 											<a href="single.html">
-												<img src="assets/images/blog/widget/post-1.jpg" alt="Post">
+												<img th:src="${mylist.path}" alt="Post">
 											</a>
 										</div>
 										<div class="post-info">

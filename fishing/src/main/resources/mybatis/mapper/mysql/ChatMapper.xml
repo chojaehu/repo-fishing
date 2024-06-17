@@ -38,7 +38,9 @@
 	 <select id ="myroomList" resultMap="resultMapObj">
 	 select 
 		a.romSeq,
-		a.romTitle
+		a.romTitle,
+		(select aa.path from fileuploaded aa 
+            where a.iuSeq = aa.iuSeq) as path
 		from 
 			room a
 		join 
