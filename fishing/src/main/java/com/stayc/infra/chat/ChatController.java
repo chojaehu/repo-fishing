@@ -35,8 +35,8 @@ public class ChatController {
 		if(roomcount > 0)
 		{
 			vo.setPagingVo(roomcount);
-			httpSession.setAttribute("sessMbrSeq",  3);
-			dto.setMbrSeq((Integer) httpSession.getAttribute("sessMbrSeq"));
+			//httpSession.setAttribute("sessMbrSeq",  2);
+			dto.setMbrSeq((String) httpSession.getAttribute("sessMbrSeq"));
 			//httpSession.invalidate();
 			model.addAttribute("list", service.roomList(vo));
 			model.addAttribute("mylist", service.myroomList(dto));
@@ -66,7 +66,7 @@ public class ChatController {
 	@RequestMapping(value = "/chatting")
 	public String chatting(@RequestParam("romSeq") String romSeq, ChatDto dto, Model model,HttpSession httpSession) throws Exception{
 		dto.setRomSeq(Integer.parseInt(romSeq));
-		dto.setMbrSeq((Integer) httpSession.getAttribute("sessMbrSeq"));
+		dto.setMbrSeq((String) httpSession.getAttribute("sessMbrSeq"));
 		model.addAttribute("item", service.roomOne(dto));
 		model.addAttribute("mbrlist", service.roomMember(dto));
 		return Constants.PATH_CHAT + "chatting";
@@ -81,7 +81,7 @@ public class ChatController {
 	@RequestMapping(value="/chatupdate")
 	public String chatupdate(ChatDto dto, Model model,HttpSession httpSession) throws Exception
 	{
-		dto.setMbrSeq((Integer) httpSession.getAttribute("sessMbrSeq"));
+		dto.setMbrSeq((String) httpSession.getAttribute("sessMbrSeq"));
 		model.addAttribute("item", service.roomOne(dto));
 		return Constants.PATH_CHAT + "chatupdate";
 	}
@@ -103,7 +103,7 @@ public class ChatController {
 	@RequestMapping(value = "/chatroominst")
 	public String chatroominst(ChatDto dto,HttpSession httpSession) throws Exception
 	{
-		dto.setMbrSeq((Integer) httpSession.getAttribute("sessMbrSeq"));
+		dto.setMbrSeq((String) httpSession.getAttribute("sessMbrSeq"));
 		service.chatroominst(dto);
 		service.chatroommanager(dto);
 	
@@ -114,7 +114,7 @@ public class ChatController {
 	@RequestMapping(value = "/roomcheckinst")
 	public String roomcheckinst(ChatDto dto,HttpSession httpSession) throws Exception
 	{
-		dto.setMbrSeq((Integer) httpSession.getAttribute("sessMbrSeq"));
+		dto.setMbrSeq((String) httpSession.getAttribute("sessMbrSeq"));
 		service.roomcheckinst(dto);
 		
 		return "redirect:/chatting" + "?romSeq=" + dto.getRomSeq();
@@ -124,7 +124,7 @@ public class ChatController {
 	@RequestMapping(value= "/memberdelete")
 	public String memberdelete(ChatDto dto , HttpSession httpSession) throws Exception
 	{
-		dto.setMbrSeq((Integer)httpSession.getAttribute("sessMbrSeq"));
+		dto.setMbrSeq((String)httpSession.getAttribute("sessMbrSeq"));
 		service.memberdelete(dto);
 		
 		return "redirect:/chatroom";
@@ -147,7 +147,7 @@ public class ChatController {
 	public Map<String, Object> checkroom(Model model,HttpSession httpSession,ChatDto dto) throws Exception {
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 		
-		dto.setMbrSeq((Integer) httpSession.getAttribute("sessMbrSeq"));
+		dto.setMbrSeq((String) httpSession.getAttribute("sessMbrSeq"));
 		System.out.println(dto.getMbrSeq()+"-----------------------------");
 		if(dto.getMbrSeq() != null)
 		{

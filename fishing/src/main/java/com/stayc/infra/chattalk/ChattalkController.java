@@ -24,7 +24,7 @@ public class ChattalkController {
 	public Map<String, Object> chattinginsert(ChattalkDto dto,HttpSession httpSession)throws Exception
 	{
 		Map<String, Object> returnMap = new HashMap<String, Object>();
-		dto.setMbrSeq(String.valueOf((Integer) httpSession.getAttribute("sessMbrSeq")));
+		dto.setMbrSeq((String) httpSession.getAttribute("sessMbrSeq"));
 		service.talkinsert(dto);
 		service.chattinginst(dto);
 		

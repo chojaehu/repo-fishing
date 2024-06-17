@@ -17,7 +17,7 @@ public class ChatDto {
 	
 	
 	
-	private Integer mbrSeq;
+	private String mbrSeq;
 	private String mbrName;
 	
 	
@@ -29,8 +29,19 @@ public class ChatDto {
 	private Integer currentStaff;
 	
 	
+	private String path;
 	
 	
+	
+	
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+
 	public Integer getRckDelNY() {
 		return rckDelNY;
 	}
@@ -95,11 +106,11 @@ public class ChatDto {
 		this.romNote = romNote;
 	}
 
-	public Integer getMbrSeq() {
+	public String getMbrSeq() {
 		return mbrSeq;
 	}
 
-	public void setMbrSeq(Integer mbrSeq) {
+	public void setMbrSeq(String mbrSeq) {
 		this.mbrSeq = mbrSeq;
 	}
 
