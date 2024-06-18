@@ -62,11 +62,8 @@ public class reservationController {
 	
 //	결제페이지
 	@RequestMapping(value = "/checkout")
-	public String checkout(reservationDto dto, Model model, HttpSession httpSession) throws Exception {
+	public String checkout(reservationDto dto, Model model) throws Exception {
 	    // 다른 모든 속성을 모델에 추가
-		
-		dto.setMbrSeq((String) httpSession.getAttribute("sessMbrSeq"));
-		
 	    model.addAttribute("plcSeq", dto.getPlcSeq());
 	    model.addAttribute("plcName", dto.getPlcName());
 	    model.addAttribute("plcTypeCd", dto.getPlcTypeCd());
@@ -104,7 +101,9 @@ public class reservationController {
 	
 //	결제완료 insert
 	@RequestMapping(value = "/insert")
-	public String insert(reservationDto dto) throws Exception {
+	public String insert(reservationDto dto,HttpSession httpSession) throws Exception {
+
+		dto.setMbrSeq((String) httpSession.getAttribute("sessMbrSeq"));
 		
 		service.insert(dto);
 		service.payInsert(dto);
