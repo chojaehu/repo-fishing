@@ -54,6 +54,14 @@
 </head> 
 
 <body>
+			<!-- <section class="body">
+			    <div class="slide-container">
+        <div th:each="weather : ${weatherData['response']['body']['items']['item']}" class="slide-item">
+            <h2 th:text="${weather['category']}"></h2>
+            <p th:text="${weather['fcstValue']}"></p>
+        </div>
+    </div>
+			</section>  -->
 	<div class="page-wrapper">
 
 		<header class="header">

@@ -26,6 +26,8 @@
 		from 
 			room a
 		where 1=1 and romDelNy = 0
+		LIMIT #{pgRowCount}
+    	OFFSET #{pgOffset}
 	 </select>
 	 
 	 <select id="roomCount">
