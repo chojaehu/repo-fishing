@@ -74,6 +74,9 @@
 	<!-- 결제완료 insert -->
 	<insert id="insert">
     	INSERT INTO reservation (
+    		<selectKey resultType ="String" keyProperty="revSeq" order="AFTER">
+				SELECT LAST_INSERT_ID()
+			</selectKey>
     		revDate
     		,revAmount
     		,revPlaceCd
@@ -93,6 +96,31 @@
     		,now()
     		,#{mbrSeq}
     		,#{plcSeq}
+    	)
+    </insert>
+    <insert id="payInsert">
+    	INSERT INTO payment (
+    		payName
+    		,payCardCd
+    		,payNunber
+    		,payYY
+    		,payMM
+    		,payCVC
+    		,payDelNy
+    		,payRegDt
+    		,payModDt
+    		,revSeq
+    	)VALUES(
+    		#{payName}
+    		,#{payCardCd}
+    		,#{payNunber}
+    		,#{payYY}
+    		,#{payMM}
+    		,#{payCVC}
+    		,0
+    		,now()
+    		,now()
+    		,#{revSeq}
     	)
     </insert>
 	

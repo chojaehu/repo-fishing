@@ -1,5 +1,7 @@
 package com.stayc.infra.reservation;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +12,7 @@ import com.stayc.common.constants.Constants;
 import com.stayc.common.fileupload.FileUpLoadDto;
 import com.stayc.common.util.UtilFunction;
 
+import jakarta.servlet.http.HttpSession;
 @Controller
 public class reservationController {
 
@@ -59,7 +62,10 @@ public class reservationController {
 	
 //	결제페이지
 	@RequestMapping(value = "/checkout")
-	public String checkout(reservationDto dto, Model model) throws Exception {
+	public String checkout(reservationDto dto, Model model, HttpSession httpSession) throws Exception {
+	    // 다른 모든 속성을 모델에 추가
+		
+		dto.setMbrSeq((String) httpSession.getAttribute("sessMbrSeq"));
 		
 	    model.addAttribute("plcSeq", dto.getPlcSeq());
 	    model.addAttribute("plcName", dto.getPlcName());
@@ -67,10 +73,26 @@ public class reservationController {
 	    model.addAttribute("plcAmount", dto.getPlcAmount());
 	    model.addAttribute("revSeat", dto.getRevSeat());
 	    model.addAttribute("reservDD", dto.getReservDD());
-		model.addAttribute("reservMM", dto.getReservMM());
-		model.addAttribute("reservYY", dto.getReservYY());
-	    
-		return Constants.PATH_RESERVE + "checkout";
+	    model.addAttribute("reservMM", dto.getReservMM());
+	    model.addAttribute("reservYY", dto.getReservYY());
+
+	    // reservYY, reservMM, reservDD를 사용하여 LocalDate 객체 생성
+	    String year = dto.getReservYY();
+	    String month = dto.getReservMM();
+	    String day = dto.getReservDD();
+
+	    // null 체크 후 String을 int로 변환
+	    int yearInt = (year != null && !year.isEmpty()) ? Integer.parseInt(year) : 0;
+	    int monthInt = (month != null && !month.isEmpty()) ? Integer.parseInt(month) : 1; // 기본값으로 1월 설정
+	    int dayInt = (day != null && !day.isEmpty()) ? Integer.parseInt(day) : 1; // 기본값으로 1일 설정
+
+	    // LocalDate 객체 생성
+	    LocalDate reservationDate = LocalDate.of(yearInt, monthInt, dayInt);
+
+	    // LocalDate 객체를 모델에 추가
+	    model.addAttribute("reservationDate", reservationDate);
+
+	    return Constants.PATH_RESERVE + "checkout";
 	}
 
 //	예약상세 리스트
@@ -82,9 +104,10 @@ public class reservationController {
 	
 //	결제완료 insert
 	@RequestMapping(value = "/insert")
-	public String insert(reservationDto dto) {
+	public String insert(reservationDto dto) throws Exception {
 		
 		service.insert(dto);
+		service.payInsert(dto);
 		
 		return "redirect:/index";
 	}

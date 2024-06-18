@@ -39,6 +39,11 @@ public class reservationService {
 		return dao.selectOne(dto);
 	}
 	
+//	결제카드정보 insert
+	public int payInsert(reservationDto dto) {
+		return dao.payInsert(dto);
+	}
+	
 //	결제완료 insert
 	public int insert(reservationDto dto) {
 		return dao.insert(dto);

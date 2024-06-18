@@ -2,10 +2,12 @@
 //             10(한글영문), 11(한글숫자), 12(영문숫자), 13(한글영문숫자)
 //			   20(비밀번호), 21(날짜), 22(이메일)
 //             30(특수문자), 31(공백체크)
+//			   32(숫자16자리), 33(카드년도), 34(카드월), 35(카드보안)
 const TYPE_KR   =  1, TYPE_EN   = 2,  TYPE_IT   = 3,  TYPE_FT     = 4;  TYPE_ICM = 5;
 const TYPE_KREN = 10, TYPE_KRIT = 11, TYPE_ENIT = 12, TYPE_KRENIT = 13;
 const TYPE_PW   = 20, TYPE_DT   = 21, TYPE_EM   = 22;
 const TYPE_SP   = 30, TYPE_NULL = 31;
+const TYPE_CARD	= 32; TYPE_YY	= 33; TYPE_MM	= 34; TYPE_CVC	  = 35;
 
 // 입력항목 확인
 fnValidation = function() {
@@ -57,10 +59,12 @@ fnValidType = function(obj, objValid, validText, validType) {
 	//             10(한글영문), 11(한글숫자), 12(영문숫자), 13(한글영문숫자)
 	//			   20(비밀번호), 21(날짜), 22(이메일)
 	//             30(특수문자), 31(공백체크)
+	//			   32(숫자16자리), 33(카드년도), 34(카드월), 35(카드보안)
 	// TYPE_KR   =  1, TYPE_EN   = 2,  TYPE_IT   = 3,  TYPE_FT     = 4;  TYPE_ICM = 5;
 	// TYPE_KREN = 10, TYPE_KRIT = 11, TYPE_ENIT = 12, TYPE_KRENIT = 13;
 	// TYPE_PW   = 20, TYPE_DT   = 21, TYPE_EM   = 22;
 	// TYPE_SP   = 30, TYPE_NULL = 31;
+	// TYPE_CARD = 32; TYPE_YY	 = 33; TYPE_MM	 = 34; TYPE_CVC    = 35;
 	
 	let rtReturn = false;
 			
@@ -109,9 +113,21 @@ fnValidType = function(obj, objValid, validText, validType) {
 			break;
 		case TYPE_NULL: // 공백체크
 			rtReturn = fnNullToEmpty(obj, objValid, validText);
-			break;			
+			break;
+//=============================================================================	
+		case TYPE_CARD: // 카드번호입력(정수)
+			rtReturn = fnCardNumber(obj, objValid, validText);
+			break;
+		case TYPE_YY: // 카드년도입력(정수)
+			rtReturn = fnCardYY(obj, objValid, validText);
+			break;
+		case TYPE_MM: // 카드월입력(정수)
+			rtReturn = fnCardMM(obj, objValid, validText);
+			break;
+		case TYPE_CVC: // 카드보안입력(정수)
+			rtReturn = fnCardCVC(obj, objValid, validText);
+			break;
 	};
-	
 	return rtReturn;
 };
 
@@ -218,7 +234,31 @@ fnEmail = function(obj, objValid, validText) {
 fnSpecialChar = function(obj, objValid, validText) {
 	let regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g;
 	return fnValidationCheck(obj, objValid, validText, regExp);		
-}
+};
+
+// 카드번호입력(정수)
+fnCardNumber = function(obj, objValid, validText) {
+	var regExp = /^([0-9]{4})-?([0-9]{4})-?([0-9]{4})-?([0-9]{4})$/; 
+	return fnValidationCheck(obj, objValid, validText, regExp);	
+};
+
+// 카드년도번호입력(정수)
+fnCardYY = function(obj, objValid, validText) {
+	var regExp = /^(0[0-9]|[1-9][0-9])$/; 
+	return fnValidationCheck(obj, objValid, validText, regExp);	
+};
+
+// 카드월번호입력(정수)
+fnCardMM = function(obj, objValid, validText) {
+	var regExp = /^(0[1-9]|1[0-2])$/; 
+	return fnValidationCheck(obj, objValid, validText, regExp);	
+};
+
+// 카드보안번호입력(정수)
+fnCardCVC = function(obj, objValid, validText) {
+	var regExp = /^([0-9]{3})$/; 
+	return fnValidationCheck(obj, objValid, validText, regExp);	
+};
 
 // 유효성 검사
 fnValidationCheck = function(obj, objValid, validText, regExp) {	
@@ -245,3 +285,4 @@ fnValidationCheck = function(obj, objValid, validText, regExp) {
 	};
 
 };
+
