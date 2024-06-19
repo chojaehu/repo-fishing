@@ -38,7 +38,6 @@ public class ChatController {
 	
 	@RequestMapping(value = "/chatroom")
 	public String chatroom(@ModelAttribute("vo") ChatVo vo,ChatDto dto ,Model model,HttpSession httpSession) throws Exception {
-		String roomSeq = String.valueOf(dto.getRomSeq());
 		SimpleDateFormat date = new SimpleDateFormat("yyyyMMdd");
 		Date now = new Date();         
 		String nowtime = date.format(now);
