@@ -25,6 +25,7 @@ public class ChattalkController {
 	{
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 		dto.setMbrSeq((String) httpSession.getAttribute("sessMbrSeq"));
+		dto.setMbrName((String) httpSession.getAttribute("sessMbrName"));
 		service.talkinsert(dto);
 		service.chattinginst(dto);
 		

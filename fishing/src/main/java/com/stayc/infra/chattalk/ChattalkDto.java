@@ -11,7 +11,17 @@ public class ChattalkDto {
 	private Date rtkDate;
 	private String rtkNote;
 	private String mbrSeq;
+	private String mbrName;
 	private Integer romSeq;
+	
+	
+	
+	public String getMbrName() {
+		return mbrName;
+	}
+	public void setMbrName(String mbrName) {
+		this.mbrName = mbrName;
+	}
 	public Integer getRtkSeq() {
 		return rtkSeq;
 	}
