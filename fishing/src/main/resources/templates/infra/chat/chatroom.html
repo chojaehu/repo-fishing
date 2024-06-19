@@ -51,17 +51,89 @@
     <!-- 사용자 스크립트 -->
     <script src="js/validation.js"></script>
     <script src="js/search.js"></script>   
+     <style>
+        body {
+            background: #f4f7fc;
+        }
+        .weather-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .weather-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .weather-header h2 {
+            font-size: 1.5rem;
+            color: #333;
+        }
+        .weather-header .date {
+            font-size: 1rem;
+            color: #666;
+        }
+        .weather-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .weather-icon {
+            font-size: 4rem;
+            color: #007bff;
+        }
+        .weather-info {
+            flex-grow: 1;
+            padding-left: 20px;
+        }
+        .temperature {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .details {
+            font-size: 1rem;
+            color: #666;
+        }
+    </style>
 </head> 
 
 <body>
-			<!-- <section class="body">
-			    <div class="slide-container">
-        <div th:each="weather : ${weatherData['response']['body']['items']['item']}" class="slide-item">
-            <h2 th:text="${weather['category']}"></h2>
-            <p th:text="${weather['fcstValue']}"></p>
+	<div class="weather-container">
+        <div class="weather-header">
+            <h2>서울</h2>
+            <div class="date">2024-06-19</div>
+        </div>
+        <div class="weather-content">
+            <div class="weather-icon">
+                <i class="bi bi-cloud-sun"></i>
+            </div>
+            <div class="weather-info">
+                <div class="temperature">25°C</div>
+                <div class="details">맑음</div>
+                <div class="details">습도: 60%</div>
+                <div class="details">바람: 남서풍 5m/s</div>
+            </div>
         </div>
     </div>
-			</section>  -->
+	<!-- <section class="body">
+	    <div class="slide-container">
+	        <div th:if="${weather != null}">
+	            <div th:each="item : ${weather}" class="slide-item">
+	                <h2 th:text="${item.category}"></h2>
+	                <p th:text="${item.obsrValue}"></p>
+	            </div>
+	        </div>
+	        <div th:if="${weatherItems == null}">
+	            <p>No weather data available.</p>
+	        </div>
+	    </div>
+	</section> -->
 	<div class="page-wrapper">
 
 		<header class="header">
