@@ -52,16 +52,7 @@
     <script src="js/validation.js"></script>
     <script src="js/search.js"></script>  
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+
         .weather-container {
             background-color: white;
             padding: 20px;
@@ -154,6 +145,7 @@
 			<div th:replace="~{infra/include/head :: date}"></div>	
         </header><!-- End .header -->
 
+
 		<main class="main">
 			<nav aria-label="breadcrumb" class="breadcrumb-nav">
 				<div class="container">
@@ -165,19 +157,33 @@
 			<form id="form" name="form" method="post">
 			<input type="hidden" id="pgPage" name="pgPage" th:value="${vo.pgPage}" default="1">
 			<div class="container">
-				<div class="row mt-5">
+				<!-- <div class="row mt-8">
+					<div class="col-4">
+					</div>
+					<div class="col-4">
+						<select class="form-select" >
+						  <option value="1">서울</option>
+						  <option value="2">인천</option>
+						  <option value="3">경기</option>
+						</select>
+					</div>
+					<div class="col-4">
+					</div>
+				</div>  -->
+				<div class="row ㅡㅅ-5">
 			        <div>
-			            <div class="location">노원구 상계2동</div>
+			        	
+			            <div class="location">서울</div>
 			            <div class="weather-main">
-			                <div class="temperature">25.2°</div>
-			                <div class="description">맑음</div>
+			                <div class="temperature" th:each="item : ${weather}" th:if="${item.category =='T1H'}" th:text="${item.obsrValue} + '°'">25.2°</div>
+			                <!-- <div class="description">맑음</div> -->
 			            </div>
 			            <div class="misc">
 			                <span>습도 <b th:each="item : ${weather}" th:if="${item.category =='REH'}" th:text="${item.obsrValue} + '%'">62%</b></span>
-			                <span>체감 <b>25.8°</b></span>
-			                <span>남동풍 <b>0.3m/s</b></span>
-			                <span>미세 <span class="highlight">좋음</span> · 초미세 <span class="highlight">보통</span></span>
-			                <span>일몰 <span class="highlight">19:56</span></span>
+			                <span>풍향 <b th:each="item : ${weather}" th:if="${item.category =='VEC'}" th:text="${item.obsrValue} + 'deg'">25.8°</b></span>
+			                <span>풍속 <b th:each="item : ${weather}" th:if="${item.category =='UUU'}" th:text="${item.obsrValue} + 'm/s'">0.3m/s</b></span>
+			                <!-- <span>미세 <span class="highlight">좋음</span> · 초미세 <span class="highlight">보통</span></span>
+			                <span>일몰 <span class="highlight">19:56</span></span> -->
 			            </div>
 			        </div>
 				</div>
