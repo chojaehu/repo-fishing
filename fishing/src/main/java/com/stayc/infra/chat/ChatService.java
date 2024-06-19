@@ -17,8 +17,6 @@ public class ChatService {
 	@Autowired
 	ChatDao dao;
 	
-	@Autowired
-    private Firestore firestore;
 	
 	
 //	채팅방목록 리스트
