@@ -32,6 +32,31 @@ public class reservationController {
 		
 		return Constants.PATH_RESERVE + "seatList";
 	}
+	
+//	결제된 항목리스트
+	@RequestMapping(value = "/reservation")
+	public String reservation(@ModelAttribute("vo") reservationVo vo,reservationDto dto,HttpSession httpSession, Model model) throws Exception {
+		
+		vo.setMbrSeq((String) httpSession.getAttribute("sessMbrSeq"));
+		
+		UtilFunction.setSearch(vo);
+		
+//		int rowCount = service.revOneCount(vo);
+//		
+//		if(rowCount > 0) {			
+//			vo.setPagingVo(rowCount);		
+			model.addAttribute("list", service.revList(vo));
+//		};
+		
+		return Constants.PATH_RESERVE + "reservation";
+	}
+//	결제완료문구
+	@RequestMapping(value = "/completion")
+	public String completion(reservationDto dto) throws Exception {
+		
+		
+		return Constants.PATH_RESERVE + "completion";
+	}
 
 //	페이징
 	@RequestMapping(value = "/seatListPaging")
@@ -91,7 +116,7 @@ public class reservationController {
 
 	    return Constants.PATH_RESERVE + "checkout";
 	}
-
+	
 //	예약상세 리스트
 	@RequestMapping(value = "/upload")
 	public String upload(reservationDto dto, Model model) throws Exception {
@@ -108,7 +133,7 @@ public class reservationController {
 		service.insert(dto);
 		service.payInsert(dto);
 		
-		return "redirect:/index";
+		return "redirect:/completion";
 	}
 //	이미지 업로드
 	@RequestMapping(value = "/fileUploadsS3")

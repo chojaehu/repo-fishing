@@ -29,7 +29,35 @@
 		 WHERE 1=1
 		   AND plcTypeCd = #{shTypeCd}
 	</select>
-		
+	
+	<!-- 예약완료 후 리스트 -->
+	<select id="revList" resultMap="resultMapObj">
+	 	SELECT a.revDate
+			 , a.revAmount
+			 , a.revPlaceCd 
+			 , a.revSeat
+			 , a.mbrSeq
+			 , b.payRegDt
+			 , c.plcName
+			 , d.mbrName
+		FROM reservation a
+		LEFT JOIN payment b on b.revSeq = a.revSeq
+		LEFT JOIN place c on c.plcSeq = a.plcSeq
+		LEFT JOIN members d on d.mbrSeq = a.mbrSeq 
+		WHERE 1=1
+			AND a.mbrSeq = #{mbrSeq}
+			LIMIT #{pgRowCount}
+    		OFFSET #{pgOffset}
+	</select>
+	
+	<!-- 예약완료 카운터 -->
+	<select id="revOneCount">
+	 	SELECT COUNT(*)
+		  FROM reservation
+		 WHERE 1=1
+		   AND revSeq = #{shTypeCd}
+	</select>
+	
 	<!-- 어종리스트 -->
 	<select id="fisList" resultMap="resultMapObj">
 	 	select

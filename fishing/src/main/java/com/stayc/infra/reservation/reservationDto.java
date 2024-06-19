@@ -77,7 +77,12 @@ public class reservationDto extends BaseDto {
 	private Integer payDelNy;		// 삭제여부
 	private Date payRegDt;			// 등록일시
 	private Date payModDt;			// 수정일시
-//	결제정보(payment)	
+//	결제정보(payment)
+	
+//	유저정보(members)
+	private String mbrName;			// 유저이름
+//	유저정보(members)	
+	
 	
 	public String getPlcSeq() {
 		return plcSeq;
@@ -378,6 +383,12 @@ public class reservationDto extends BaseDto {
 	}
 	public void setPayModDt(Date payModDt) {
 		this.payModDt = payModDt;
+	}
+	public String getMbrName() {
+		return mbrName;
+	}
+	public void setMbrName(String mbrName) {
+		this.mbrName = mbrName;
 	}
 	
 }

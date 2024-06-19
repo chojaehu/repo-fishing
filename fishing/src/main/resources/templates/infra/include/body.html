@@ -43,6 +43,7 @@
 			    </div>				
 			    <ul>
 					<th:block th:if="${session.sessMbrName != null and session.sessMbrName != ''}">
+						<li><a href="/reservation" class="header-icon">예약목록<span class="tip tip-new">여행가자~~</span></a></li>
 						<li><a href="/logout" class="header-icon">로그아웃<span class="tip tip-new">일상으로~~</span></a></li>
 					</th:block>
 					<th:block th:unless="${session.sessMbrName != null and session.sessMbrName != ''}">

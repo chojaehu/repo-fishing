@@ -34,6 +34,11 @@ public class reservationService {
 		return dao.selectList(vo);
 	}
 	
+//	예약완료 리스트
+	public List<reservationDto> revList(reservationVo vo) {
+		return dao.revList(vo);
+	}
+	
 //	예약상세 리스트
 	public reservationDto selectOne(reservationDto dto) {
 		return dao.selectOne(dto);
@@ -62,6 +67,11 @@ public class reservationService {
 // 	낚시터 갯수
 	public int selectOneCount(reservationVo vo) {
 		return dao.selectOneCount(vo);
+	}
+	
+// 	예약완료 갯수
+	public int revOneCount(reservationVo vo) {
+		return dao.revOneCount(vo);
 	}
 	
 	// 여러파일 업로드(AWS S3)

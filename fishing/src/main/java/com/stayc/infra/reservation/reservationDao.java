@@ -7,6 +7,9 @@ public interface reservationDao {
 //	예약장소 리스트
 	public List<reservationDto> selectList(reservationVo vo);
 	
+//	예약완료 리스트
+	public List<reservationDto> revList(reservationVo vo);
+	
 //	예약상세 리스트
 	public reservationDto selectOne(reservationDto dto);
 	
@@ -24,5 +27,8 @@ public interface reservationDao {
 	
 // 	낚시터 갯수
 	public int selectOneCount(reservationVo vo);
+	
+// 	예약완료 갯수
+	public int revOneCount(reservationVo vo);
 
 }
