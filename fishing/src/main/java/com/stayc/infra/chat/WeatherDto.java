@@ -7,6 +7,16 @@ public class WeatherDto {
     private int nx;
     private int ny;
     private String obsrValue;
+    private String mbrName;
+    
+    
+    
+	public String getMbrName() {
+		return mbrName;
+	}
+	public void setMbrName(String mbrName) {
+		this.mbrName = mbrName;
+	}
 	public String getBaseDate() {
 		return baseDate;
 	}
