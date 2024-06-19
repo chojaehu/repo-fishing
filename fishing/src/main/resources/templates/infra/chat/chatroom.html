@@ -50,90 +50,73 @@
     
     <!-- 사용자 스크립트 -->
     <script src="js/validation.js"></script>
-    <script src="js/search.js"></script>   
-     <style>
+    <script src="js/search.js"></script>  
+    <style>
         body {
-            background: #f4f7fc;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
         .weather-container {
-            width: 100%;
-            max-width: 600px;
-            margin: 50px auto;
+            background-color: white;
             padding: 20px;
-            background: white;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .weather-header {
+            width: 600px;
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            margin-bottom: 20px;
+            align-items: center;
         }
-        .weather-header h2 {
-            font-size: 1.5rem;
-            color: #333;
-        }
-        .weather-header .date {
-            font-size: 1rem;
+        .location {
+            font-size: 16px;
             color: #666;
+            text-align: center;
+            width: 100%;
         }
-        .weather-content {
+        .weather-main {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
+            width: 100%;
         }
         .weather-icon {
-            font-size: 4rem;
-            color: #007bff;
-        }
-        .weather-info {
-            flex-grow: 1;
-            padding-left: 20px;
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
         }
         .temperature {
-            font-size: 2rem;
-            color: #333;
-            margin-bottom: 10px;
+            font-size: 40px;
+            font-weight: bold;
+            margin-right: 10px;
         }
-        .details {
-            font-size: 1rem;
+        .description {
+            font-size: 18px;
             color: #666;
+            margin-right: 10px;
         }
-    </style>
+        .misc {
+            font-size: 14px;
+            color: #666;
+            text-align: center;
+            width: 100%;
+        }
+        .misc span {
+            display: inline-block;
+            margin-right: 10px;
+        }
+        .highlight {
+            color: #00aaff;
+        }
+    </style> 
 </head> 
 
 <body>
-	<div class="weather-container">
-        <div class="weather-header">
-            <h2>서울</h2>
-            <div class="date">2024-06-19</div>
-        </div>
-        <div class="weather-content">
-            <div class="weather-icon">
-                <i class="bi bi-cloud-sun"></i>
-            </div>
-            <div class="weather-info">
-                <div class="temperature">25°C</div>
-                <div class="details">맑음</div>
-                <div class="details">습도: 60%</div>
-                <div class="details">바람: 남서풍 5m/s</div>
-            </div>
-        </div>
-    </div>
-	<!-- <section class="body">
-	    <div class="slide-container">
-	        <div th:if="${weather != null}">
-	            <div th:each="item : ${weather}" class="slide-item">
-	                <h2 th:text="${item.category}"></h2>
-	                <p th:text="${item.obsrValue}"></p>
-	            </div>
-	        </div>
-	        <div th:if="${weatherItems == null}">
-	            <p>No weather data available.</p>
-	        </div>
-	    </div>
-	</section> -->
+
 	<div class="page-wrapper">
 
 		<header class="header">
@@ -171,7 +154,6 @@
 			<div th:replace="~{infra/include/head :: date}"></div>	
         </header><!-- End .header -->
 
-
 		<main class="main">
 			<nav aria-label="breadcrumb" class="breadcrumb-nav">
 				<div class="container">
@@ -183,6 +165,22 @@
 			<form id="form" name="form" method="post">
 			<input type="hidden" id="pgPage" name="pgPage" th:value="${vo.pgPage}" default="1">
 			<div class="container">
+				<div class="row mt-5">
+			        <div>
+			            <div class="location">노원구 상계2동</div>
+			            <div class="weather-main">
+			                <div class="temperature">25.2°</div>
+			                <div class="description">맑음</div>
+			            </div>
+			            <div class="misc">
+			                <span>습도 <b th:each="item : ${weather}" th:if="${item.category =='REH'}" th:text="${item.obsrValue} + '%'">62%</b></span>
+			                <span>체감 <b>25.8°</b></span>
+			                <span>남동풍 <b>0.3m/s</b></span>
+			                <span>미세 <span class="highlight">좋음</span> · 초미세 <span class="highlight">보통</span></span>
+			                <span>일몰 <span class="highlight">19:56</span></span>
+			            </div>
+			        </div>
+				</div>
 				<div class="row">
 					<div class="col-lg-9">
 						<div class="row" style="padding: 20px;" id="listData">

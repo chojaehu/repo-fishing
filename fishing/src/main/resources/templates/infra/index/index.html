@@ -20,7 +20,59 @@
 	        height: auto;
 	        display: block;
 	    }
-	</style>	
+	</style>
+	 <style>
+        .weather-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 600px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .location {
+            font-size: 16px;
+            color: #666;
+            text-align: center;
+            width: 100%;
+        }
+        .weather-main {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+        .weather-icon {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+        }
+        .temperature {
+            font-size: 40px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .description {
+            font-size: 18px;
+            color: #666;
+            margin-right: 10px;
+        }
+        .misc {
+            font-size: 14px;
+            color: #666;
+            text-align: center;
+            width: 100%;
+        }
+        .misc span {
+            display: inline-block;
+            margin-right: 10px;
+        }
+        .highlight {
+            color: #00aaff;
+        }
+    </style>	
 </head>
 
 <body>
@@ -51,6 +103,24 @@
         <main class="main">
             <section class="recommended-section mt-3">
                 <div class="container">
+	                <!-- <div class="row mt-5">
+				        <div class="weather-container">
+					        <div>
+					            <div class="location">노원구 상계2동</div>
+					            <div class="weather-main">
+					                <div class="temperature">25.2°</div>
+					                <div class="description">맑음</div>
+					            </div>
+					            <div class="misc">
+					                <span>습도 <b>62%</b></span>
+					                <span>체감 <b>25.8°</b></span>
+					                <span>남동풍 <b>0.3m/s</b></span>
+					                <span>미세 <span class="highlight">좋음</span> · 초미세 <span class="highlight">보통</span></span>
+					                <span>일몰 <span class="highlight">19:56</span></span>
+					            </div>
+					        </div>
+					    </div>
+					</div> -->
                     <h2 class="section-title m-b-2 appear-animate" data-animation-name="fadeInUpShorter">최근 등록 겔러리</h2>
                     <h5 class="section-info p-b-4 mb-2 appear-animate" data-animation-name="fadeInUpShorter"
                         data-animation-delay="200">~~뽐내기~~</h5>
