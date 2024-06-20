@@ -6,6 +6,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -41,13 +43,30 @@ public class ChatController {
 		SimpleDateFormat date = new SimpleDateFormat("yyyyMMdd");
 		Date now = new Date();         
 		String nowtime = date.format(now);
+		
+		
+			
+		LocalTime now2 = LocalTime.now(); // 현재 시간을 가져옴
+	    System.out.println("현재 시간: " + now2); 
+	        
+	        // 한 시간을 뺀 시간을 계산
+	        LocalTime oneHourEarlier = now2.minusHours(1);
+	        System.out.println("한 시간 전: " + oneHourEarlier);
+	        
+	        // DateTimeFormatter를 사용하여 시간을 "HH" 형식으로 포맷
+	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH");        
+	        String formatedNow = oneHourEarlier.format(formatter);
+	        
+	        System.out.println(formatedNow + "--------------------------");
+		  
+		  
 		 StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst");
          urlBuilder.append("?" + URLEncoder.encode("serviceKey", "UTF-8") + "=N3YEBL3S%2BptRSuZYd5A3x7XK3VTIf61bowQ48lqXUISpn3BNT64x0ZAv4fEz36B06RS%2FTml5T6otfwpL9jre%2FQ%3D%3D");
          urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8"));
          urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("1000", "UTF-8"));
          urlBuilder.append("&" + URLEncoder.encode("dataType", "UTF-8") + "=" + URLEncoder.encode("JSON", "UTF-8"));
          urlBuilder.append("&" + URLEncoder.encode("base_date", "UTF-8") + "=" + URLEncoder.encode(nowtime, "UTF-8"));
-         urlBuilder.append("&" + URLEncoder.encode("base_time", "UTF-8") + "=" + URLEncoder.encode("0600", "UTF-8"));
+         urlBuilder.append("&" + URLEncoder.encode("base_time", "UTF-8") + "=" + URLEncoder.encode(formatedNow+"00", "UTF-8"));
          urlBuilder.append("&" + URLEncoder.encode("nx", "UTF-8") + "=" + URLEncoder.encode("60", "UTF-8"));
          urlBuilder.append("&" + URLEncoder.encode("ny", "UTF-8") + "=" + URLEncoder.encode("127", "UTF-8"));
          
